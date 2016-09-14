@@ -1,11 +1,12 @@
 /*
  * @author Eugene Andruszczenko
  * @version 0.0.5
- * @date August 19th, 2016
- * @description - litebrite master 
+ * @date created 08/19/16
+ * @date updated 09/14/16
+ * @description
  */
 
-
+ 
 /*
  * @description Config
  */ 

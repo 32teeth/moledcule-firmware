@@ -1,12 +1,12 @@
 /*
  * @author Eugene Andruszczenko
  * @version 0.0.5
- * @date September 13th, 2016
+ * @date created 08/19/16
+ * @date updated 09/14/16
+ * @description
  */
 
-/*
- *
- */
+ 
 //#define KAIMANA
 #define LITEBRITE
 
