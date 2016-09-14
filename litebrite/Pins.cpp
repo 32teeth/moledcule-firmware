@@ -35,48 +35,48 @@ Pins::Pins()
 	#define  PIN_K4      6    //PD7 
   */	
 	#ifdef KAIMANA
-    const PROGMEM IO P1 = {3, INPUT, HIGH, "d"};
-    const PROGMEM IO P2 = {2, INPUT, HIGH, "d"};
-    const PROGMEM IO P3 = {0, INPUT, HIGH, "d"};
-    const PROGMEM IO P4 = {1, INPUT, HIGH, "d"};
-    const PROGMEM IO K1 = {4, INPUT, HIGH, "d"};
-    const PROGMEM IO K2 = {A3, INPUT, HIGH, "a"};
-    const PROGMEM IO K3 = {12, INPUT, HIGH, "d"};
-    const PROGMEM IO K4 = {6, INPUT, HIGH, "d"};
+    IO P1 = {3, INPUT, HIGH, "d"};
+    IO P2 = {2, INPUT, HIGH, "d"};
+    IO P3 = {0, INPUT, HIGH, "d"};
+    IO P4 = {1, INPUT, HIGH, "d"};
+    IO K1 = {4, INPUT, HIGH, "d"};
+    IO K2 = {A3, INPUT, HIGH, "a"};
+    IO K3 = {12, INPUT, HIGH, "d"};
+    IO K4 = {6, INPUT, HIGH, "d"};
     
-    const PROGMEM IO START = {10, INPUT, HIGH, "d"};    
-    const PROGMEM IO SELECT = {9, INPUT, HIGH, "d"};
-    const PROGMEM IO HOME = {8, INPUT, HIGH, "d"};
+    IO START = {10, INPUT, HIGH, "d"};    
+    IO SELECT = {9, INPUT, HIGH, "d"};
+    IO HOME = {8, INPUT, HIGH, "d"};
 
-    const PROGMEM IO RIGHT = {A2, INPUT, HIGH, "a"};
-    const PROGMEM IO DOWN = {11, INPUT, HIGH, "d"};   
-    const PROGMEM IO LEFT = {A1, INPUT, HIGH, "a"};
-    const PROGMEM IO UP = {A0, INPUT, HIGH, "a"};
+    IO RIGHT = {A2, INPUT, HIGH, "a"};
+    IO DOWN = {11, INPUT, HIGH, "d"};   
+    IO LEFT = {A1, INPUT, HIGH, "a"};
+    IO UP = {A0, INPUT, HIGH, "a"};
   #endif
 
   #ifdef LITEBRITE
-    const PROGMEM IO P1 = {5, INPUT, HIGH, "d"};
-    const PROGMEM IO P2 = {10, INPUT, HIGH, "d"};
-    const PROGMEM IO P3 = {9, INPUT, HIGH, "d"};
-    const PROGMEM IO P4 = {8, INPUT, HIGH, "d"};
-    const PROGMEM IO K1 = {12, INPUT, HIGH, "d"};
-    const PROGMEM IO K2 = {6, INPUT, HIGH, "d"};
-    const PROGMEM IO K3 = {2, INPUT, HIGH, "d"};
-    const PROGMEM IO K4 = {4, INPUT, HIGH, "d"};
+    IO P1 = {5, INPUT, HIGH, "d"};
+    IO P2 = {10, INPUT, HIGH, "d"};
+    IO P3 = {9, INPUT, HIGH, "d"};
+    IO P4 = {8, INPUT, HIGH, "d"};
+    IO K1 = {12, INPUT, HIGH, "d"};
+    IO K2 = {6, INPUT, HIGH, "d"};
+    IO K3 = {2, INPUT, HIGH, "d"};
+    IO K4 = {4, INPUT, HIGH, "d"};
     
-    const PROGMEM IO START = {13, INPUT, HIGH, "d"};    
-    const PROGMEM IO SELECT = {A1, INPUT, HIGH, "a"};
-    const PROGMEM IO HOME = {A0, INPUT, HIGH, "a"};
+    IO START = {13, INPUT, HIGH, "d"};    
+    IO SELECT = {A1, INPUT, HIGH, "a"};
+    IO HOME = {A0, INPUT, HIGH, "a"};
 
-    const PROGMEM IO RIGHT = {A3, INPUT, HIGH, "a"};
-    const PROGMEM IO DOWN = {A4, INPUT, HIGH, "a"};   
-    const PROGMEM IO LEFT = {A2, INPUT, HIGH, "a"};
-    const PROGMEM IO UP = {A5, INPUT, HIGH, "a"};       
+    IO RIGHT = {A3, INPUT, HIGH, "a"};
+    IO DOWN = {A4, INPUT, HIGH, "a"};   
+    IO LEFT = {A2, INPUT, HIGH, "a"};
+    IO UP = {A5, INPUT, HIGH, "a"};       
   #endif
 
-  const PROGMEM IO commands[11] = {P1, P2, P3, P4, K1, K2, K3, K4};
-  const PROGMEM IO alts[3] = {START, SELECT, HOME};
-  const PROGMEM IO directions[4] = {RIGHT, DOWN, LEFT, UP}; 
+  IO commands[11] = {P1, P2, P3, P4, K1, K2, K3, K4};
+  IO alts[3] = {START, SELECT, HOME};
+  IO directions[4] = {RIGHT, DOWN, LEFT, UP}; 
 
   this->set();	
 }
