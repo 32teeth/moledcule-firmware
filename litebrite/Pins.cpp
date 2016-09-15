@@ -10,6 +10,7 @@
  * @description Pins include files
  */
 #include "Pins.h"
+#include "Utils.h"
 
 /*
  * @class Pins
@@ -123,6 +124,16 @@ void Pins::read()
 		direction.address |= direction.states[n] == 0 ? 1 << n : 0 << n;	
 	}						
 }	
+
+void Pins::echo()
+{
+	Serial.print(F("\n command:"));
+	Serial.print(UTILS->getBin(command.address));
+	Serial.print(F(" alt:"));
+	Serial.print(UTILS->getBin(alt.address));		
+	Serial.print(F(" direction:"));
+	Serial.print(UTILS->getBin(direction.address));	
+}
 
 
 /*

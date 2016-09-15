@@ -18,7 +18,7 @@ class Pins
 	public:
 
 		/*
-		 *
+		 * @description	
 		 */
 		Pins();
 
@@ -92,6 +92,7 @@ class Pins
     Direction direction; 
 
 		void read();
+		void echo();
 
 		/*
 		 *

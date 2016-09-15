@@ -79,13 +79,7 @@ void loop()
 	if(now - timestamp >= interval)
 	{
   	PINS->read();
-		timestamp = now;	
-
-		Serial.print(F("\n command:"));
-		Serial.print(UTILS->getBin(PINS->command.address));
-		Serial.print(F(" alt:"));
-		Serial.print(UTILS->getBin(PINS->alt.address));		
-		Serial.print(F(" direction:"));
-		Serial.print(UTILS->getBin(PINS->direction.address));				
+  	PINS->echo();
+		timestamp = now;			
 	}
 }
