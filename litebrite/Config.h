@@ -7,8 +7,8 @@
  */
 
  
-//#define KAIMANA
-#define LITEBRITE
+#define KAIMANA
+//#define LITEBRITE
 
 #ifdef LITEBRITE
 	const int data = 7;
