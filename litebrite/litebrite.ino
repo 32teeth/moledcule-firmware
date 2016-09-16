@@ -5,18 +5,18 @@
  * @date updated 09/14/16
  * @description
  */
+#define DEBUG
 
- 
-/*
+ /*
  * @description Config
- */ 
+ */
 #include "Config.h"
 
 /*
  * @description include libraries
  */
 #include <Adafruit_NeoPixel.h>
-Adafruit_NeoPixel pixel = Adafruit_NeoPixel(leds, data, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel pixel = Adafruit_NeoPixel(count_led, data_led, NEO_GRB + NEO_KHZ800);
 
 /*
  * @description Utils
@@ -31,14 +31,15 @@ Utils *UTILS;
 Comm *COMM;
 
 /*
+ * @description Config
+ */
+#include "Theme.h"
+
+/*
  * @description Pins
  */
 #include "Pins.h"
-
-/*
- * @description Theme
- */ 
-#include "Theme.h"
+Pins *PINS;
 
 
 /*
@@ -55,15 +56,30 @@ const long interval = 500;
  */
 void setup()
 { 
+	/*
+	 * @description start pixel and turn them all off
+	 */
 	pixel.begin();
 	pixel.setBrightness(50);
 	pixel.setPixelColor(0, 0, 0, 255);
 	pixel.show();
+
+	/*
+	 * @description create UTILS
+	 */
 	UTILS = new Utils();
+
+	/*
+	 * @description create COMM
+	 */	
 	COMM = new Comm();
 	COMM->start();
 
-	initPins();
+	//initPins();
+	/*
+	 * @description create PINS
+	 */	
+	PINS = new Pins();	
 
   delay(1000);
   
@@ -80,7 +96,7 @@ void loop()
 	now = millis();
 	if(now - timestamp >= interval)
 	{
-		readPins();
+		//readPins();
 		timestamp = now;			
 	}
 }

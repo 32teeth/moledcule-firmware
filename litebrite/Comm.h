@@ -26,6 +26,7 @@ class Comm
 
     void start();
     void listen();
+    void print(String str);
 
     /*
      *

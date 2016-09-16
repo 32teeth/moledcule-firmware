@@ -37,6 +37,10 @@ void Comm::listen()
   }
 };
 
+void Comm::print(String str)
+{
+  Serial.println(str);
+};
 
 /*
  * @class Comm
