@@ -25,16 +25,15 @@ Adafruit_NeoPixel pixel = Adafruit_NeoPixel(leds, data, NEO_GRB + NEO_KHZ800);
 Utils *UTILS;
 
 /*
- * @description Pins
- */
-#include "Pins.h"
-Pins *PINS;
-
-/*
  * @description Comm
  */ 
 #include "Comm.h"
 Comm *COMM;
+
+/*
+ * @description Pins
+ */
+#include "Pins.h"
 
 /*
  * @description Theme
@@ -61,9 +60,11 @@ void setup()
 	pixel.setPixelColor(0, 0, 0, 255);
 	pixel.show();
 	UTILS = new Utils();
-	PINS = new Pins();
 	COMM = new Comm();
-	//COMM->start();
+	COMM->start();
+
+	initPins();
+
   delay(1000);
 }
 
@@ -78,8 +79,7 @@ void loop()
 	now = millis();
 	if(now - timestamp >= interval)
 	{
-  	PINS->read();
-  	PINS->echo();
+		readPins();
 		timestamp = now;			
 	}
 }
