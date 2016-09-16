@@ -66,6 +66,7 @@ void setup()
 	initPins();
 
   delay(1000);
+  
 }
 
 
