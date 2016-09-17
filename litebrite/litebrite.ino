@@ -96,7 +96,7 @@ void loop()
 	now = millis();
 	if(now - timestamp >= interval)
 	{
-		//readPins();
+		PINS->get();
 		timestamp = now;			
 	}
 }

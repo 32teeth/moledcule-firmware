@@ -6,36 +6,37 @@
  * @description
  */
 #include "Pins.h"
+	
 
 /*
  * @description punchs
  */
-IO P1 = {3, INPUT_PULLDOWN, HIGH, "d"};
-IO P2 = {2, INPUT_PULLDOWN, HIGH, "d"};
-IO P3 = {0, INPUT_PULLDOWN, HIGH, "d"};
-IO P4 = {1, INPUT_PULLDOWN, HIGH, "d"};
+IO P1 = {3, INPUT, HIGH, "d"};
+IO P2 = {2, INPUT, HIGH, "d"};
+IO P3 = {0, INPUT, HIGH, "d"};
+IO P4 = {1, INPUT, HIGH, "d"};
 /*
  * @description kicks
  */
-IO K1 = {4, INPUT_PULLDOWN, HIGH, "d"};
-IO K2 = {A3, INPUT_PULLDOWN, HIGH, "a"};
-IO K3 = {12, INPUT_PULLDOWN, HIGH, "d"};
-IO K4 = {6, INPUT_PULLDOWN, HIGH, "d"};
+IO K1 = {4, INPUT, HIGH, "d"};
+IO K2 = {A3, INPUT, HIGH, "a"};
+IO K3 = {12, INPUT, HIGH, "d"};
+IO K4 = {6, INPUT, HIGH, "d"};
 
 /*
  * @description alts
  */		
-IO START = {10, INPUT_PULLDOWN, HIGH, "d"};		
-IO SELECT = {9, INPUT_PULLDOWN, HIGH, "d"};
-IO HOME = {8, INPUT_PULLDOWN, HIGH, "d"};
+IO START = {10, INPUT, HIGH, "d"};		
+IO SELECT = {9, INPUT, HIGH, "d"};
+IO HOME = {8, INPUT, HIGH, "d"};
 
 /*
  * @description directions
  */
-IO RIGHT = {A2, INPUT_PULLDOWN, HIGH, "a"};
-IO DOWN = {11, INPUT_PULLDOWN, HIGH, "d"};	 
-IO LEFT = {A1, INPUT_PULLDOWN, HIGH, "a"};
-IO UP = {A0, INPUT_PULLDOWN, HIGH, "a"};
+IO RIGHT = {A2, INPUT, HIGH, "a"};
+IO DOWN = {11, INPUT, HIGH, "d"};	 
+IO LEFT = {A1, INPUT, HIGH, "a"};
+IO UP = {A0, INPUT, HIGH, "a"};
 
 /*
  * @description array of IO
@@ -59,6 +60,14 @@ Direction direction = {{0,0,0,0},{0,0,0,0},0,"0"};
  */ 
 Pins::Pins()
 {
+
+/*
+ * @description
+ */
+Punch punch = {{0,0,0,0},{0,0,0,0},0,"0"};
+Kick kick = {{0,0,0,0},{0,0,0,0},0,"0"};
+Alt alt = {{0,0,0},{0,0,0},0,"0"};
+Direction direction = {{0,0,0,0},{0,0,0,0},0,"0"};	
 	this->set();
 }
 
@@ -114,20 +123,13 @@ void Pins::get()
 	 *
 	 */
 	Serial.print(F("\n")); 
-	Serial.print(F("punch"));
-	Serial.print(F("\n"));   
-	Serial.print(F("buttons:"));  
+	Serial.print(F("punch:")); 
 	String result = "";
 	for(int n = 0; n < 4; n++)
 	{
-		Serial.print(F(" "));
-		Serial.print(punchs[n].pin);
-		Serial.print(F(":"));
 		Serial.print(punchs[n].state);
 		result += ((punch.address & (1 << n)) ? "1" : "0");
 	}
-	Serial.print(F("\n"));
-	Serial.print(F("address:"));
 	Serial.print(result); 
 	Serial.print(F("\n"));
 }

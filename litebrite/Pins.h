@@ -6,8 +6,6 @@
  * @description
  */
 #include <Arduino.h>
-#ifndef Pins_h
-#define Pins_h
 
 /*
  * @struct IO
@@ -32,7 +30,10 @@ typedef struct{int states[3];int stored[3];int address;String state;} Alt;
 /*
  * @struct Direction
  */
-typedef struct{int states[4];int stored[4];int address;String state;} Direction;		
+typedef struct{int states[4];int stored[4];int address;String state;} Direction;	
+ 
+#ifndef Pins_h
+#define Pins_h	
 
 
 
@@ -42,7 +43,7 @@ class Pins
 		/*
 		 *
 		 */
-		Pins();
+		Pins();	
 
 		/*
 		 *
