@@ -1,5 +1,5 @@
-//#define KAIMANA
-#define LITEBRITE
+#define KAIMANA
+//#define LITEBRITE
 
 #ifdef LITEBRITE
 	#define data_led 7
