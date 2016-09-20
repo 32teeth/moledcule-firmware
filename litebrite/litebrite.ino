@@ -61,7 +61,7 @@ void setup()
 	 */
 	pixel.begin();
 	pixel.setBrightness(50);
-	pixel.setPixelColor(0, 0, 0, 255);
+	pixel.setPixelColor(0, 255, 0, 0);
 	pixel.show();
 
 	/*

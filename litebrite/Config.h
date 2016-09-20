@@ -6,7 +6,7 @@
 #endif
 
 #ifdef KAIMANA
-	#define data_led 23		
+	#define data_led A5		
 #endif
 
 #define punch_led 4

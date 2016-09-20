@@ -387,7 +387,7 @@ Pins::~Pins(){}
  * @description include libraries
  */
 #include <Adafruit_NeoPixel.h>
-Adafruit_NeoPixel pixel = Adafruit_NeoPixel(1, data_led, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel pixel = Adafruit_NeoPixel(1, 8, NEO_GRB + NEO_KHZ800);
 //Adafruit_NeoPixel pixel = Adafruit_NeoPixel(1, PIN, NEO_GRB + NEO_KHZ800);
 
 /*
@@ -442,6 +442,7 @@ void setup()
 	 * @description start pixel and turn them all off
 	 */
 	pixel.begin();
+	pixel.setBrightness(10);
 	pixel.setPixelColor(0, rgb_shift.red, rgb_shift.green, rgb_shift.blue);
 	pixel.show();
 	/*
@@ -476,7 +477,7 @@ void setup()
  * @description main litebrite loop
  */
 float changed;
-float duration = interval/2;
+float duration = interval/4;
 
 void loop()
 {
@@ -498,7 +499,7 @@ void loop()
 	}
   	if(changed >= now)
     {  
-		crossfade(0);
+			crossfade(0);
     }
 }
 
@@ -517,6 +518,6 @@ void crossfade(int led)
 
 	pixel.setPixelColor(led, rgb_shift.red, rgb_shift.green, rgb_shift.blue);
 	pixel.show();
-	delay(5);
+	delay(1);
 }
 
