@@ -47,7 +47,7 @@ Pins *PINS;
  */
 unsigned long now;
 unsigned long timestamp = 0;
-const long interval = 500;
+const long interval = 100;
 
 
 /*
@@ -61,7 +61,7 @@ void setup()
 	 */
 	pixel.begin();
 	pixel.setBrightness(50);
-	pixel.setPixelColor(0, 255, 0, 0);
+	pixel.setPixelColor(0, 0, 0, 0);
 	pixel.show();
 
 	/*
@@ -97,6 +97,7 @@ void loop()
 	if(now - timestamp >= interval)
 	{
 		PINS->get();
-		timestamp = now;			
+		timestamp = now;	
+
 	}
 }

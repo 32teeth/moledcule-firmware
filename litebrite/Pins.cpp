@@ -118,20 +118,6 @@ void Pins::get()
 		direction.states[n] = directions[n].state;		
 		direction.address |= direction.states[n] == 0 ? 1 << n : 0 << n;	
 	}
-
-	/*
-	 *
-	 */
-	Serial.print(F("\n")); 
-	Serial.print(F("punch:")); 
-	String result = "";
-	for(int n = 0; n < 4; n++)
-	{
-		Serial.print(punchs[n].state);
-		result += ((punch.address & (1 << n)) ? "1" : "0");
-	}
-	Serial.print(result); 
-	Serial.print(F("\n"));
 }
 
 void Pins::get(IO& io)
