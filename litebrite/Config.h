@@ -1,5 +1,4 @@
 #define KAIMANA
-//#define LITEBRITE
 
 #ifdef LITEBRITE
 	#define data_led 7
@@ -8,6 +7,8 @@
 #ifdef KAIMANA
 	#define data_led A5		
 #endif
+
+#define bright 25
 
 #define punch_led 4
 #define kick_led 4

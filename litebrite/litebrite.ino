@@ -60,8 +60,8 @@ void setup()
 	 * @description start pixel and turn them all off
 	 */
 	pixel.begin();
-	pixel.setBrightness(50);
-	pixel.setPixelColor(0, 0, 0, 0);
+	pixel.setBrightness(bright);
+	pixel.setPixelColor(0, 255, 0, 0);
 	pixel.show();
 
 	/*
@@ -72,14 +72,29 @@ void setup()
 	/*
 	 * @description create COMM
 	 */	
-	COMM = new Comm();
-	COMM->start();
+	//COMM = new Comm();
+	//COMM->start();
 
 	//initPins();
 	/*
 	 * @description create PINS
 	 */	
 	PINS = new Pins();	
+
+	delay(1000);
+	for(int i = 0; i < punch_led; i++)
+	{
+		pixel.setPixelColor(i, 255, 0, 255);
+		pixel.show();	
+		delay(250);	
+	}
+
+	for(int i = punch_led; i < punch_led + kick_led; i++)
+	{
+		pixel.setPixelColor(i, 0, 255, 255);
+		pixel.show();		
+		delay(250);
+	}	
 
   delay(1000);
   
@@ -98,6 +113,5 @@ void loop()
 	{
 		PINS->get();
 		timestamp = now;	
-
 	}
 }
