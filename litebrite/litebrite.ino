@@ -33,7 +33,7 @@ Comm *COMM;
 /*
  * @description Config
  */
-#include "Theme.h"
+#include "Pattern.h"
 
 /*
  * @description Pins
