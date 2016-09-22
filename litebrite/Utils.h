@@ -57,6 +57,7 @@ class Utils
     ** @param color {long} long value represantation of color
     ** @return {int*}
     */
+   
     int* getRGB(long color)
     {
       int r = (color>>16);
