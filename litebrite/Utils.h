@@ -5,6 +5,12 @@
  * @date updated 09/14/16
  * @description
  */
+#include <Arduino.h>
+
+typedef struct{int r;int g;int b;} RGB;
+
+#ifndef Utils_h
+#define Utils_h  
 
 /*
  * @class Utils
@@ -12,89 +18,48 @@
  */
 class Utils
 {
-  public:
+	public:
+		/*
+		 *
+		 */
+		Utils();
 
-    int block;
+		/*
+		 *
+		 */		 
+		String getBin(int number);
 
-    /*
-     * @class Utils
-     * @constructor
-     */ 
-    Utils()
-    {
+		/*
+		 *
+		 */
+		long int getLong(int r, int g, int b);
 
-    }
-
-    /*
-    ** @method getBin
-    ** @param number (int)
-    ** @return result {String} 
-    ** @desc converts the decimal param to binary string
-    */
-    String getBin(int number)
-    {  
-      String result = "";
-      for(int i = 0; i < (sizeof(number)*4); i++){result += ((number & (1 << i)) ? "1" : "0");}
-      return result;
-    }
+		/*
+		 *
+		 */
+		int getRGB(long color);
 
     /*
-    ** @method getLong
-    ** @desc convert rgb values to long int
-    ** @param r {int} red value
-    ** @param g {int} red value
-    ** @param b {int} red value
-    ** @return {long}
-    */
-    long int getLong(int r, int g, int b)
-    {
-      return (unsigned long)r << 16 | (unsigned long)g << 8 | (unsigned long)b;
-    }
+     *
+     */
+    void getRGB(RGB& rgb, long color);
+		
+		/*
+		 *
+		 */
+		String getHEX(long color);
 
-    /*
-    ** @method getRGB
-    ** @desc convert long values to rgb array
-    ** @param color {long} long value represantation of color
-    ** @return {int*}
-    */
-   
-    int* getRGB(long color)
-    {
-      int r = (color>>16);
-      int g = ((color>>8) & 0xff);
-      int b = (color & 0xff);
-      int rgb[3] = {r,g,b};
-      return rgb;
-    }
+		/*
+		 *
+		 */
+		String getHEX(int* rgb);
 
-    /*
-    ** @method getHEX
-    ** @desc convert long values to rgb array
-    ** @param color {long} long value represantation of color
-    ** @return {String}
-    */
-    String getHEX(long color)
-    {
-      return String(color, HEX);
-    }
+		/*
+		 *
+		 */
+		~Utils();
 
-    /*
-    ** @method getHEX
-    ** @desc convert long values to rgb array
-    ** @param color {long} long value represantation of color
-    ** @return {String}
-    */
-    String getHEX(int* rgb)
-    {
-      int r = rgb[0];
-      int g = rgb[1];
-      int b = rgb[2];
-      return getHEX(getLong(r,g,b));
-    }
-
-    
-    ~Utils();
-
-
-  private:
+	private:
 };
+
+#endif

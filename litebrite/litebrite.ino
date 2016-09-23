@@ -49,6 +49,7 @@ unsigned long now;
 unsigned long timestamp = 0;
 const long interval = 100;
 
+RGB rgb = {0,0,0};
 
 /*
  * @method setup
@@ -72,32 +73,42 @@ void setup()
 	/*
 	 * @description create COMM
 	 */	
-	//COMM = new Comm();
-	//COMM->start();
+	COMM = new Comm();
+	COMM->start();
 
 	//initPins();
 	/*
 	 * @description create PINS
 	 */	
 	PINS = new Pins();	
-
-	delay(1000);
+			
+	long punch[4] = {P1, P2, P3, P4};
 	for(int i = 0; i < punch_led; i++)
 	{
-		pixel.setPixelColor(i, 255, 0, 255);
+		UTILS->getRGB(rgb, (long) strtol(punch[i], NULL, 16));
+		pixel.setPixelColor(i, rgb.r, rgb.g, rgb.b);
 		pixel.show();	
-		delay(250);	
+		delay(50);	
 	}
 
+	long kick[4] = {K1, K2, K3, K4};
 	for(int i = punch_led; i < punch_led + kick_led; i++)
 	{
-		pixel.setPixelColor(i, 0, 255, 255);
-		pixel.show();		
-		delay(250);
-	}	
+		UTILS->getRGB(rgb, (long) strtol(kick[i-punch_led], NULL, 16));
+		pixel.setPixelColor(i, rgb.r, rgb.g, rgb.b);
+		pixel.show();	
+		delay(50);	
+	}		
 
-  delay(1000);
-  
+  /*
+  long number = (long) strtol(P1, NULL, 16);
+  int r = (number >> 16);
+  int g = ((number >> 8) & 0xFF);
+  int b = (number & 0xFF);
+	*/
+
+	//pixel.setPixelColor(0, rgb[0], rgb[1], rgb[2]);
+	//pixel.show();	    		
 }
 
 

@@ -51,6 +51,9 @@ class Pins
 		void set();
 		void set(IO& io);
 
+		/*
+		 *
+		 */
 		void get();
 		void get(IO& io);		
 

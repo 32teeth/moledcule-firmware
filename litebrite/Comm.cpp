@@ -24,7 +24,7 @@ Comm::Comm()
 void Comm::start()
 {
   Serial.begin(115200);
-  while (!Serial) ;
+  //while (!Serial) ;
   delay(1000);
 };
 
