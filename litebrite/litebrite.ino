@@ -49,7 +49,7 @@ unsigned long now;
 unsigned long timestamp = 0;
 const long interval = 100;
 
-RGB rgb = {0,0,0};
+RGB color = {0,0,0};
 
 /*
  * @method setup
@@ -85,8 +85,8 @@ void setup()
 	long punch[4] = {P1, P2, P3, P4};
 	for(int i = 0; i < punch_led; i++)
 	{
-		UTILS->getRGB(rgb, (long) strtol(punch[i], NULL, 16));
-		pixel.setPixelColor(i, rgb.r, rgb.g, rgb.b);
+		UTILS->getRGB(color, (long) strtol(punch[i], NULL, 16));
+		pixel.setPixelColor(i, color.r, color.g, color.b);
 		pixel.show();	
 		delay(50);	
 	}
@@ -94,8 +94,8 @@ void setup()
 	long kick[4] = {K1, K2, K3, K4};
 	for(int i = punch_led; i < punch_led + kick_led; i++)
 	{
-		UTILS->getRGB(rgb, (long) strtol(kick[i-punch_led], NULL, 16));
-		pixel.setPixelColor(i, rgb.r, rgb.g, rgb.b);
+		UTILS->getRGB(color, (long) strtol(kick[i-punch_led], NULL, 16));
+		pixel.setPixelColor(i, color.r, color.g, color.b);
 		pixel.show();	
 		delay(50);	
 	}		

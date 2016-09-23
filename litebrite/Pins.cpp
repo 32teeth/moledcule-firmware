@@ -60,14 +60,13 @@ Direction direction = {{0,0,0,0},{0,0,0,0},0,"0"};
  */ 
 Pins::Pins()
 {
-
-/*
- * @description
- */
-Punch punch = {{0,0,0,0},{0,0,0,0},0,"0"};
-Kick kick = {{0,0,0,0},{0,0,0,0},0,"0"};
-Alt alt = {{0,0,0},{0,0,0},0,"0"};
-Direction direction = {{0,0,0,0},{0,0,0,0},0,"0"};	
+	/*
+	 * @description
+	 */
+	Punch punch = {{0,0,0,0},{0,0,0,0},0,"0"};
+	Kick kick = {{0,0,0,0},{0,0,0,0},0,"0"};
+	Alt alt = {{0,0,0},{0,0,0},0,"0"};
+	Direction direction = {{0,0,0,0},{0,0,0,0},0,"0"};	
 	this->set();
 }
 

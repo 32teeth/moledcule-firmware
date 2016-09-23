@@ -37,7 +37,7 @@ class Utils
 		/*
 		 *
 		 */
-		int getRGB(long color);
+		int* getRGB(long color);
 
     /*
      *

@@ -7,6 +7,9 @@
  */
 #include "Utils.h"
 
+
+RGB rgb = {0,0,0};
+
 /*
  * @class Utils
  * @description 
@@ -45,7 +48,7 @@ long int Utils::getLong(int r, int g, int b)
 ** @param color {long} long value represantation of color
 ** @return {int*}
 */
-int Utils::getRGB(long color)
+int* Utils::getRGB(long color)
 {
 	int r = (color>>16);
 	int g = ((color>>8) & 0xff);
