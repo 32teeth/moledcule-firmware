@@ -1,0 +1,1 @@
+#define wiring {P1, P2, P3, P4, K1, K2, K3, K4, START, SELECT, HOME, JOYSTICK, BALLTOP}

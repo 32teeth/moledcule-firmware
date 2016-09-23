@@ -8,8 +8,6 @@
 #include "Utils.h"
 
 
-RGB rgb = {0,0,0};
-
 /*
  * @class Utils
  * @description 
@@ -65,10 +63,9 @@ int* Utils::getRGB(long color)
 */
 void Utils::getRGB(RGB& rgb, long color)
 {
-	int r = (color>>16);
-	int g = ((color>>8) & 0xff);
-	int b = (color & 0xff);
-	rgb = {r,g,b};
+	rgb.r = (color>>16);
+	rgb.g = ((color>>8) & 0xff);
+	rgb.b = (color & 0xff);
 }
 
 /*

@@ -7,6 +7,9 @@
  */
 #include <Arduino.h>
 
+/*
+ * @struct RGB
+ */
 typedef struct{int r;int g;int b;} RGB;
 
 #ifndef Utils_h

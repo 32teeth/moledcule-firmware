@@ -31,15 +31,20 @@ Utils *UTILS;
 Comm *COMM;
 
 /*
+ * @description Pins
+ */
+#include "Pins.h"
+Pins *PINS;
+
+/*
  * @description Config
  */
 #include "Pattern.h"
 
 /*
- * @description Pins
+ * @description Config
  */
-#include "Pins.h"
-Pins *PINS;
+#include "Wiring.h"
 
 
 /*
@@ -82,7 +87,7 @@ void setup()
 	 */	
 	PINS = new Pins();	
 			
-	long punch[4] = {P1, P2, P3, P4};
+	char* punch[4] = {P1, P2, P3, P4};
 	for(int i = 0; i < punch_led; i++)
 	{
 		UTILS->getRGB(color, (long) strtol(punch[i], NULL, 16));
@@ -91,24 +96,14 @@ void setup()
 		delay(50);	
 	}
 
-	long kick[4] = {K1, K2, K3, K4};
+	char* kick[4] = {K1, K2, K3, K4};
 	for(int i = punch_led; i < punch_led + kick_led; i++)
 	{
 		UTILS->getRGB(color, (long) strtol(kick[i-punch_led], NULL, 16));
 		pixel.setPixelColor(i, color.r, color.g, color.b);
 		pixel.show();	
 		delay(50);	
-	}		
-
-  /*
-  long number = (long) strtol(P1, NULL, 16);
-  int r = (number >> 16);
-  int g = ((number >> 8) & 0xFF);
-  int b = (number & 0xFF);
-	*/
-
-	//pixel.setPixelColor(0, rgb[0], rgb[1], rgb[2]);
-	//pixel.show();	    		
+	}		   		
 }
 
 
