@@ -13,6 +13,11 @@
 #include "Config.h"
 
 /*
+ * @description Pattern
+ */
+#include "Pattern.h"
+
+/*
  * @description include libraries
  */
 #include <Adafruit_NeoPixel.h>
@@ -37,15 +42,9 @@ Comm *COMM;
 Pins *PINS;
 
 /*
- * @description Config
- */
-#include "Pattern.h"
-
-/*
- * @description Config
+ * @description Wiring
  */
 #include "Wiring.h"
-
 
 /*
  *
@@ -93,7 +92,7 @@ void setup()
 		UTILS->getRGB(color, (long) strtol(punch[i], NULL, 16));
 		pixel.setPixelColor(i, color.r, color.g, color.b);
 		pixel.show();	
-		delay(50);	
+		delay(50);
 	}
 
 	char* kick[4] = {K1, K2, K3, K4};
@@ -104,6 +103,24 @@ void setup()
 		pixel.show();	
 		delay(50);	
 	}		   		
+
+	delay(2500);
+
+	for(int i = 0; i < count_led; i++)
+	{
+		pixel.setPixelColor(i, 0, 0, 0);
+	}		   		
+	pixel.show();
+
+	for(int i = 0; i < wiring_length; i++)
+	{
+		UTILS->getRGB(color, (long) strtol(wiring[i], NULL, 16));
+		pixel.setPixelColor(i, color.r, color.g, color.b);
+		pixel.show();	
+		delay(50);	
+	}		
+
+	delay(2500);	
 }
 
 

@@ -1,6 +1,6 @@
 #define P1 "D95B7D"
 #define P2 "F2B6C6"
-#define P3 "C4F2DD"
+#define P3 "ff00ff"
 #define P4 "A7F2CF"
 #define PX2 "DFADF4"
 #define PX3 "7DF4BE"
@@ -34,3 +34,6 @@
 #define BALLTOP_UPLEFT "FF00DB"
 #define BALLTOP_UP "B2FF40"
 #define BALLTOP_UPRIGHT "FF00DB"
+/*
+EOF
+*/
