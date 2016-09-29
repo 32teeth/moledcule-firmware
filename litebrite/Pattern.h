@@ -1,14 +1,14 @@
-#define P1 "D95B7D"
-#define P2 "F2B6C6"
-#define P3 "ff00ff"
-#define P4 "A7F2CF"
+#define P1 "ff0000"
+#define P2 "ff8000"
+#define P3 "ffff00"
+#define P4 "ff0000"
 #define PX2 "DFADF4"
 #define PX3 "7DF4BE"
 #define PX4 "A7F2CF"
-#define K1 "75A590"
-#define K2 "C4F2DD"
-#define K3 "A56E65"
-#define K4 "F2CAC4"
+#define K1 "0000ff"
+#define K2 "00ff00"
+#define K3 "ff00ff"
+#define K4 "00ffff"
 #define KX2 "BF88A6"
 #define KX3 "F4888D"
 #define PK1 "88B9BF"
@@ -35,5 +35,5 @@
 #define BALLTOP_UP "B2FF40"
 #define BALLTOP_UPRIGHT "FF00DB"
 /*
-EOF
+ EOF
 */
