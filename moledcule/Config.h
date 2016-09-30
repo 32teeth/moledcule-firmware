@@ -1,5 +1,5 @@
 #define KAIMANA
-#ifdef LITEBRITE
+#ifdef MOLEDCULE
 	#define data_led 7
 #endif
 
