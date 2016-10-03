@@ -36,15 +36,15 @@ Utils *UTILS;
 Comm *COMM;
 
 /*
+ * @description Wiring
+ */
+#include "Wiring.h"
+
+/*
  * @description Pins
  */
 #include "Pins.h"
 Pins *PINS;
-
-/*
- * @description Wiring
- */
-#include "Wiring.h"
 
 /*
  *
@@ -114,8 +114,6 @@ void setup()
 
 	for(int i = 0; i < wiring_length; i++)
 	{
-		Serial.print(wiring_order[i]);
-		Serial.print(":");
 		Serial.println(wiring_color[i]);
 		UTILS->getRGB(color, (long) strtol(wiring_color[i], NULL, 16));
 		pixel.setPixelColor(i, color.r, color.g, color.b);
