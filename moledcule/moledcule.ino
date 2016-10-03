@@ -114,8 +114,8 @@ void setup()
 
 	for(int i = 0; i < wiring_length; i++)
 	{
-		Serial.println(wiring_color[i]);
-		UTILS->getRGB(color, (long) strtol(wiring_color[i], NULL, 16));
+		Serial.println(wiring_colors[i]);
+		UTILS->getRGB(color, (long) strtol(wiring_colors[i], NULL, 16));
 		pixel.setPixelColor(i, color.r, color.g, color.b);
 		pixel.show();	
 		delay(50);	

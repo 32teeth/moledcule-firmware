@@ -11,32 +11,32 @@
 /*
  * @description punchs
  */
-IO P1 = {3, INPUT, HIGH, P1_INDEX, "d"};
-IO P2 = {2, INPUT, HIGH, P2_INDEX, "d"};
-IO P3 = {0, INPUT, HIGH, P3_INDEX, "d"};
-IO P4 = {1, INPUT, HIGH, P4_INDEX, "d"};
+IO P1 = {3, INPUT, HIGH, "d"};
+IO P2 = {2, INPUT, HIGH, "d"};
+IO P3 = {0, INPUT, HIGH, "d"};
+IO P4 = {1, INPUT, HIGH, "d"};
 /*
  * @description kicks
  */
-IO K1 = {4, INPUT, HIGH, K1_INDEX, "d"};
-IO K2 = {A3, INPUT, HIGH, K2_INDEX, "a"};
-IO K3 = {12, INPUT, HIGH, K3_INDEX, "d"};
-IO K4 = {6, INPUT, HIGH, K4_INDEX, "d"};
+IO K1 = {4, INPUT, HIGH, "d"};
+IO K2 = {A3, INPUT, HIGH, "a"};
+IO K3 = {12, INPUT, HIGH, "d"};
+IO K4 = {6, INPUT, HIGH, "d"};
 
 /*
  * @description alts
  */		
-IO START = {10, INPUT, HIGH, START_INDEX, "d"};		
-IO SELECT = {9, INPUT, HIGH, SELECT_INDEX, "d"};
-IO HOME = {8, INPUT, HIGH, HOME_INDEX, "d"};
+IO START = {10, INPUT, HIGH, "d"};
+IO SELECT = {9, INPUT, HIGH, "d"};
+IO HOME = {8, INPUT, HIGH, "d"};
 
 /*
  * @description directions
  */
-IO RIGHT = {A2, INPUT, HIGH, _INDEX, "a"};
-IO DOWN = {11, INPUT, HIGH, _INDEX, "d"};	 
-IO LEFT = {A1, INPUT, HIGH,  _INDEX,"a"};
-IO UP = {A0, INPUT, HIGH, _INDEX, "a"};
+IO RIGHT = {A2, INPUT, HIGH, "a"};
+IO DOWN = {11, INPUT, HIGH, "d"};	
+IO LEFT = {A1, INPUT, HIGH,"a"};
+IO UP = {A0, INPUT, HIGH, "a"};
 
 /*
  * @description array of IO

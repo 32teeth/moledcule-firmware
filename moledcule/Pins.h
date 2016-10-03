@@ -10,7 +10,7 @@
 /*
  * @struct IO
  */
-typedef struct{int pin;int mode;int state;int index;String type;} IO;	
+typedef struct{int pin;int mode;int state;String type;} IO;	
 
 /*
  * @struct Punch
