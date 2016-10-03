@@ -18,7 +18,8 @@
 
 #define count_led punch_led + kick_led + alt_led + plate_led + balltop_led + controller_led
 
-#define controller FIGHTSTICK						
+#define FIGHTSTICK
+//#define HITBOX
 /*
  EOF
 */
