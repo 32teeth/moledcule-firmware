@@ -20,7 +20,7 @@ Utils::Utils(){}
 ** @return result {String} 
 ** @desc converts the decimal param to binary string
 */
-String getBin(int number)
+String Utils::getBin(int number)
 {	
 	String result = "";
 	for(int i = 0; i < (sizeof(number)*4); i++){result += ((number & (1 << i)) ? "1" : "0");}

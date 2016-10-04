@@ -28,6 +28,7 @@ Adafruit_NeoPixel pixel = Adafruit_NeoPixel(count_led, data_led, NEO_GRB + NEO_K
  */ 
 #include "Utils.h"
 Utils *UTILS;
+RGB color = {0,0,0};
 
 /*
  * @description Comm
@@ -52,8 +53,6 @@ Pins *PINS;
 unsigned long now;
 unsigned long timestamp = 0;
 const long interval = 100;
-
-RGB color = {0,0,0};
 
 /*
  * @method setup
@@ -118,7 +117,7 @@ void setup()
 		UTILS->getRGB(color, (long) strtol(wiring_colors[i], NULL, 16));
 		pixel.setPixelColor(i, color.r, color.g, color.b);
 		pixel.show();	
-		delay(50);	
+		delay(50);
 	}		
 
 	delay(2500);	
