@@ -13,11 +13,11 @@
 //#define LITEBRITE
 
 #ifdef LITEBRITE
-	#define data_led 7
+  #define data_led 7
 #endif
 
 #ifdef KAIMANA
-	#define data_led A5		
+  #define data_led A5   
 #endif
 
 #define punch_led 4
@@ -27,11 +27,11 @@
 #define joystick_led 1
 
 typedef struct {
-	int punch[punch_led];
-	int kick[kick_led];
-	int alt[alt_led];
-	int directions[direction_led];
-	int joystick[joystick_led];				
+  int punch[punch_led];
+  int kick[kick_led];
+  int alt[alt_led];
+  int directions[direction_led];
+  int joystick[joystick_led];       
 } Order;
 
 #define count_led punch_led + kick_led + alt_led + direction_led + joystick_led
@@ -167,7 +167,7 @@ class Comm
  */ 
 Comm::Comm()
 {
-	this->listen();   
+  this->listen();   
 }
 
 void Comm::start()
@@ -195,12 +195,12 @@ void Comm::print(String str)
  * @class Comm
  * @deconstructor
  */ 
-Comm::~Comm(){}	
+Comm::~Comm(){} 
 
 /*
  * @struct IO
  */
-typedef struct{int pin;int mode;int state;String type;} IO;	
+typedef struct{int pin;int mode;int state;String type;} IO; 
 
 /*
  * @struct Punch
@@ -220,33 +220,33 @@ typedef struct{int states[3];int stored[3];int address;String state;} Alt;
 /*
  * @struct Direction
  */
-typedef struct{int states[4];int stored[4];int address;String state;} Direction;		
+typedef struct{int states[4];int stored[4];int address;String state;} Direction;    
 
 
 
 class Pins
 {
-	public:
-		/*
-		 *
-		 */
-		Pins();
+  public:
+    /*
+     *
+     */
+    Pins();
 
-		/*
-		 *
-		 */
-		void set();
-		void set(IO& io);
+    /*
+     *
+     */
+    void set();
+    void set(IO& io);
 
-		void get();
-		void get(IO& io);		
+    void get();
+    void get(IO& io);   
 
-		/*
-		 *
-		 */
-		~Pins();		
+    /*
+     *
+     */
+    ~Pins();    
 
-	private:
+  private:
 };
 
 /*
@@ -266,7 +266,7 @@ IO K4 = {6, INPUT, HIGH, "d"};
 
 /*
  * @description alts
- */		
+ */   
 IO START = {10, INPUT, HIGH, "d"};    
 IO SELECT = {9, INPUT, HIGH, "d"};
 IO HOME = {8, INPUT, HIGH, "d"};
@@ -301,74 +301,74 @@ Direction direction = {{0,0,0,0},{0,0,0,0},0,"0"};
  */ 
 Pins::Pins()
 {
-	this->set();
+  this->set();
 }
 
 void Pins::set()
 {
-	for(int n = 0; n < 4; n++){set(punchs[n]);}
-	for(int n = 0; n < 4; n++){set(kicks[n]);}
-	for(int n = 0; n < 3; n++){set(alts[n]);}
-	for(int n = 0; n < 4; n++){set(directions[n]);}	
+  for(int n = 0; n < 4; n++){set(punchs[n]);}
+  for(int n = 0; n < 4; n++){set(kicks[n]);}
+  for(int n = 0; n < 3; n++){set(alts[n]);}
+  for(int n = 0; n < 4; n++){set(directions[n]);} 
 }
 
 void Pins::set(IO& io)
 {
-	pinMode(io.pin, io.mode);
-	digitalWrite(io.pin, io.state);
+  pinMode(io.pin, io.mode);
+  digitalWrite(io.pin, io.state);
 }
 
 void Pins::get()
 {
-	punch.address = 0;
-	for(int n = 0; n < 4; n++)
-	{
-		get(punchs[n]);
-		punch.states[n] = punchs[n].state;
-		punch.address |= punch.states[n] == 0 ? 1 << n : 0 << n;
-	}	
+  punch.address = 0;
+  for(int n = 0; n < 4; n++)
+  {
+    get(punchs[n]);
+    punch.states[n] = punchs[n].state;
+    punch.address |= punch.states[n] == 0 ? 1 << n : 0 << n;
+  } 
 
-	kick.address = 0;
-	for(int n = 0; n < 4; n++)
-	{
-		get(kicks[n]);
-		kick.states[n] = kicks[n].state;
-		kick.address |= kick.states[n] == 0 ? 1 << n : 0 << n;
-	}		
+  kick.address = 0;
+  for(int n = 0; n < 4; n++)
+  {
+    get(kicks[n]);
+    kick.states[n] = kicks[n].state;
+    kick.address |= kick.states[n] == 0 ? 1 << n : 0 << n;
+  }   
 
-	alt.address = 0;
-	for(int n = 0; n < 3; n++)
-	{
-		get(alts[n]);
-		alt.states[n] = alts[n].state;
-		alt.address |= alt.states[n] == 0 ? 1 << n : 0 << n;				
-	}			
+  alt.address = 0;
+  for(int n = 0; n < 3; n++)
+  {
+    get(alts[n]);
+    alt.states[n] = alts[n].state;
+    alt.address |= alt.states[n] == 0 ? 1 << n : 0 << n;        
+  }     
 
-	direction.address = 0;
-	for(int n = 0; n < 4; n++)
-	{
-		get(directions[n]);
-		direction.states[n] = directions[n].state;		
-		direction.address |= direction.states[n] == 0 ? 1 << n : 0 << n;	
-	}
+  direction.address = 0;
+  for(int n = 0; n < 4; n++)
+  {
+    get(directions[n]);
+    direction.states[n] = directions[n].state;    
+    direction.address |= direction.states[n] == 0 ? 1 << n : 0 << n;  
+  }
   
-	/*
-	 *
-	 */
-	Serial.print(F("\n")); 
-	Serial.print(F("punch:"));
-	String result = "";
-	for(int n = 0; n < 4; n++)
-	{
-		result += ((punch.address & (1 << n)) ? "1" : "0");
-	}
-	Serial.print(result); 
+  /*
+   *
+   */
+  Serial.print(F("\n")); 
+  Serial.print(F("punch:"));
+  String result = "";
+  for(int n = 0; n < 4; n++)
+  {
+    result += ((punch.address & (1 << n)) ? "1" : "0");
+  }
+  Serial.print(result); 
 }
 
 void Pins::get(IO& io)
 {
-	io.state = digitalRead(io.pin);
-	
+  io.state = digitalRead(io.pin);
+  
 }
 
 /*
@@ -423,14 +423,34 @@ const long interval = 1000;
 
 
 typedef struct{
-	int red;
-	int green;
-	int blue;	
+  int red;
+  int green;
+  int blue; 
 } RGB;
 
-RGB rgb_to {random(0, 255), random(0, 255), random(0, 255)};
-RGB rgb_from {rgb_to.red, rgb_to.blue, rgb_to.green};
-RGB rgb_shift {rgb_to.red, rgb_to.blue, rgb_to.green};
+RGB rgb_to_0 {random(0, 255), random(0, 255), random(0, 255)};
+RGB rgb_from_0 {rgb_to_0.red, rgb_to_0.blue, rgb_to_0.green};
+RGB rgb_shift_0 {rgb_to_0.red, rgb_to_0.blue, rgb_to_0.green};
+
+RGB rgb_to_1 {random(0, 255), random(0, 255), random(0, 255)};
+RGB rgb_from_1 {rgb_to_1.red, rgb_to_1.blue, rgb_to_1.green};
+RGB rgb_shift_1 {rgb_to_1.red, rgb_to_1.blue, rgb_to_1.green};
+
+RGB rgb_to_2 {random(0, 255), random(0, 255), random(0, 255)};
+RGB rgb_from_2 {rgb_to_2.red, rgb_to_2.blue, rgb_to_2.green};
+RGB rgb_shift_2 {rgb_to_2.red, rgb_to_2.blue, rgb_to_2.green};
+
+RGB rgb_to_3 {random(0, 255), random(0, 255), random(0, 255)};
+RGB rgb_from_3 {rgb_to_3.red, rgb_to_3.blue, rgb_to_3.green};
+RGB rgb_shift_3 {rgb_to_3.red, rgb_to_3.blue, rgb_to_3.green};
+
+RGB rgb_to_4 {random(0, 255), random(0, 255), random(0, 255)};
+RGB rgb_from_4 {rgb_to_4.red, rgb_to_4.blue, rgb_to_4.green};
+RGB rgb_shift_4 {rgb_to_4.red, rgb_to_4.blue, rgb_to_4.green};
+
+RGB rgb_to_5 {random(0, 255), random(0, 255), random(0, 255)};
+RGB rgb_from_5 {rgb_to_5.red, rgb_to_5.blue, rgb_to_5.green};
+RGB rgb_shift_5 {rgb_to_5.red, rgb_to_5.blue, rgb_to_5.green};
 
 /*
  * @method setup
@@ -438,35 +458,40 @@ RGB rgb_shift {rgb_to.red, rgb_to.blue, rgb_to.green};
  */
 void setup()
 { 
-	/*
-	 * @description start pixel and turn them all off
-	 */
-	pixel.begin();
-	pixel.setBrightness(10);
-	pixel.setPixelColor(0, rgb_shift.red, rgb_shift.green, rgb_shift.blue);
-	pixel.show();
-	/*
-	 * @description create UTILS
-	 */
-	UTILS = new Utils();
+  /*
+   * @description start pixel and turn them all off
+   */
+  pixel.begin();
+  pixel.setBrightness(10);
+  pixel.setPixelColor(0, rgb_shift_0.red, rgb_shift_0.green, rgb_shift_0.blue);
+  pixel.setPixelColor(1, rgb_shift_1.red, rgb_shift_1.green, rgb_shift_1.blue);
+  pixel.setPixelColor(2, rgb_shift_2.red, rgb_shift_2.green, rgb_shift_2.blue);
+  pixel.setPixelColor(3, rgb_shift_3.red, rgb_shift_3.green, rgb_shift_3.blue);
+  pixel.setPixelColor(4, rgb_shift_4.red, rgb_shift_4.green, rgb_shift_4.blue);
+  pixel.setPixelColor(5, rgb_shift_5.red, rgb_shift_5.green, rgb_shift_5.blue);
+  pixel.show();
+  /*
+   * @description create UTILS
+   */
+  UTILS = new Utils();
 
-	/*
-	 * @description create COMM
-	 */	
-	COMM = new Comm();
-	COMM->start();
+  /*
+   * @description create COMM
+   */ 
+  COMM = new Comm();
+  COMM->start();
 
-	//initPins();
-	/*
-	 * @description create PINS
-	 */	
-	PINS = new Pins();	
+  //initPins();
+  /*
+   * @description create PINS
+   */ 
+  PINS = new Pins();  
 
-	Serial.println("count_led:");
-	Serial.print(count_led);
+  Serial.println("count_led:");
+  Serial.print(count_led);
 
-	Serial.print(" data_led:");
-	Serial.print(data_led);	
+  Serial.print(" data_led:");
+  Serial.print(data_led); 
 
   delay(1000);
   
@@ -481,43 +506,89 @@ float duration = interval/4;
 
 void loop()
 {
-	//COMM->listen();
-	now = millis();
-	if(now - timestamp >= interval)
-	{
-		rgb_from.red = rgb_to.red;
-		rgb_from.green = rgb_to.green;
-		rgb_from.blue = rgb_to.blue;
+  //COMM->listen();
+  now = millis();
+  if(now - timestamp >= interval)
+  {
+    rgb_from_0.red = rgb_to_0.red;
+    rgb_from_0.green = rgb_to_0.green;
+    rgb_from_0.blue = rgb_to_0.blue;
 
-		rgb_to.red = random(0, 255);
-		rgb_to.green = random(0, 255);
-		rgb_to.blue = random(0, 255);		
+    rgb_to_0.red = random(0, 255);
+    rgb_to_0.green = random(0, 255);
+    rgb_to_0.blue = random(0, 255);   
 
-		PINS->get();
-		timestamp = now; 
-      	changed = now + duration;
-	}
-  	if(changed >= now)
-    {  
-			crossfade(0);
-    }
+    PINS->get();
+    timestamp = now; 
+    changed = now + duration;
+  }
+  if(changed >= now)
+  {  
+    crossfade(0);
+  }
 }
 
 void crossfade(int led)
-{	
-	float percent = ((changed-now)/duration);
+{ 
+  float percent = ((changed-now)/duration);
 
-	rgb_shift.red = rgb_to.red - rgb_from.red;
-	rgb_shift.red = rgb_to.red - (rgb_shift.red*percent);
+  RGB to;
+  RGB from;
+  RGB shift;
+  switch (led) {
+    case 0:
+      to = rgb_to_0;
+      from = rgb_from_0;
+      shift = rgb_shift_0;
+    break;
+    case 1:
+      to = rgb_to_1;
+      from = rgb_from_1;
+      shift = rgb_shift_1;
+    break;
+    case 2:
+      to = rgb_to_2;
+      from = rgb_from_2;
+      shift = rgb_shift_2;
+    break;    
+    case 3:
+      to = rgb_to_3;
+      from = rgb_from_3;
+      shift = rgb_shift_3;
+    break;
+    case 4:
+      to = rgb_to_4;
+      from = rgb_from_4;
+      shift = rgb_shift_4;
+    break;
+    case 5:
+      to = rgb_to_5;
+      from = rgb_from_5;
+      shift = rgb_shift_5;
+    break;
 
-	rgb_shift.green = rgb_to.green - rgb_from.green;
-	rgb_shift.green = rgb_to.green - (rgb_shift.green*percent);
+  }
+  shift.red = to.red - from.red;
+  shift.red = to.red - (shift.red*percent);
 
-	rgb_shift.blue = rgb_to.blue - rgb_from.blue;
-	rgb_shift.blue = rgb_to.blue - (rgb_shift.blue*percent);	
+  shift.green = to.green - from.green;
+  shift.green = to.green - (shift.green*percent);
 
-	pixel.setPixelColor(led, rgb_shift.red, rgb_shift.green, rgb_shift.blue);
-	pixel.show();
-	delay(1);
+  shift.blue = to.blue - from.blue;
+  shift.blue = to.blue - (shift.blue*percent);  
+
+  Serial.print("\nled:");
+  Serial.print(led);  
+  Serial.print(" red:");
+  Serial.print(shift.red);
+  Serial.print(" green:");
+  Serial.print(shift.red);
+  Serial.print(" blue:");
+  Serial.print(shift.red);
+
+  pixel.setPixelColor(led, shift.red, shift.green, shift.blue);
+  pixel.show();
+  
+  delay(1);
 }
 
