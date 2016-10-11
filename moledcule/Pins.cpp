@@ -60,13 +60,6 @@ Direction direction = {{0,0,0,0},{0,0,0,0},0,"0"};
  */ 
 Pins::Pins()
 {
-	/*
-	 * @description
-	 */
-	Punch punch = {{0,0,0,0},{0,0,0,0},0,"0"};
-	Kick kick = {{0,0,0,0},{0,0,0,0},0,"0"};
-	Alt alt = {{0,0,0},{0,0,0},0,"0"};
-	Direction direction = {{0,0,0,0},{0,0,0,0},0,"0"};	
 	this->set();
 }
 
@@ -118,12 +111,14 @@ void Pins::get()
 		direction.address |= direction.states[n] == 0 ? 1 << n : 0 << n;	
 	}
 
-Serial.print(F("\n command:"));    
-Serial.print(UTILS->getBin(command.address));   
-Serial.print(F(" alt:"));   
-Serial.print(UTILS->getBin(alt.address));       
-Serial.print(F(" direction:"));   
-Serial.print(UTILS->getBin(direction.address));
+	Serial.print(F("\n punch:"));    
+	Serial.print(punch.address);   
+	Serial.print(F(" kick:"));   
+	Serial.print(kick.address);
+	Serial.print(F(" alt:"));   
+	Serial.print(alt.address);
+	Serial.print(F(" direction:"));   
+	Serial.print(direction.address);
 
 }
 

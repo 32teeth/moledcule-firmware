@@ -355,14 +355,14 @@ void Pins::get()
   /*
    *
    */
-  Serial.print(F("\n")); 
-  Serial.print(F("punch:"));
-  String result = "";
-  for(int n = 0; n < 4; n++)
-  {
-    result += ((punch.address & (1 << n)) ? "1" : "0");
-  }
-  Serial.print(result); 
+  Serial.print(F("\n punch:"));    
+  Serial.print(punch.address);   
+  Serial.print(F(" kick:"));   
+  Serial.print(kick.address);
+  Serial.print(F(" alt:"));   
+  Serial.print(alt.address);
+  Serial.print(F(" direction:"));   
+  Serial.print(direction.address);
 }
 
 void Pins::get(IO& io)
@@ -419,7 +419,7 @@ Pins *PINS;
  */
 unsigned long now;
 unsigned long timestamp = 0;
-const long interval = 1000;
+const long interval = 100;
 
 
 typedef struct{
@@ -461,6 +461,7 @@ void setup()
   /*
    * @description start pixel and turn them all off
    */
+  /*
   pixel.begin();
   pixel.setBrightness(10);
   pixel.setPixelColor(0, rgb_shift_0.red, rgb_shift_0.green, rgb_shift_0.blue);
@@ -470,6 +471,7 @@ void setup()
   pixel.setPixelColor(4, rgb_shift_4.red, rgb_shift_4.green, rgb_shift_4.blue);
   pixel.setPixelColor(5, rgb_shift_5.red, rgb_shift_5.green, rgb_shift_5.blue);
   pixel.show();
+  */
   /*
    * @description create UTILS
    */
@@ -487,11 +489,13 @@ void setup()
    */ 
   PINS = new Pins();  
 
+  /*
   Serial.println("count_led:");
   Serial.print(count_led);
 
   Serial.print(" data_led:");
   Serial.print(data_led); 
+  */
 
   delay(1000);
   
@@ -510,21 +514,8 @@ void loop()
   now = millis();
   if(now - timestamp >= interval)
   {
-    rgb_from_0.red = rgb_to_0.red;
-    rgb_from_0.green = rgb_to_0.green;
-    rgb_from_0.blue = rgb_to_0.blue;
-
-    rgb_to_0.red = random(0, 255);
-    rgb_to_0.green = random(0, 255);
-    rgb_to_0.blue = random(0, 255);   
-
     PINS->get();
-    timestamp = now; 
-    changed = now + duration;
-  }
-  if(changed >= now)
-  {  
-    crossfade(0);
+    timestamp = now;  
   }
 }
 
