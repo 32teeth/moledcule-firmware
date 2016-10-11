@@ -117,6 +117,14 @@ void Pins::get()
 		direction.states[n] = directions[n].state;		
 		direction.address |= direction.states[n] == 0 ? 1 << n : 0 << n;	
 	}
+
+Serial.print(F("\n command:"));    
+Serial.print(UTILS->getBin(command.address));   
+Serial.print(F(" alt:"));   
+Serial.print(UTILS->getBin(alt.address));       
+Serial.print(F(" direction:"));   
+Serial.print(UTILS->getBin(direction.address));
+
 }
 
 void Pins::get(IO& io)

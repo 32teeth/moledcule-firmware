@@ -97,6 +97,7 @@ void setup()
 	char* kick[4] = {K1, K2, K3, K4};
 	for(int i = punch_led; i < punch_led + kick_led; i++)
 	{
+  
 		UTILS->getRGB(color, (long) strtol(kick[i-punch_led], NULL, 16));
 		pixel.setPixelColor(i, color.r, color.g, color.b);
 		pixel.show();	
