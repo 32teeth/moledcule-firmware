@@ -85,7 +85,7 @@ void setup()
 	 */	
 	PINS = new Pins();	
 	
-	/*
+	///*
 	char* punch[4] = {P1, P2, P3, P4};
 	for(int i = 0; i < punch_led; i++)
 	{
@@ -123,7 +123,7 @@ void setup()
 	}		
 
 	delay(2500);
-	*/	
+	//*/	
 }
 
 
