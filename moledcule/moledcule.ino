@@ -119,7 +119,7 @@ void setup()
 		UTILS->getRGB(color, (long) strtol(wiring_colors[i], NULL, 16));
 		pixel.setPixelColor(i, color.r, color.g, color.b);
 		pixel.show();	
-		delay(50);
+		delay(500);
 	}		
 
 	delay(2500);
