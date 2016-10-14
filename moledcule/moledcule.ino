@@ -18,12 +18,6 @@
 #include "Pattern.h"
 
 /*
- * @description include libraries
- */
-#include <Adafruit_NeoPixel.h>
-Adafruit_NeoPixel pixel = Adafruit_NeoPixel(count_led, data_led, NEO_GRB + NEO_KHZ800);
-
-/*
  * @description Utils
  */ 
 #include "Utils.h"
@@ -55,6 +49,12 @@ unsigned long timestamp = 0;
 const long interval = 100;
 
 /*
+ * @description include libraries
+ */
+#include <Adafruit_NeoPixel.h>
+Adafruit_NeoPixel pixel = Adafruit_NeoPixel(count_led, data_led, NEO_GRB + NEO_KHZ800);
+
+/*
  * @method setup
  * @description main litebrite setup
  */
@@ -65,9 +65,12 @@ void setup()
 	 */
 	pixel.begin();
 	pixel.setBrightness(bright);
-	pixel.setPixelColor(0, 255, 0, 0);
+	for(int i = 0; i < count_led; i++)
+	{
+		pixel.setPixelColor(i, 0, 0, 0);
+	}
 	pixel.show();
-
+	delay(1000);
 	/*
 	 * @description create UTILS
 	 */
@@ -83,47 +86,38 @@ void setup()
 	/*
 	 * @description create PINS
 	 */	
-	PINS = new Pins();	
-	
-	///*
-	char* punch[4] = {P1, P2, P3, P4};
-	for(int i = 0; i < punch_led; i++)
+	PINS = new Pins();		   		
+
+
+
+
+
+
+
+
+
+	int address;
+	for(int i = 0; i < length; i++)
 	{
-		UTILS->getRGB(color, (long) strtol(punch[i], NULL, 16));
-		pixel.setPixelColor(i, color.r, color.g, color.b);
+		Serial.print("index:");
+		Serial.print(i);		
+		Serial.print(" order:");
+		Serial.print(order[i]);
+		Serial.print(" leds:");
+		Serial.print(leds[i]);
+		Serial.print(" color:");
+		Serial.print(colors[i]);
+		Serial.print("\n");	
+
+		UTILS->getRGB(color, (long) strtol(colors[i], NULL, 16));
+
+		pixel.setPixelColor(order[i], color.r, color.g, color.b);
+		if(leds[i] == 2){pixel.setPixelColor(order[i]+1, color.r, color.g, color.b);}
 		pixel.show();	
-		delay(50);
-	}
-
-	char* kick[4] = {K1, K2, K3, K4};
-	for(int i = punch_led; i < punch_led + kick_led; i++)
-	{
-  
-		UTILS->getRGB(color, (long) strtol(kick[i-punch_led], NULL, 16));
-		pixel.setPixelColor(i, color.r, color.g, color.b);
-		pixel.show();	
-		delay(50);	
-	}		   		
-
-	delay(2500);
-
-	for(int i = 0; i < count_led; i++)
-	{
-		pixel.setPixelColor(i, 0, 0, 0);
-	}		   		
-	pixel.show();
-
-	for(int i = 0; i < wiring_length; i++)
-	{
-		Serial.println(wiring_colors[i]);
-		UTILS->getRGB(color, (long) strtol(wiring_colors[i], NULL, 16));
-		pixel.setPixelColor(i, color.r, color.g, color.b);
-		pixel.show();	
-		delay(500);
+		delay(100);
 	}		
 
 	delay(2500);
-	//*/	
 }
 
 
@@ -134,10 +128,12 @@ void setup()
 void loop()
 {
 	//COMM->listen();
+	/*
 	now = millis();
 	if(now - timestamp >= interval)
 	{
 		PINS->get();
 		timestamp = now;	
 	}
+	*/
 }
