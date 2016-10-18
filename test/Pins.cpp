@@ -7,7 +7,6 @@
  */
 #include "Pins.h"
 	
-
 /*
  * @description punchs
  */
@@ -110,7 +109,15 @@ void Pins::get()
 		direction.states[n] = directions[n].state;		
 		direction.address |= direction.states[n] == 0 ? 1 << n : 0 << n;	
 	}
+}
 
+void Pins::get(IO& io)
+{
+	io.state = digitalRead(io.pin);	
+}
+
+void Pins::pixels()
+{
 	Serial.print(F("\n punch:"));    
 	Serial.print(punch.address);   
 	Serial.print(F(" kick:"));   
@@ -119,13 +126,9 @@ void Pins::get()
 	Serial.print(alt.address);
 	Serial.print(F(" direction:"));   
 	Serial.print(direction.address);
-
 }
 
-void Pins::get(IO& io)
-{
-	io.state = digitalRead(io.pin);	
-}
+
 
 /*
  * @class Pins

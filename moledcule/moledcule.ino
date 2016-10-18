@@ -5,7 +5,21 @@
  * @date updated 09/14/16
  * @description
  */
+
+/*
+ * @description DEBUG
+ */
 #define DEBUG
+
+/*
+ * @description Config
+ */
+#include <Arduino.h>
+
+ /*
+ * @description Config
+ */
+#include "Structures.h"
 
  /*
  * @description Config
@@ -18,28 +32,37 @@
 #include "Pattern.h"
 
 /*
- * @description Utils
- */ 
-#include "Utils.h"
-Utils *UTILS;
-RGB color = {0,0,0};
-
-/*
- * @description Comm
- */ 
-#include "Comm.h"
-Comm *COMM;
-
-/*
  * @description Wiring
  */
 #include "Wiring.h"
 
 /*
+ * @description Utils
+ */ 
+#include "Utils.h"
+
+/*
+ * @description Comm
+ */ 
+#include "Comm.h"
+
+/*
  * @description Pins
  */
 #include "Pins.h"
-Pins *PINS;
+
+/*
+ * @description Pixels
+ */
+#include "Pixels.h"
+
+
+/*
+ * @description include libraries
+ */
+#include <Adafruit_NeoPixel.h>
+Adafruit_NeoPixel pixel = Adafruit_NeoPixel(count_led, data_led, NEO_GRB + NEO_KHZ800);
+
 
 /*
  *
@@ -48,11 +71,6 @@ unsigned long now;
 unsigned long timestamp = 0;
 const long interval = 100;
 
-/*
- * @description include libraries
- */
-#include <Adafruit_NeoPixel.h>
-Adafruit_NeoPixel pixel = Adafruit_NeoPixel(count_led, data_led, NEO_GRB + NEO_KHZ800);
 
 /*
  * @method setup
@@ -71,53 +89,13 @@ void setup()
 	}
 	pixel.show();
 	delay(1000);
+
 	/*
-	 * @description create UTILS
+	 *
 	 */
-	UTILS = new Utils();
-
-	/*
-	 * @description create COMM
-	 */	
-	COMM = new Comm();
-	COMM->start();
-
-	//initPins();
-	/*
-	 * @description create PINS
-	 */	
-	PINS = new Pins();		   		
-
-
-
-
-
-
-
-
-
-	int address;
-	for(int i = 0; i < length; i++)
-	{
-		Serial.print("index:");
-		Serial.print(i);		
-		Serial.print(" order:");
-		Serial.print(order[i]);
-		Serial.print(" leds:");
-		Serial.print(leds[i]);
-		Serial.print(" color:");
-		Serial.print(colors[i]);
-		Serial.print("\n");	
-
-		UTILS->getRGB(color, (long) strtol(colors[i], NULL, 16));
-
-		pixel.setPixelColor(order[i], color.r, color.g, color.b);
-		if(leds[i] == 2){pixel.setPixelColor(order[i]+1, color.r, color.g, color.b);}
-		pixel.show();	
-		delay(100);
-	}		
-
-	delay(2500);
+	startComm();
+	listenComm();
+	printComm("Comm is ready!");
 }
 
 
@@ -127,13 +105,10 @@ void setup()
  */
 void loop()
 {
-	//COMM->listen();
-	/*
 	now = millis();
 	if(now - timestamp >= interval)
 	{
-		PINS->get();
+		getPins();
 		timestamp = now;	
 	}
-	*/
 }

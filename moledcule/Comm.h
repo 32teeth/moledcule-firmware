@@ -1,39 +1,37 @@
 /*
- * @author Eugene Andruszczenko
- * @version 0.0.5
- * @date created 08/19/16
- * @date updated 09/14/16
- * @description
- */
-
- 
-#ifndef Comm_h
-#define Comm_h
-#include <Arduino.h>
-
-/*
- * @class Comm
- * @description 
- */
-class Comm
+** @method startComm
+** @desc start serial port if DEBUG is defined
+*/
+void startComm()
 {
-  public:
-
-    /*
-     *
-     */
-    Comm();
-
-    void start();
-    void listen();
-    void print(String str);
-
-    /*
-     *
-     */
-    ~Comm();
-
-  private:    
+	#ifdef DEBUG
+	  Serial.begin(115200);
+	  //while (!Serial) ;
+	  delay(1000);
+  #endif
 };
 
-#endif
+/*
+** @method listenComm
+** @desc listen to serial port if DEBUG is defined
+*/
+void listenComm()
+{
+  if(Serial.available() > 0)
+  {
+    String data = Serial.readStringUntil('\n');
+    String message;
+  }
+};
+
+/*
+** @method printComm
+** @param str (String)
+** @desc print string to serial port if DEBUG is defined
+*/
+void printComm(String str)
+{
+	#ifdef DEBUG
+		Serial.println(str);
+	#endif
+};
