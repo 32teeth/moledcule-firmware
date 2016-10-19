@@ -75,7 +75,7 @@ void printPins()
 	char buffer[250];
 	(String)sprintf(
 		buffer,
-		"\n PUNCH:%s KICK:%s  ALT:%s  DIRECTION:%s ",
+		"punhc:%d kick:%d alt:%d direction:%d",
 		PUNCH.address,
 		KICK.address,
 		ALT.address,
@@ -83,7 +83,7 @@ void printPins()
 	);
 
 	printComm(buffer);
-}
+;}
 
 /*
 ** @method setPins
@@ -104,35 +104,43 @@ void setPins()
 void getPins()
 {
 	PUNCH.address = 0;
+	PUNCH.bin = "";
 	for(int n = 0; n < 4; n++)
 	{
 		getPins(PUNCHS[n]);
 		PUNCH.states[n] = PUNCHS[n].state;
 		PUNCH.address |= PUNCH.states[n] == 0 ? 1 << n : 0 << n;
+		PUNCH.bin += PUNCH.states[n];
 	}
 
 	KICK.address = 0;
+	KICK.bin = "";
 	for(int n = 0; n < 4; n++)
 	{
 		getPins(KICKS[n]);
 		KICK.states[n] = KICKS[n].state;
 		KICK.address |= KICK.states[n] == 0 ? 1 << n : 0 << n;
+		KICK.bin += KICK.states[n];
 	}		
 
 	ALT.address = 0;
+	ALT.bin = "";
 	for(int n = 0; n < 3; n++)
 	{
 		getPins(ALTS[n]);
 		ALT.states[n] = ALTS[n].state;
-		ALT.address |= ALT.states[n] == 0 ? 1 << n : 0 << n;				
+		ALT.address |= ALT.states[n] == 0 ? 1 << n : 0 << n;	
+		ALT.bin += ALT.states[n];			
 	}			
 
 	DIRECTION.address = 0;
+	DIRECTION.bin = "";
 	for(int n = 0; n < 4; n++)
 	{
 		getPins(DIRECTIONS[n]);
 		DIRECTION.states[n] = DIRECTIONS[n].state;		
 		DIRECTION.address |= DIRECTION.states[n] == 0 ? 1 << n : 0 << n;	
+		DIRECTION.bin += DIRECTION.states[n];		
 	}
 
 	#ifdef DEBUG

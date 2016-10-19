@@ -11,19 +11,19 @@ typedef struct{int pin;int mode;int state;String type;} IO;
 /*
  * @struct Punch
  */
-typedef struct{int states[4];int stored[4];int address;String state;} Punch;
+typedef struct{int states[4];int stored[4];int address;String bin;} Punch;
 
 /*
  * @struct Kick
  */
-typedef struct{int states[4];int stored[4];int address;String state;} Kick;
+typedef struct{int states[4];int stored[4];int address;String bin;} Kick;
 
 /*
  * @struct Alt
  */
-typedef struct{int states[3];int stored[3];int address;String state;} Alt;
+typedef struct{int states[3];int stored[3];int address;String bin;} Alt;
 
 /*
  * @struct Direction
  */
-typedef struct{int states[4];int stored[4];int address;String state;} Direction;	
+typedef struct{int states[4];int stored[4];int address;String bin;} Direction;	
