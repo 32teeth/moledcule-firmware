@@ -37,6 +37,11 @@
 #include "Wiring.h"
 
 /*
+ * @description Define
+ */
+#include "Define.h"
+
+/*
  * @description Utils
  */ 
 #include "Utils.h"
@@ -96,6 +101,11 @@ void setup()
 	startComm();
 	listenComm();
 	printComm("Comm is ready!");
+
+	/*
+	 *
+	 */
+	setPins();
 }
 
 

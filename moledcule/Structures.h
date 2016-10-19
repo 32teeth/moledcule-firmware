@@ -6,7 +6,7 @@ typedef struct{int r;int g;int b;} RGB;
 /*
  * @struct IO
  */
-typedef struct{int pin;int mode;int state;String type;} IO;	
+typedef struct{int pin;int mode;int state;String type;int index;} IO;	
 
 /*
  * @struct Punch
