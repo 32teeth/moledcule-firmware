@@ -61,12 +61,10 @@
  */
 #include "Pixels.h"
 
-
 /*
- * @description include libraries
+ * @description Animation
  */
-#include <Adafruit_NeoPixel.h>
-Adafruit_NeoPixel pixel = Adafruit_NeoPixel(count_led, data_led, NEO_GRB + NEO_KHZ800);
+#include "Animation.h"
 
 
 /*
