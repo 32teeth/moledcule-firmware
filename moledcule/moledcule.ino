@@ -130,10 +130,5 @@ void setup()
  */
 void loop()
 {
-	animate.now = millis();
-	if(animate.now - animate.timestamp >= animate.interval)
-	{
-		animation();
-		animate.timestamp = animate.now;
-	}
+	animation();
 }
