@@ -2,16 +2,16 @@
  *
  */
 
-ANIMATION animate = {0,0,1000};
-
-int index[6] = {P1_INDEX,P2_INDEX,P3_INDEX,K1_INDEX,K2_INDEX,K3_INDEX};
-int current_frame = 0;
-int total_frames = 12;
+ANIMATION animate = {0,0,250};
 
 RGB red = {255,0,0};
 RGB green = {0,255,0};
 RGB blue = {0,0,255};
 RGB black = {0,0,0};
+
+int index[6] = {P1_INDEX, P2_INDEX, P3_INDEX, K3_INDEX, K2_INDEX, K1_INDEX};
+int current_frame = 0;
+int total_frames = 12;
 
 const byte frames[12][6][3] PROGMEM = {
 	// blue shift
@@ -117,22 +117,21 @@ const byte frames[12][6][3] PROGMEM = {
 
 void animation()
 {
-	animate.now = millis();
-	if(animate.now - animate.timestamp >= animate.interval)
+	for(int n = 0; n < 6; n++)
 	{
-		animate.timestamp = animate.now;
+		int r = frames[current_frame][n][0];
+		int g = frames[current_frame][n][1];
+		int b = frames[current_frame][n][2];
 
-		for(int n = 0; n < 6; n++)
-		{
-			int r = frames[current_frame][n][0];
-			int g = frames[current_frame][n][1];
-			int b = frames[current_frame][n][2];
-
-			pixel.setPixelColor(index[n], r, g, b);
-			pixel.setPixelColor(index[n] + 1, r, g, b);
-		}
-
-		current_frame += current_frame < total_frames ? 1 : -total_frames;
+		pixel.setPixelColor(index[n], r, g, b);
+		pixel.setPixelColor(index[n] + 1, r, g, b);
+		pixel.show();
 	}
-	animation();
+
+	current_frame++;
+	if(current_frame >= total_frames)
+	{
+		current_frame = 0;
+	}
 }
+

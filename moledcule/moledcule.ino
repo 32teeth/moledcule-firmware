@@ -92,6 +92,7 @@ void setup()
 	}
 	pixel.show();
 
+	/*
 	for(int i = 0; i < 255; i++)
 	{
 		pixel.setPixelColor(0, i, i, i);
@@ -107,6 +108,7 @@ void setup()
 		delay(5);
 	}		
 	delay(1000);
+	*/
 
 	/*
 	 *
@@ -128,10 +130,10 @@ void setup()
  */
 void loop()
 {
-	now = millis();
-	if(now - timestamp >= interval)
+	animate.now = millis();
+	if(animate.now - animate.timestamp >= animate.interval)
 	{
-		getPins();
-		timestamp = now;	
+		animation();
+		animate.timestamp = animate.now;
 	}
 }

@@ -1,9 +1,9 @@
-#define P1_INDEX 0
-#define P2_INDEX 2
-#define P3_INDEX 4
-#define K1_INDEX 6
-#define K2_INDEX 8
-#define K3_INDEX 10
+#define P3_INDEX 0
+#define K3_INDEX 2
+#define P2_INDEX 4
+#define K2_INDEX 6
+#define P1_INDEX 8
+#define K1_INDEX 10
 #define PLATE_RIGHT_INDEX 12
 #define PLATE_DOWNRIGHT_INDEX 13
 #define PLATE_DOWN_INDEX 14
