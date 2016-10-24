@@ -63,6 +63,8 @@ byte intro_colors[intro_elements][3] = {
   {red.r, red.g, red.b}    
 };
 
+byte intro_colors_reset[intro_elements][3] = {};
+
 void animateSet()
 {
   for(int n = 0; n < intro_length; n++)
@@ -96,20 +98,25 @@ void animateIntro()
     intro_step++;
     if(intro_step > (intro_length - intro_elements))
     {
-      byte intro_colors_reset[intro_elements][3] = {
-        {intro_colors[1][0], intro_colors[1][1], intro_colors[1][2]},
-        {intro_colors[2][0], intro_colors[2][1], intro_colors[2][2]},
-        {intro_colors[3][0], intro_colors[3][1], intro_colors[3][2]},
-        {intro_colors[4][0], intro_colors[4][1], intro_colors[4][2]},
-        {intro_colors[5][0], intro_colors[5][1], intro_colors[5][2]},
-        {intro_colors[6][0], intro_colors[6][1], intro_colors[6][2]},
-        {intro_colors[0][0], intro_colors[0][1], intro_colors[0][2]}
-      };
+      for(int n = 0; n < intro_elements-1; n++)
+      {
+        for(int m = 0; m < 3; m++)
+        {
+          intro_colors_reset[n][m] = intro_colors[n+1][m];  
+        }
+      }
+      for(int m = 0; m < 3; m++)
+      {
+        intro_colors_reset[6][m] = intro_colors[0][m];  
+      }      
+
+
       for(int n = 0; n < intro_elements; n++)
       {
-        intro_colors[n][0] = intro_colors_reset[n][0];
-        intro_colors[n][1] = intro_colors_reset[n][1];
-        intro_colors[n][2] = intro_colors_reset[n][2];
+        for(int m = 0; m < 3; m++)
+        {
+          intro_colors[n][m] = intro_colors_reset[n][m];  
+        }
       }
 
       pixel.setPixelColor(intro_index[intro_length-intro_elements], black.r, black.g, black.b);

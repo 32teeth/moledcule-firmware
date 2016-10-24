@@ -119,6 +119,7 @@ void setup()
 	/*
 	 *
 	 */
+	setupIntro();
 	animateIntro();
 }
 

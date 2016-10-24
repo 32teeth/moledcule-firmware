@@ -7,7 +7,8 @@ ANIMATION intro_timing = {0,0,50};
 int intro_active = 0;
 int intro_step = 0;
 int intro_loops = 5;
-const int intro_length = 14;
+const int intro_elements = 7;
+const int intro_length = count_led;
 
 int intro_index[intro_length] = {
 	P1_INDEX,
@@ -27,23 +28,22 @@ int intro_index[intro_length] = {
 };
 //int intro_index[20] = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19};
 
-const byte intro_frames[3][3][3] = {
-	{
-		{red.r, red.g, red.b},
-		{green.r, green.g, green.b},
-		{blue.r, blue.g, blue.b}
-	},
-	{	
-		{blue.r, blue.g, blue.b},
-		{red.r, red.g, red.b},
-		{green.r, green.g, green.b}
-	},
-	{
-		{green.r, green.g, green.b},
-		{blue.r, blue.g, blue.b},
-		{red.r, red.g, red.b}
-	}
+byte intro_colors[intro_elements][3] = {
+  {pink.r, pink.g, pink.b},  
+  {violet.r, violet.g, violet.b},
+  {blue.r, blue.g, blue.b},
+  {green.r, green.g, green.b},
+  {yellow.r, yellow.g, yellow.b},
+  {orange.r, orange.g, orange.b},
+  {red.r, red.g, red.b}    
 };
+
+byte intro_colors_reset[intro_elements][3] = {};
+
+void setupIntro()
+{
+
+}
 
 void animateIntro()
 {
@@ -52,49 +52,48 @@ void animateIntro()
 	{
 		intro_timing.timestamp = intro_timing.now;
 
-		for(int i = 0; i < count_led; i++)
-		{
-			pixel.setPixelColor(i, 0, 0, 0);
-		}		
-
-		pixel.setPixelColor(intro_index[intro_length-2], intro_frames[intro_active][0][0], intro_frames[intro_active][0][1], intro_frames[intro_active][0][2]);
-		pixel.setPixelColor(intro_index[intro_length-1], intro_frames[intro_active][1][0], intro_frames[intro_active][1][1], intro_frames[intro_active][1][2]);
-		pixel.setPixelColor(intro_index[intro_step], intro_frames[intro_active][2][0], intro_frames[intro_active][2][1], intro_frames[intro_active][2][2]);
-		pixel.show();			
-
-		intro_step++;
-		if(intro_step >= intro_length)
-		{
-			intro_active++;
-			if(intro_active > 2)
-			{
-				intro_active = 0;
-				intro_loops--;
-				if(intro_loops != 0)
-				{
-					animateIntro();
-				}
-			}				
-			intro_step = 0;
-		}	
-		/*
-		for(int n = 0; n < 6; n++)
-		{
-			int r = frames[current_frame][n][0];
-			int g = frames[current_frame][n][1];
-			int b = frames[current_frame][n][2];
-
-			pixel.setPixelColor(index[n], r, g, b);
-			pixel.setPixelColor(index[n] + 1, r, g, b);
-			pixel.show();
-		}
-
-		current_frame++;
-		if(current_frame >= total_frames)
-		{
-			current_frame = 0;
-		}		
-		*/
+    for(int n = intro_elements; n > 0; n--)
+    {
+      int i = n - 1;
+      pixel.setPixelColor(intro_index[intro_length-i], intro_colors[i][0], intro_colors[i][1], intro_colors[i][2]);
+    }		
 	}
+
+int prev_step = intro_step - 1;
+    if(intro_step == -1)
+    {intro_step = intro_length - 1;}
+    
+    pixel.setPixelColor(intro_index[prev_step], black.r, black.g, black.b);    
+    pixel.setPixelColor(intro_index[intro_step], intro_colors[0][0], intro_colors[0][1], intro_colors[0][2]);
+
+    pixel.show();
+
+    intro_step++;
+    if(intro_step > (intro_length - intro_elements))
+    {
+      for(int n = 0; n < intro_elements-1; n++)
+      {
+      	for(int m = 0; m < 3; m++)
+      	{
+      		intro_colors_reset[n][m] = intro_colors[n+1][m];	
+      	}
+      }
+    	for(int m = 0; m < 3; m++)
+    	{
+    		intro_colors_reset[6][m] = intro_colors[0][m];	
+    	}      
+
+
+      for(int n = 0; n < intro_elements; n++)
+      {
+      	for(int m = 0; m < 3; m++)
+      	{
+      		intro_colors[n][m] = intro_colors_reset[n][m];	
+      	}
+      }
+
+      pixel.setPixelColor(intro_index[intro_length-intro_elements], black.r, black.g, black.b);
+      intro_step = 0;
+    } 	
 }
 
