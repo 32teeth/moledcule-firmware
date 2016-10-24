@@ -22,6 +22,11 @@
 #include "Structures.h"
 
  /*
+ * @description Colors
+ */
+#include "Colors.h"
+
+ /*
  * @description Config
  */
 #include "Config.h"
@@ -64,6 +69,11 @@
 /*
  * @description Animation
  */
+#include "Intro.h"
+
+/*
+ * @description Animation
+ */
 #include "Animation.h"
 
 
@@ -93,24 +103,6 @@ void setup()
 	pixel.show();
 
 	/*
-	for(int i = 0; i < 255; i++)
-	{
-		pixel.setPixelColor(0, i, i, i);
-		pixel.setPixelColor(1, i, i, i);
-		pixel.show();
-		delay(5);
-	}
-	for(int i = 0; i < 255; i++)
-	{
-		pixel.setPixelColor(0, 255-i, 255-i, i);
-		pixel.setPixelColor(1, 255-i, 255-i, i);
-		pixel.show();
-		delay(5);
-	}		
-	delay(1000);
-	*/
-
-	/*
 	 *
 	 */
 	startComm();
@@ -121,6 +113,13 @@ void setup()
 	 *
 	 */
 	setPins();
+
+
+
+	/*
+	 *
+	 */
+	animateIntro();
 }
 
 
@@ -130,5 +129,5 @@ void setup()
  */
 void loop()
 {
-	animation();
+	//animation();
 }
