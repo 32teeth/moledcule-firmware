@@ -1,34 +1,16 @@
 
-
-
-
-ANIMATION intro_timing = {0,0,500};
+bool animate = true;
+ANIMATION intro = {0,0,500};
 
 int intro_active = 0;
 int intro_step = 0;
 int intro_loops = 5;
 const int intro_elements = 7;
-const int intro_length = 14;
 
-///*
-int intro_index[intro_length] = {
-	P1_INDEX,
-	P2_INDEX,
-	P3_INDEX,
-	K3_INDEX,
-	K2_INDEX,
-	K1_INDEX,
-	PLATE_RIGHT_INDEX,
-	PLATE_DOWNRIGHT_INDEX,
-	PLATE_DOWN_INDEX,
-	PLATE_DOWNLEFT_INDEX,
-	PLATE_LEFT_INDEX,
-	PLATE_UPLEFT_INDEX,
-	PLATE_UP_INDEX,
-	PLATE_UPRIGHT_INDEX
-};
 //*/
-//int intro_index[intro_length] = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19};
+//int order[wiring] = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19};
+
+byte intro_clear[3] = {0,0,0};
 
 byte intro_colors[intro_elements][3] = {
   {pink.r, pink.g, pink.b},  
@@ -47,41 +29,79 @@ void setupIntro()
 
 }
 
+void animateSetLED(int index, byte* color)
+{
+  int single = order[index];
+  int twin = leds[index] == 2 ? single + 1 : single;
+  pixel.setPixelColor(single, color[0], color[1], color[2]);
+  pixel.setPixelColor(twin, color[0], color[1], color[2]);
+}
+
 void animateIntro()
 {
-	intro_timing.now = millis();
-	if(intro_timing.now - intro_timing.timestamp >= intro_timing.interval)
+  /*
+   * @description
+   */
+	intro.now = millis();
+	if(intro.now - intro.timestamp >= intro.interval)
 	{
-		intro_timing.timestamp = intro_timing.now;
+    /*
+     * @description reset timestamp
+     */   
+		intro.timestamp = intro.now;
 
+    /*
+     * @description set the rainbow
+     */
     for(int n = intro_elements; n > 0; n--)
     {
       int i = n - 1;
-      pixel.setPixelColor(intro_index[intro_length-i], intro_colors[i][0], intro_colors[i][1], intro_colors[i][2]);
+      animateSetLED(wiring-i, intro_colors[i]);
     }		
 
+    /*
+     * @description
+     */
     int prev_step = intro_step - 1;
-    if(intro_step == -1){prev_step = intro_length - 1;}
-      
-    pixel.setPixelColor(intro_index[prev_step], black.r, black.g, black.b);    
-    pixel.setPixelColor(intro_index[intro_step], intro_colors[0][0], intro_colors[0][1], intro_colors[0][2]);
+    if(intro_step == -1){prev_step = wiring - 1;}
+    animateSetLED(prev_step, intro_clear);
+    animateSetLED(intro_step, intro_colors[0]);
 
+    /*
+     * @description
+     */
     intro_step++;
-    if(intro_step > (intro_length - intro_elements))
+
+    /*
+     * @description
+     */    
+    if(intro_step > (wiring - intro_elements))
     {
+      /*
+       * @description
+       */        
       for(int n = 0; n < intro_elements-1; n++)
       {
+        /*
+         * @description
+         */          
         for(int m = 0; m < 3; m++)
         {
           intro_colors_reset[n][m] = intro_colors[n+1][m];  
         }
       }
+
+      /*
+       * @description
+       */        
       for(int m = 0; m < 3; m++)
       {
         intro_colors_reset[6][m] = intro_colors[0][m];  
       }      
 
-
+      /*
+       * @description
+       */  
       for(int n = 0; n < intro_elements; n++)
       {
         for(int m = 0; m < 3; m++)
@@ -90,10 +110,29 @@ void animateIntro()
         }
       }
 
-      pixel.setPixelColor(intro_index[0], black.r, black.g, black.b);
+      /*
+       * @description
+       */  
+      animateSetLED(0, intro_clear);
       intro_step = 0;
-    }    
-    pixel.show();   
+
+      /*
+       * @description
+       */  
+      intro_loops--;
+      if(intro_loops == 0)
+      {
+        for(int n = 0; n < wiring; n++)
+        {
+          animateSetLED(n, intro_clear);
+        }
+        animate = false;        
+      }
+    } 
+
+    /*
+     * @description
+     */         
+    pixel.show();  
 	}
 }
-

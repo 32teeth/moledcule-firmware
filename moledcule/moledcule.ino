@@ -129,5 +129,12 @@ void setup()
  */
 void loop()
 {
-	animateIntro();
+	if(animate)
+	{
+		animateIntro();
+	}
+	else
+	{
+		getPins();
+	}
 }
