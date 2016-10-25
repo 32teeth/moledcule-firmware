@@ -120,7 +120,6 @@ void setup()
 	 *
 	 */
 	setupIntro();
-	animateIntro();
 }
 
 
@@ -130,5 +129,5 @@ void setup()
  */
 void loop()
 {
-	//animation();
+	animateIntro();
 }

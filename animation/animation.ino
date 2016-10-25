@@ -1,7 +1,7 @@
 #include <Adafruit_NeoPixel.h>
 
 #define PIN A5
-#define PIXELS 24
+#define PIXELS 18
 #define BRIGHTNESS 50
 
 Adafruit_NeoPixel pixel = Adafruit_NeoPixel(PIXELS, PIN, NEO_GRB + NEO_KHZ800);
