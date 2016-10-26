@@ -11,6 +11,7 @@ String getBin(int number)
 	return result;
 }
 
+
 /*
 ** @method getLong
 ** @desc convert rgb values to long int

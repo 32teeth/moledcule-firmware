@@ -72,19 +72,24 @@ void getPins(IO& io)
 */
 void printPins()
 {
+	char punch[24];PUNCH.bin.toCharArray(punch, 24);
+	char kick[24];KICK.bin.toCharArray(kick, 24);
+	char alt[24];ALT.bin.toCharArray(alt, 24);
+	char direction[24];DIRECTION.bin.toCharArray(direction, 24);
+		
 	char buffer[250];
-	/*
+
 	(String)sprintf(
 		buffer,
 		"punch:%d %s kick:%d %s alt:%d %s direction:%d %s",
-		PUNCH.address, PUNCH.bin,
-		KICK.address, KICK.bin,
-		ALT.address, ALT.bin,
-		DIRECTION.address, DIRECTION.bin
+		PUNCH.address, punch,
+		KICK.address, kick,
+		ALT.address, alt,
+		DIRECTION.address, direction
 	);
 
+
 	printComm(buffer);
-	*/
 ;}
 
 /*

@@ -1,14 +1,15 @@
 
-bool animate = true;
-ANIMATION intro = {0,0,500};
+bool animate = false;
+ANIMATION intro = {0,0,250};
 
 int intro_active = 0;
 int intro_step = 0;
-int intro_loops = 5;
 const int intro_elements = 7;
+int intro_loops = intro_elements;
 
 //*/
 //int order[wiring] = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19};
+int intro_order[wiring] = {P1_INDEX,P2_INDEX,P3_INDEX,K3_INDEX,K2_INDEX,K1_INDEX,PLATE_RIGHT_INDEX,PLATE_DOWNRIGHT_INDEX,PLATE_DOWN_INDEX,PLATE_DOWNLEFT_INDEX,PLATE_LEFT_INDEX,PLATE_UPLEFT_INDEX,PLATE_UP_INDEX,PLATE_UPRIGHT_INDEX};
 
 byte intro_clear[3] = {0,0,0};
 
@@ -31,10 +32,12 @@ void setupIntro()
 
 void animateSetLED(int index, byte* color)
 {
-  int single = order[index];
-  int twin = leds[index] == 2 ? single + 1 : single;
+  int single = intro_order[index];
   pixel.setPixelColor(single, color[0], color[1], color[2]);
-  pixel.setPixelColor(twin, color[0], color[1], color[2]);
+  if(leds[index] == 2)
+  {
+    pixel.setPixelColor(single+1, color[0], color[1], color[2]);
+  }
 }
 
 void animateIntro()
@@ -57,7 +60,8 @@ void animateIntro()
     {
       int i = n - 1;
       animateSetLED(wiring-i, intro_colors[i]);
-    }		
+    }	
+    animateSetLED(wiring-intro_elements, intro_clear);
 
     /*
      * @description
@@ -80,41 +84,25 @@ void animateIntro()
       /*
        * @description
        */        
-      for(int n = 0; n < intro_elements-1; n++)
-      {
-        /*
-         * @description
-         */          
-        for(int m = 0; m < 3; m++)
-        {
-          intro_colors_reset[n][m] = intro_colors[n+1][m];  
-        }
-      }
+      for(int n = 0; n < intro_elements-1; n++){for(int m = 0; m < 3; m++){intro_colors_reset[n][m] = intro_colors[n+1][m];};};
 
       /*
        * @description
        */        
-      for(int m = 0; m < 3; m++)
-      {
-        intro_colors_reset[6][m] = intro_colors[0][m];  
-      }      
+      for(int m = 0; m < 3; m++){intro_colors_reset[6][m] = intro_colors[0][m];};
 
       /*
        * @description
-       */  
-      for(int n = 0; n < intro_elements; n++)
-      {
-        for(int m = 0; m < 3; m++)
-        {
-          intro_colors[n][m] = intro_colors_reset[n][m];  
-        }
-      }
+       */ 
+      for(int n = 0; n < intro_elements; n++){for(int m = 0; m < 3; m++){intro_colors[n][m] = intro_colors_reset[n][m];};};
 
       /*
        * @description
        */  
       animateSetLED(0, intro_clear);
+
       intro_step = 0;
+
 
       /*
        * @description
@@ -126,13 +114,14 @@ void animateIntro()
         {
           animateSetLED(n, intro_clear);
         }
-        animate = false;        
+        pixel.show();
+        animate = false;
       }
     } 
 
     /*
      * @description
      */         
-    pixel.show();  
+    pixel.show(); 
 	}
 }
