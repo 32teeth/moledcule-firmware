@@ -59,7 +59,8 @@ Kaimana::Kaimana(void)
   pinMode( PIN_K1,     INPUT_PULLUP );
   pinMode( PIN_K2,     INPUT_PULLUP );
   pinMode( PIN_K3,     INPUT_PULLUP );
-  pinMode( PIN_K4,     INPUT_PULLUP );
+  pinMode( PIN_K4,     INPUT_PULLUP ); 
+
 
   // initialize Switch History
   switchHistoryClear();
@@ -69,13 +70,32 @@ Kaimana::Kaimana(void)
 void Kaimana::setLED(int index, int iR, int iG, int iB)
 {
   // set led identified by index to the RGB color passed to this function
-  if(index >=0 && index < LED_COUNT)
+ 
+  _led[index].r = iR*BRIGHTNESS;
+  _led[index].g = iG*BRIGHTNESS;
+  _led[index].b = iB*BRIGHTNESS;
+  
+
+
+  if(index == LED_JOY)
   {
-    _led[index].r=iR;
-    _led[index].g=iG;
-    _led[index].b=iB;
+    index = 8;
+   _led[index].r = iR*BRIGHTNESS;
+   _led[index].g = iG*BRIGHTNESS;
+   _led[index].b = iB*BRIGHTNESS;
   }
-}  
+  else
+  {
+
+     _led[index].r = iR*BRIGHTNESS;
+     _led[index].g = iG*BRIGHTNESS;
+     _led[index].b = iB*BRIGHTNESS;
+     _led[index+ 1].r = iR*BRIGHTNESS;
+     _led[index+ 1].g = iG*BRIGHTNESS;
+     _led[index+ 1].b = iB*BRIGHTNESS;
+   }
+   
+}
 
 
 void Kaimana::setALL(int iR, int iG, int iB)

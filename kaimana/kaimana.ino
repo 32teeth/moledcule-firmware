@@ -36,9 +36,9 @@
 
 
 // local function declarations
-int  pollSwitches(void);
-void showStartup(void);
-void setLEDRandomColor(int index);
+//int  pollSwitches(void);
+//void showStartup(void);
+//void setLEDRandomColor(int index);
 
 
 // ParadiseArcadeShop.com Kaimana features initialzied when Kaimana class instantiated
@@ -53,16 +53,15 @@ void setup()
 }
 
 
-
 // the loop routine repeats indefinitely and executes immediately following the setup() function
 void loop() 
 {
   unsigned long  ulTimeout;
-  
-    
+  uint8_t i;
+
   // initialize timeout value to now + some seconds
   ulTimeout = millis() + ( (unsigned long)IDLE_TIMEOUT_SECONDS * 1000 );
-  
+
 
   // infinite loop of read switches, update LEDs and idle animation when necessary
   while(true)
@@ -188,39 +187,75 @@ int pollSwitches(void)
   switch(joystickDirection)
   {
     case ATTACK_RIGHT:    // right
-      kaimana.setLED(LED_JOY, 127, 220, 000); 
+      #ifdef RANDOM_COLOR_JOY_ON
+        setLEDRandomColor(LED_JOY);
+      #else
+        kaimana.setLED(LED_JOY, LED_JOY_COLOR_ON);
+      #endif
       iLED[LED_JOY] = true;
       break;
     case ATTACK_LEFT:    // left
-      kaimana.setLED(LED_JOY, 127, 000, 220); 
+      #ifdef RANDOM_COLOR_JOY_ON
+        setLEDRandomColor(LED_JOY);
+      #else
+        kaimana.setLED(LED_JOY, LED_JOY_COLOR_ON);
+      #endif
       iLED[LED_JOY] = true;
       break;
     case ATTACK_DOWN:    // down
-      kaimana.setLED(LED_JOY, 000, 220, 220);
+      #ifdef RANDOM_COLOR_JOY_ON
+        setLEDRandomColor(LED_JOY);
+      #else
+        kaimana.setLED(LED_JOY, LED_JOY_COLOR_ON);
+      #endif
       iLED[LED_JOY] = true;
       break;
     case ATTACK_DOWN + ATTACK_RIGHT:    // down + right
-      kaimana.setLED(LED_JOY, 000, 255, 127); 
+      #ifdef RANDOM_COLOR_JOY_ON
+        setLEDRandomColor(LED_JOY);
+      #else
+        kaimana.setLED(LED_JOY, LED_JOY_COLOR_ON);
+      #endif
       iLED[LED_JOY] = true;
       break;
     case ATTACK_DOWN + ATTACK_LEFT:    // down + left
-      kaimana.setLED(LED_JOY, 000, 127, 255); 
+      #ifdef RANDOM_COLOR_JOY_ON
+        setLEDRandomColor(LED_JOY);
+      #else
+        kaimana.setLED(LED_JOY, LED_JOY_COLOR_ON);
+      #endif
       iLED[LED_JOY] = true;
       break;
     case ATTACK_UP:    // up
-      kaimana.setLED(LED_JOY, 255, 000, 000); 
+      #ifdef RANDOM_COLOR_JOY_ON
+        setLEDRandomColor(LED_JOY);
+      #else
+        kaimana.setLED(LED_JOY, LED_JOY_COLOR_ON);
+      #endif
       iLED[LED_JOY] = true;
       break;
     case ATTACK_UP + ATTACK_RIGHT:    // up + right
-      kaimana.setLED(LED_JOY, 220, 127, 000); 
+      #ifdef RANDOM_COLOR_JOY_ON
+        setLEDRandomColor(LED_JOY);
+      #else
+        kaimana.setLED(LED_JOY, LED_JOY_COLOR_ON);
+      #endif
       iLED[LED_JOY] = true;
       break;
     case ATTACK_UP + ATTACK_LEFT:   // up + left
-      kaimana.setLED(LED_JOY, 220, 000, 127); 
+      #ifdef RANDOM_COLOR_JOY_ON
+        setLEDRandomColor(LED_JOY);
+      #else
+        kaimana.setLED(LED_JOY, LED_JOY_COLOR_ON);
+      #endif
       iLED[LED_JOY] = true;
       break;
     default:   // zero or any undefined value on an 8 way stick like UP+DOWN which is not happening on my watch
-      kaimana.setLED(LED_JOY, BLACK);    
+      #ifdef RANDOM_COLOR_JOY_OFF
+        setLEDRandomColor(LED_JOY);
+      #else
+        kaimana.setLED(LED_JOY, LED_JOY_COLOR_OFF);
+      #endif    
       iLED[LED_JOY] = false;
       break;
   }  
@@ -242,14 +277,22 @@ int pollSwitches(void)
     else
     {
       // select new color when switch is first activated
-      setLEDRandomColor(LED_HOME);
+      #ifdef RANDOM_COLOR_HOME_ON      
+        setLEDRandomColor(LED_HOME);  
+      #else
+         kaimana.setLED(LED_HOME, LED_HOME_COLOR_ON);
+      #endif
       iLED[LED_HOME] = true;
     }
   }
   else
   {
       // switch is inactive
-      kaimana.setLED(LED_HOME, BLACK);    
+      #ifdef RANDOM_COLOR_HOME_OFF
+        setLEDRandomColor(LED_HOME);
+      #else
+        kaimana.setLED(LED_HOME, LED_HOME_COLOR_OFF);
+      #endif    
       iLED[LED_HOME] = false;
   }
 
@@ -266,14 +309,22 @@ int pollSwitches(void)
     else
     {
       // select new color when switch is first activated
-      setLEDRandomColor(LED_SELECT);
+      #ifdef RANDOM_COLOR_SELECT_ON        //mwolak 11-01-2015 switch between random or solid colors
+        setLEDRandomColor(LED_SELECT);  //mappings in kaimana_custom.h
+      #else
+         kaimana.setLED(LED_SELECT, LED_SELECT_COLOR_ON);
+      #endif
       iLED[LED_SELECT] = true;
     }
   }
   else
   {
       // switch is inactive
-      kaimana.setLED(LED_SELECT, BLACK);    
+      #ifdef RANDOM_COLOR_SELECT_OFF
+        setLEDRandomColor(LED_SELECT);
+      #else
+        kaimana.setLED(LED_SELECT, LED_SELECT_COLOR_OFF);
+      #endif       
       iLED[LED_SELECT] = false;
   }
 
@@ -290,14 +341,23 @@ int pollSwitches(void)
     else
     {
       // select new color when switch is first activated
-      setLEDRandomColor(LED_START);
+      #ifdef RANDOM_COLOR_START_ON        //mwolak 11-01-2015 switch between random or solid colors
+        setLEDRandomColor(LED_START);  //mappings in kaimana_custom.h
+      #else
+         kaimana.setLED(LED_START, LED_START_COLOR_ON);
+      #endif
       iLED[LED_START] = true;
     }
   }
   else
   {
       // switch is inactive
-      kaimana.setLED(LED_START, BLACK);    
+      // switch is inactive
+      #ifdef RANDOM_COLOR_START_OFF
+        setLEDRandomColor(LED_START);
+      #else
+        kaimana.setLED(LED_START, LED_START_COLOR_OFF);
+      #endif      
       iLED[LED_START] = false;
   }
 
@@ -316,14 +376,22 @@ int pollSwitches(void)
     else
     {
       // select new color when switch is first activated
-      setLEDRandomColor(LED_P1);
+      #ifdef RANDOM_COLOR_P1_ON
+        setLEDRandomColor(LED_P1);
+      #else
+         kaimana.setLED(LED_P1, LED_P1_COLOR_ON);
+      #endif
       iLED[LED_P1] = true;
     }
   }
   else
   {
       // switch is inactive
-      kaimana.setLED(LED_P1, BLACK);    
+      #ifdef RANDOM_COLOR_P1_OFF
+        setLEDRandomColor(LED_P1);
+      #else
+        kaimana.setLED(LED_P1, LED_P1_COLOR_OFF);
+      #endif     
       iLED[LED_P1] = false;
   }
 
@@ -342,14 +410,22 @@ int pollSwitches(void)
     else
     {
       // select new color when switch is first activated
-      setLEDRandomColor(LED_P2);
+      #ifdef RANDOM_COLOR_P2_ON
+        setLEDRandomColor(LED_P2);
+      #else
+         kaimana.setLED(LED_P2, LED_P2_COLOR_ON);
+      #endif
       iLED[LED_P2] = true;
     }
   }
   else
   {
       // switch is inactive
-      kaimana.setLED(LED_P2, BLACK);    
+      #ifdef RANDOM_COLOR_P2_OFF
+        setLEDRandomColor(LED_P2);
+      #else
+        kaimana.setLED(LED_P2, LED_P2_COLOR_OFF);
+      #endif    
       iLED[LED_P2] = false;
   }
 
@@ -368,14 +444,23 @@ int pollSwitches(void)
     else
     {
       // select new color when switch is first activated
-      setLEDRandomColor(LED_P3);
+      #ifdef RANDOM_COLOR_P3_ON
+        setLEDRandomColor(LED_P3);
+      #else
+         kaimana.setLED(LED_P3, LED_P3_COLOR_ON);
+      #endif
       iLED[LED_P3] = true;
     }
   }
   else
   {
       // switch is inactive
-      kaimana.setLED(LED_P3, BLACK);    
+      // switch is inactive
+      #ifdef RANDOM_COLOR_P3_OFF
+        setLEDRandomColor(LED_P3);
+      #else
+        kaimana.setLED(LED_P3, LED_P3_COLOR_OFF);
+      #endif   
       iLED[LED_P3] = false;
   }
   
@@ -394,14 +479,22 @@ int pollSwitches(void)
     else
     {
       // select new color when switch is first activated
-      setLEDRandomColor(LED_P4);
+      #ifdef RANDOM_COLOR_P4_ON
+        setLEDRandomColor(LED_P4);
+      #else
+         kaimana.setLED(LED_P4, LED_P4_COLOR_ON);
+      #endif
       iLED[LED_P4] = true;
     }
   }
   else
   {
       // switch is inactive
-      kaimana.setLED(LED_P4, BLACK);    
+      #ifdef RANDOM_COLOR_P4_OFF
+        setLEDRandomColor(LED_P4);
+      #else
+        kaimana.setLED(LED_P4, LED_P4_COLOR_OFF);
+      #endif 
       iLED[LED_P4] = false;
   }
 
@@ -420,14 +513,22 @@ int pollSwitches(void)
     else
     {
       // select new color when switch is first activated
-      setLEDRandomColor(LED_K1);
+      #ifdef RANDOM_COLOR_K1_ON
+        setLEDRandomColor(LED_K1);
+      #else
+         kaimana.setLED(LED_K1, LED_K1_COLOR_ON);
+      #endif
       iLED[LED_K1] = true;
     }
   }
   else
   {
       // switch is inactive
-      kaimana.setLED(LED_K1, BLACK);    
+      #ifdef RANDOM_COLOR_K1_OFF
+        setLEDRandomColor(LED_K1);
+      #else
+        kaimana.setLED(LED_K1, LED_K1_COLOR_OFF);
+      #endif    
       iLED[LED_K1] = false;
   }
 
@@ -446,14 +547,23 @@ int pollSwitches(void)
     else
     {
       // select new color when switch is first activated
-      setLEDRandomColor(LED_K2);
+      #ifdef RANDOM_COLOR_K2_ON
+        setLEDRandomColor(LED_K2);
+      #else
+         kaimana.setLED(LED_K2, LED_K2_COLOR_ON);
+      #endif
       iLED[LED_K2] = true;
     }
   }
   else
   {
       // switch is inactive
-      kaimana.setLED(LED_K2, BLACK);    
+      // switch is inactive
+      #ifdef RANDOM_COLOR_K2_OFF
+        setLEDRandomColor(LED_K2);
+      #else
+        kaimana.setLED(LED_K2, LED_K2_COLOR_OFF);
+      #endif      
       iLED[LED_K2] = false;
   }
 
@@ -472,14 +582,23 @@ int pollSwitches(void)
     else
     {
       // select new color when switch is first activated
-      setLEDRandomColor(LED_K3);
+      #ifdef RANDOM_COLOR_K3_ON
+        setLEDRandomColor(LED_K3);
+      #else
+         kaimana.setLED(LED_K3, LED_K3_COLOR_ON);
+      #endif
       iLED[LED_K3] = true;
     }
   }
   else
   {
       // switch is inactive
-      kaimana.setLED(LED_K3, BLACK);    
+      // switch is inactive
+      #ifdef RANDOM_COLOR_K3_OFF
+        setLEDRandomColor(LED_K3);
+      #else
+        kaimana.setLED(LED_K3, LED_K3_COLOR_OFF);
+      #endif    
       iLED[LED_K3] = false;
   }
 
@@ -498,14 +617,23 @@ int pollSwitches(void)
     else
     {
       // select new color when switch is first activated
-      setLEDRandomColor(LED_K4);
+      #ifdef RANDOM_COLOR_K4_ON
+        setLEDRandomColor(LED_K4);
+      #else
+         kaimana.setLED(LED_K4, LED_K4_COLOR_ON);
+      #endif
       iLED[LED_K4] = true;
     }
   }
   else
   {
       // switch is inactive
-      kaimana.setLED(LED_K4, BLACK);    
+      // switch is inactive
+      #ifdef RANDOM_COLOR_K4_OFF
+        setLEDRandomColor(LED_K4);
+      #else
+        kaimana.setLED(LED_K4, LED_K4_COLOR_OFF);
+      #endif       
       iLED[LED_K4] = false;
   }
 

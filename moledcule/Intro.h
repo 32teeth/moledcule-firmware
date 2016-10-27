@@ -1,3 +1,15 @@
+/*
+ * @author Eugene Andruszczenko
+ *  ___ ___ _           _   _   
+ * |_  |_  | |_ ___ ___| |_| |_ 
+ * |_  |  _|  _| -_| -_|  _|   |
+ * |___|___|_| |___|___|_| |_|_|
+ * 
+ * @version 0.0.5
+ * @date created 08/19/16
+ * @date updated 10/26/16
+ * @description
+ */
 
 bool animate = false;
 ANIMATION intro = {0,0,250};
@@ -25,12 +37,9 @@ byte intro_colors[intro_elements][3] = {
 
 byte intro_colors_reset[intro_elements][3] = {};
 
-void setupIntro()
-{
 
-}
 
-void animateSetLED(int index, byte* color)
+void animateSetPixel(int index, byte* color)
 {
   int single = intro_order[index];
   pixel.setPixelColor(single, color[0], color[1], color[2]);
@@ -38,6 +47,11 @@ void animateSetLED(int index, byte* color)
   {
     pixel.setPixelColor(single+1, color[0], color[1], color[2]);
   }
+}
+
+void setupIntro()
+{
+
 }
 
 void animateIntro()
@@ -59,17 +73,17 @@ void animateIntro()
     for(int n = intro_elements; n > 0; n--)
     {
       int i = n - 1;
-      animateSetLED(wiring-i, intro_colors[i]);
+      animateSetPixel(wiring-i, intro_colors[i]);
     }	
-    animateSetLED(wiring-intro_elements, intro_clear);
+    animateSetPixel(wiring-intro_elements, intro_clear);
 
     /*
      * @description
      */
     int prev_step = intro_step - 1;
     if(intro_step == -1){prev_step = wiring - 1;}
-    animateSetLED(prev_step, intro_clear);
-    animateSetLED(intro_step, intro_colors[0]);
+    animateSetPixel(prev_step, intro_clear);
+    animateSetPixel(intro_step, intro_colors[0]);
 
     /*
      * @description
@@ -99,7 +113,7 @@ void animateIntro()
       /*
        * @description
        */  
-      animateSetLED(0, intro_clear);
+      animateSetPixel(0, intro_clear);
 
       intro_step = 0;
 
@@ -112,7 +126,7 @@ void animateIntro()
       {
         for(int n = 0; n < wiring; n++)
         {
-          animateSetLED(n, intro_clear);
+          animateSetPixel(n, intro_clear);
         }
         pixel.show();
         animate = false;

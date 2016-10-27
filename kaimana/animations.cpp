@@ -33,7 +33,6 @@
 #include "kaimana_custom.h"
 #include "animations.h"
 
-
 // Color Fade Animation when Idle
 //
 int animation_idle(void)
@@ -101,7 +100,19 @@ void animation_combo_1(void)
         pgm_read_byte_near(&colorCycleData[counter%FIREBALL_SIZE])
       );
       kaimana.setLED(
+        LED_P1_B,
+        0,  // no red just cyan used for fireball
+        pgm_read_byte_near(&colorCycleData[counter%FIREBALL_SIZE]),
+        pgm_read_byte_near(&colorCycleData[counter%FIREBALL_SIZE])
+      );
+      kaimana.setLED(
         LED_K1,
+        0,  // no red just cyan used for fireball
+        pgm_read_byte_near(&colorCycleData[counter%FIREBALL_SIZE]),
+        pgm_read_byte_near(&colorCycleData[counter%FIREBALL_SIZE])
+      );
+      kaimana.setLED(
+        LED_K1_B,
         0,  // no red just cyan used for fireball
         pgm_read_byte_near(&colorCycleData[counter%FIREBALL_SIZE]),
         pgm_read_byte_near(&colorCycleData[counter%FIREBALL_SIZE])
@@ -110,7 +121,9 @@ void animation_combo_1(void)
     else
     {
       kaimana.setLED( LED_P1, BLACK );
+      kaimana.setLED( LED_P1_B, BLACK );
       kaimana.setLED( LED_K1, BLACK );
+      kaimana.setLED( LED_K1_B, BLACK );
     }
 
     // P2 & K2
@@ -123,7 +136,19 @@ void animation_combo_1(void)
         pgm_read_byte_near(&colorCycleData[(counter+(FIREBALL_OFFSET_1))%FIREBALL_SIZE])
       );
       kaimana.setLED(
+        LED_P2_B,
+        0,  // no red just cyan used for fireball
+        pgm_read_byte_near(&colorCycleData[(counter+(FIREBALL_OFFSET_1))%FIREBALL_SIZE]),
+        pgm_read_byte_near(&colorCycleData[(counter+(FIREBALL_OFFSET_1))%FIREBALL_SIZE])
+      );     
+      kaimana.setLED(
         LED_K2,
+        0,  // no red just cyan used for fireball
+        pgm_read_byte_near(&colorCycleData[(counter+(FIREBALL_OFFSET_1))%FIREBALL_SIZE]),
+        pgm_read_byte_near(&colorCycleData[(counter+(FIREBALL_OFFSET_1))%FIREBALL_SIZE])
+      );
+      kaimana.setLED(
+        LED_K2_B,
         0,  // no red just cyan used for fireball
         pgm_read_byte_near(&colorCycleData[(counter+(FIREBALL_OFFSET_1))%FIREBALL_SIZE]),
         pgm_read_byte_near(&colorCycleData[(counter+(FIREBALL_OFFSET_1))%FIREBALL_SIZE])
@@ -132,7 +157,9 @@ void animation_combo_1(void)
     else
     {
       kaimana.setLED( LED_P2, BLACK );
+      kaimana.setLED( LED_P2_B, BLACK );
       kaimana.setLED( LED_K2, BLACK );
+      kaimana.setLED( LED_P2_B, BLACK );
     }
 
     // P3 & K3
@@ -145,7 +172,19 @@ void animation_combo_1(void)
         pgm_read_byte_near(&colorCycleData[(counter+(FIREBALL_OFFSET_2))%FIREBALL_SIZE])
       );
       kaimana.setLED(
+        LED_P3_B,
+        0,  // no red just cyan used for fireball
+        pgm_read_byte_near(&colorCycleData[(counter+(FIREBALL_OFFSET_2))%FIREBALL_SIZE]),
+        pgm_read_byte_near(&colorCycleData[(counter+(FIREBALL_OFFSET_2))%FIREBALL_SIZE])
+      );
+      kaimana.setLED(
         LED_K3,
+        0,  // no red just cyan used for fireball
+        pgm_read_byte_near(&colorCycleData[(counter+(FIREBALL_OFFSET_2))%FIREBALL_SIZE]),
+        pgm_read_byte_near(&colorCycleData[(counter+(FIREBALL_OFFSET_2))%FIREBALL_SIZE])
+      );
+      kaimana.setLED(
+        LED_K3_B,
         0,  // no red just cyan used for fireball
         pgm_read_byte_near(&colorCycleData[(counter+(FIREBALL_OFFSET_2))%FIREBALL_SIZE]),
         pgm_read_byte_near(&colorCycleData[(counter+(FIREBALL_OFFSET_2))%FIREBALL_SIZE])
@@ -154,7 +193,10 @@ void animation_combo_1(void)
     else
     {
       kaimana.setLED( LED_P3, BLACK );
+      kaimana.setLED( LED_P3_B, BLACK );
       kaimana.setLED( LED_K3, BLACK );
+      kaimana.setLED( LED_K3_B, BLACK );
+      
     }
 
     // P4 & K4
@@ -167,7 +209,19 @@ void animation_combo_1(void)
         pgm_read_byte_near(&colorCycleData[(counter+(FIREBALL_OFFSET_3))%FIREBALL_SIZE])
       );
       kaimana.setLED(
+        LED_P4_B,
+        0,  // no red just cyan used for fireball
+        pgm_read_byte_near(&colorCycleData[(counter+(FIREBALL_OFFSET_3))%FIREBALL_SIZE]),
+        pgm_read_byte_near(&colorCycleData[(counter+(FIREBALL_OFFSET_3))%FIREBALL_SIZE])
+      );
+      kaimana.setLED(
         LED_K4,
+        0,  // no red just cyan used for fireball
+        pgm_read_byte_near(&colorCycleData[(counter+(FIREBALL_OFFSET_3))%FIREBALL_SIZE]),
+        pgm_read_byte_near(&colorCycleData[(counter+(FIREBALL_OFFSET_3))%FIREBALL_SIZE])
+      );
+      kaimana.setLED(
+        LED_K4_B,
         0,  // no red just cyan used for fireball
         pgm_read_byte_near(&colorCycleData[(counter+(FIREBALL_OFFSET_3))%FIREBALL_SIZE]),
         pgm_read_byte_near(&colorCycleData[(counter+(FIREBALL_OFFSET_3))%FIREBALL_SIZE])
@@ -176,7 +230,9 @@ void animation_combo_1(void)
     else
     {
       kaimana.setLED( LED_P4, BLACK );
+      kaimana.setLED( LED_P4_B, BLACK );
       kaimana.setLED( LED_K4, BLACK );
+      kaimana.setLED( LED_K4_B, BLACK );
     }
 
     // update the leds with new/current colors in the array
@@ -213,104 +269,135 @@ void animation_combo_3(void)
   kaimana.setALL(BLACK);
 
  kaimana.setLED( LED_K1, RED );
+ kaimana.setLED( LED_K1_B, RED );
    delay(25);
    kaimana.updateALL();
  kaimana.setLED( LED_K2, RED );
+ kaimana.setLED( LED_K2_B, RED );
    delay(25);
    kaimana.updateALL();
  kaimana.setLED( LED_K3, RED );
+ kaimana.setLED( LED_K3_B, RED );
    delay(25);
    kaimana.updateALL();
  kaimana.setLED( LED_K4, RED );
+ kaimana.setLED( LED_K4_B, RED );
    delay(25);
    kaimana.updateALL();
  kaimana.setLED( LED_P4, RED );
+ kaimana.setLED( LED_P4_B, RED );
    delay(25);
    kaimana.updateALL();
  kaimana.setLED( LED_P3, RED );
+ kaimana.setLED( LED_P3_B, RED );
    delay(25);
    kaimana.updateALL();
  kaimana.setLED( LED_P2, RED );
+ kaimana.setLED( LED_P2_B, RED );
    delay(25);
    kaimana.updateALL();
  kaimana.setLED( LED_P1, RED );
+ kaimana.setLED( LED_P1_B, RED );
    delay(25);
    kaimana.updateALL();
 
 
  kaimana.setLED( LED_K1, GREEN );
+ kaimana.setLED( LED_K1_B, GREEN );
    delay(25);
    kaimana.updateALL();
  kaimana.setLED( LED_K2, GREEN );
+ kaimana.setLED( LED_K2_B, GREEN );
    delay(25);
    kaimana.updateALL();
  kaimana.setLED( LED_K3, GREEN );
+ kaimana.setLED( LED_K3_B, GREEN );
    delay(25);
    kaimana.updateALL();
  kaimana.setLED( LED_K4, GREEN );
+ kaimana.setLED( LED_K4_B, GREEN );
    delay(25);
    kaimana.updateALL();
  kaimana.setLED( LED_P4, GREEN );
+ kaimana.setLED( LED_P4_B, GREEN );
    delay(25);
    kaimana.updateALL();
  kaimana.setLED( LED_P3, GREEN );
+ kaimana.setLED( LED_P3_B, GREEN );
    delay(25);
    kaimana.updateALL();
  kaimana.setLED( LED_P2, GREEN );
+ kaimana.setLED( LED_P2_B, GREEN );
    delay(25);
    kaimana.updateALL();
  kaimana.setLED( LED_P1, GREEN );
+ kaimana.setLED( LED_P1_B, GREEN );
    delay(25);
    kaimana.updateALL();
 
 
  kaimana.setLED( LED_K1, BLUE );
+ kaimana.setLED( LED_K1_B, BLUE );
    delay(25);
    kaimana.updateALL();
  kaimana.setLED( LED_K2, BLUE );
+ kaimana.setLED( LED_K2_B, BLUE );
    delay(25);
    kaimana.updateALL();
  kaimana.setLED( LED_K3, BLUE );
+ kaimana.setLED( LED_K3_B, BLUE );
    delay(25);
    kaimana.updateALL();
  kaimana.setLED( LED_K4, BLUE );
+ kaimana.setLED( LED_K4_B, BLUE );
    delay(25);
    kaimana.updateALL();
  kaimana.setLED( LED_P4, BLUE );
+ kaimana.setLED( LED_P4_B, BLUE );
    delay(25);
    kaimana.updateALL();
  kaimana.setLED( LED_P3, BLUE );
+ kaimana.setLED( LED_P3_B, BLUE );
    delay(25);
    kaimana.updateALL();
  kaimana.setLED( LED_P2, BLUE );
+ kaimana.setLED( LED_P2_B, BLUE );
    delay(25);
    kaimana.updateALL();
  kaimana.setLED( LED_P1, BLUE );
+ kaimana.setLED( LED_P1_B, BLUE );
    delay(25);
    kaimana.updateALL();
-
  kaimana.setLED( LED_K1, BLACK );
+ kaimana.setLED( LED_K1_B, BLACK );
    delay(25);
    kaimana.updateALL();
  kaimana.setLED( LED_K2, BLACK );
+ kaimana.setLED( LED_K2_B, BLACK );
    delay(25);
    kaimana.updateALL();
  kaimana.setLED( LED_K3, BLACK );
+ kaimana.setLED( LED_K3_B, BLACK );
    delay(25);
    kaimana.updateALL();
  kaimana.setLED( LED_K4, BLACK );
+ kaimana.setLED( LED_K4_B, BLACK );
    delay(25);
    kaimana.updateALL();
  kaimana.setLED( LED_P4, BLACK );
+ kaimana.setLED( LED_P4_B, BLACK );
    delay(25);
    kaimana.updateALL();
  kaimana.setLED( LED_P3, BLACK );
+ kaimana.setLED( LED_P3_B, BLACK );
    delay(25);
    kaimana.updateALL();
  kaimana.setLED( LED_P2, BLACK );
+ kaimana.setLED( LED_P2_B, BLACK );
    delay(25);
    kaimana.updateALL();
  kaimana.setLED( LED_P1, BLACK );
+ kaimana.setLED( LED_P1_B, BLACK );
    delay(25);
    kaimana.updateALL();
 
