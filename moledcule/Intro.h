@@ -11,7 +11,7 @@
  * @description
  */
 
-bool animate = true;
+bool animate = false;
 ANIMATION intro = {0,0,250};
 
 int intro_active = 0;

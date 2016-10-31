@@ -11,35 +11,54 @@
  * @description
  */
 
+RGB P1_COLOR;
+RGB P2_COLOR;
+RGB P3_COLOR;
+RGB P4_COLOR;
+
+RGB K1_COLOR;
+RGB K2_COLOR;
+RGB K3_COLOR;
+RGB K4_COLOR;
+
+RGB START_COLOR;
+RGB SELECT_COLOR;
+RGB HOME_COLOR;
+
+RGB RIGHT_COLOR;
+RGB DOWN_COLOR;
+RGB LEFT_COLOR;
+RGB UP_COLOR;
+
 /*
  * @description all punch IO
  */
-IO P1_IO = {3, INPUT, HIGH, "d", P1_INDEX};
-IO P2_IO = {2, INPUT, HIGH, "d", P2_INDEX};
-IO P3_IO = {0, INPUT, HIGH, "d", P3_INDEX};
-IO P4_IO = {1, INPUT, HIGH, "d", P4_INDEX};
+IO P1_IO = {3, INPUT, HIGH, "d", P1_INDEX, black, black, getRGB(P1_COLOR, getLong(P1))};
+IO P2_IO = {2, INPUT, HIGH, "d", P2_INDEX, black, black, getRGB(P2_COLOR, getLong(P2))};
+IO P3_IO = {0, INPUT, HIGH, "d", P3_INDEX, black, black, getRGB(P3_COLOR, getLong(P3))};
+IO P4_IO = {1, INPUT, HIGH, "d", P4_INDEX, black, black, getRGB(P4_COLOR, getLong(P4))};
 /*
  * @description all kick IO
  */
-IO K1_IO = {4, INPUT, HIGH, "d", K1_INDEX};
-IO K2_IO = {A3, INPUT, HIGH, "a", K2_INDEX};
-IO K3_IO = {12, INPUT, HIGH, "d", K3_INDEX};
-IO K4_IO = {6, INPUT, HIGH, "d", K4_INDEX};
+IO K1_IO = {4, INPUT, HIGH, "d", K1_INDEX, black, black, getRGB(K1_COLOR, getLong(K1))};
+IO K2_IO = {A3, INPUT, HIGH, "a", K2_INDEX, black, black, getRGB(K2_COLOR, getLong(K2))};
+IO K3_IO = {12, INPUT, HIGH, "d", K3_INDEX, black, black, getRGB(K3_COLOR, getLong(K3))};
+IO K4_IO = {6, INPUT, HIGH, "d", K4_INDEX, black, black, getRGB(K4_COLOR, getLong(K4))};
 
 /*
  * @description all alt IO
  */		
-IO START_IO = {10, INPUT, HIGH, "d", START_INDEX};
-IO SELECT_IO = {9, INPUT, HIGH, "d", SELECT_INDEX};
-IO HOME_IO = {8, INPUT, HIGH, "d", HOME_INDEX};
+IO START_IO = {10, INPUT, HIGH, "d", START_INDEX, black, black, getRGB(START_COLOR, getLong(START))};
+IO SELECT_IO = {9, INPUT, HIGH, "d", SELECT_INDEX, black, black, getRGB(SELECT_COLOR, getLong(SELECT))};
+IO HOME_IO = {8, INPUT, HIGH, "d", HOME_INDEX, black, black, getRGB(HOME_COLOR, getLong(HOME))};
 
 /*
  * @description direction IO
  */
-IO RIGHT_IO = {A2, INPUT, HIGH, "a", RIGHT_INDEX};
-IO DOWN_IO = {11, INPUT, HIGH, "d", DOWN_INDEX};	
-IO LEFT_IO = {A1, INPUT, HIGH,"a", LEFT_INDEX};
-IO UP_IO = {A0, INPUT, HIGH, "a", UP_INDEX};
+IO RIGHT_IO = {A2, INPUT, HIGH, "a", RIGHT_INDEX, black, black, getRGB(RIGHT_COLOR, getLong(RIGHT))};
+IO DOWN_IO = {11, INPUT, HIGH, "d", DOWN_INDEX, black, black, getRGB(DOWN_COLOR, getLong(DOWN))};
+IO LEFT_IO = {A1, INPUT, HIGH,"a", LEFT_INDEX, black, black, getRGB(LEFT_COLOR, getLong(LEFT))};
+IO UP_IO = {A0, INPUT, HIGH, "a", UP_INDEX, black, black, getRGB(UP_COLOR, getLong(UP))};
 
 /*
  * @description array of IO

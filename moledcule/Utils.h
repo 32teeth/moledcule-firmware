@@ -12,6 +12,11 @@
  */
 
 /*
+ * @description Config
+ */
+#include <Arduino.h>
+
+/*
 ** @method getBin
 ** @param number (int)
 ** @return result {String} 
@@ -39,6 +44,20 @@ long int getLong(int r, int g, int b)
 }
 
 /*
+** @method getLong
+** @desc convert hex values to long
+** @param color {hex} hex value represantation of color
+** @return {long}
+*/
+long int getLong(String color)
+{
+	char charbuf[8];
+	color.toCharArray(charbuf,8);
+	long int shift=strtol(charbuf,0,16);
+	return shift;
+}
+
+/*
 ** @method getRGB
 ** @desc convert long values to rgb array
 ** @param color {long} long value represantation of color
@@ -59,7 +78,7 @@ int* getRGB(long color)
 ** @param color {long} long value represantation of color
 ** @return {int*}
 */
-void getRGB(RGB& rgb, long color)
+RGB getRGB(RGB& rgb, long color)
 {
 	rgb.r = (color>>16);
 	rgb.g = ((color>>8) & 0xff);

@@ -19,6 +19,8 @@
 
 #define count_led 20
 
+#define FADE;
+
 #define FIGHTSTICK						
 /*
  EOF

@@ -355,14 +355,14 @@ void Pins::get()
   /*
    *
    */
-  Serial.print(F("\n punch:"));    
-  Serial.print(punch.address);   
-  Serial.print(F(" kick:"));   
-  Serial.print(kick.address);
-  Serial.print(F(" alt:"));   
-  Serial.print(alt.address);
-  Serial.print(F(" direction:"));   
-  Serial.print(direction.address);
+  Serial.print(F("\n")); 
+  Serial.print(F("punch:"));
+  String result = "";
+  for(int n = 0; n < 4; n++)
+  {
+    result += ((punch.address & (1 << n)) ? "1" : "0");
+  }
+  Serial.print(result); 
 }
 
 void Pins::get(IO& io)
@@ -387,7 +387,7 @@ Pins::~Pins(){}
  * @description include libraries
  */
 #include <Adafruit_NeoPixel.h>
-Adafruit_NeoPixel pixel = Adafruit_NeoPixel(1, 8, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel pixel = Adafruit_NeoPixel(1, data_led, NEO_GRB + NEO_KHZ800);
 //Adafruit_NeoPixel pixel = Adafruit_NeoPixel(1, PIN, NEO_GRB + NEO_KHZ800);
 
 /*
@@ -419,7 +419,7 @@ Pins *PINS;
  */
 unsigned long now;
 unsigned long timestamp = 0;
-const long interval = 100;
+const long interval = 1000;
 
 
 typedef struct{
@@ -428,29 +428,9 @@ typedef struct{
   int blue; 
 } RGB;
 
-RGB rgb_to_0 {random(0, 255), random(0, 255), random(0, 255)};
-RGB rgb_from_0 {rgb_to_0.red, rgb_to_0.blue, rgb_to_0.green};
-RGB rgb_shift_0 {rgb_to_0.red, rgb_to_0.blue, rgb_to_0.green};
-
-RGB rgb_to_1 {random(0, 255), random(0, 255), random(0, 255)};
-RGB rgb_from_1 {rgb_to_1.red, rgb_to_1.blue, rgb_to_1.green};
-RGB rgb_shift_1 {rgb_to_1.red, rgb_to_1.blue, rgb_to_1.green};
-
-RGB rgb_to_2 {random(0, 255), random(0, 255), random(0, 255)};
-RGB rgb_from_2 {rgb_to_2.red, rgb_to_2.blue, rgb_to_2.green};
-RGB rgb_shift_2 {rgb_to_2.red, rgb_to_2.blue, rgb_to_2.green};
-
-RGB rgb_to_3 {random(0, 255), random(0, 255), random(0, 255)};
-RGB rgb_from_3 {rgb_to_3.red, rgb_to_3.blue, rgb_to_3.green};
-RGB rgb_shift_3 {rgb_to_3.red, rgb_to_3.blue, rgb_to_3.green};
-
-RGB rgb_to_4 {random(0, 255), random(0, 255), random(0, 255)};
-RGB rgb_from_4 {rgb_to_4.red, rgb_to_4.blue, rgb_to_4.green};
-RGB rgb_shift_4 {rgb_to_4.red, rgb_to_4.blue, rgb_to_4.green};
-
-RGB rgb_to_5 {random(0, 255), random(0, 255), random(0, 255)};
-RGB rgb_from_5 {rgb_to_5.red, rgb_to_5.blue, rgb_to_5.green};
-RGB rgb_shift_5 {rgb_to_5.red, rgb_to_5.blue, rgb_to_5.green};
+RGB rgb_to {random(0, 255), random(0, 255), random(0, 255)};
+RGB rgb_from {rgb_to.red, rgb_to.blue, rgb_to.green};
+RGB rgb_shift {rgb_to.red, rgb_to.blue, rgb_to.green};
 
 /*
  * @method setup
@@ -461,17 +441,9 @@ void setup()
   /*
    * @description start pixel and turn them all off
    */
-  /*
   pixel.begin();
-  pixel.setBrightness(10);
-  pixel.setPixelColor(0, rgb_shift_0.red, rgb_shift_0.green, rgb_shift_0.blue);
-  pixel.setPixelColor(1, rgb_shift_1.red, rgb_shift_1.green, rgb_shift_1.blue);
-  pixel.setPixelColor(2, rgb_shift_2.red, rgb_shift_2.green, rgb_shift_2.blue);
-  pixel.setPixelColor(3, rgb_shift_3.red, rgb_shift_3.green, rgb_shift_3.blue);
-  pixel.setPixelColor(4, rgb_shift_4.red, rgb_shift_4.green, rgb_shift_4.blue);
-  pixel.setPixelColor(5, rgb_shift_5.red, rgb_shift_5.green, rgb_shift_5.blue);
+  pixel.setPixelColor(0, rgb_shift.red, rgb_shift.green, rgb_shift.blue);
   pixel.show();
-  */
   /*
    * @description create UTILS
    */
@@ -489,13 +461,11 @@ void setup()
    */ 
   PINS = new Pins();  
 
-  /*
   Serial.println("count_led:");
   Serial.print(count_led);
 
   Serial.print(" data_led:");
   Serial.print(data_led); 
-  */
 
   delay(1000);
   
@@ -506,7 +476,7 @@ void setup()
  * @description main litebrite loop
  */
 float changed;
-float duration = interval/4;
+float duration = interval/2;
 
 void loop()
 {
@@ -514,8 +484,21 @@ void loop()
   now = millis();
   if(now - timestamp >= interval)
   {
+    rgb_from.red = rgb_to.red;
+    rgb_from.green = rgb_to.green;
+    rgb_from.blue = rgb_to.blue;
+
+    rgb_to.red = random(0, 255);
+    rgb_to.green = random(0, 255);
+    rgb_to.blue = random(0, 255);   
+
     PINS->get();
-    timestamp = now;  
+    timestamp = now; 
+    changed = now + duration;
+  }
+  if(changed >= now)
+  {  
+    crossfade(0);
   }
 }
 
@@ -523,63 +506,16 @@ void crossfade(int led)
 { 
   float percent = ((changed-now)/duration);
 
-  RGB to;
-  RGB from;
-  RGB shift;
-  switch (led) {
-    case 0:
-      to = rgb_to_0;
-      from = rgb_from_0;
-      shift = rgb_shift_0;
-    break;
-    case 1:
-      to = rgb_to_1;
-      from = rgb_from_1;
-      shift = rgb_shift_1;
-    break;
-    case 2:
-      to = rgb_to_2;
-      from = rgb_from_2;
-      shift = rgb_shift_2;
-    break;    
-    case 3:
-      to = rgb_to_3;
-      from = rgb_from_3;
-      shift = rgb_shift_3;
-    break;
-    case 4:
-      to = rgb_to_4;
-      from = rgb_from_4;
-      shift = rgb_shift_4;
-    break;
-    case 5:
-      to = rgb_to_5;
-      from = rgb_from_5;
-      shift = rgb_shift_5;
-    break;
+  rgb_shift.red = rgb_to.red - rgb_from.red;
+  rgb_shift.red = rgb_to.red - (rgb_shift.red*percent);
 
-  }
-  shift.red = to.red - from.red;
-  shift.red = to.red - (shift.red*percent);
+  rgb_shift.green = rgb_to.green - rgb_from.green;
+  rgb_shift.green = rgb_to.green - (rgb_shift.green*percent);
 
-  shift.green = to.green - from.green;
-  shift.green = to.green - (shift.green*percent);
+  rgb_shift.blue = rgb_to.blue - rgb_from.blue;
+  rgb_shift.blue = rgb_to.blue - (rgb_shift.blue*percent);  
 
-  shift.blue = to.blue - from.blue;
-  shift.blue = to.blue - (shift.blue*percent);  
-
-  Serial.print("\nled:");
-  Serial.print(led);  
-  Serial.print(" red:");
-  Serial.print(shift.red);
-  Serial.print(" green:");
-  Serial.print(shift.red);
-  Serial.print(" blue:");
-  Serial.print(shift.red);
-
-  pixel.setPixelColor(led, shift.red, shift.green, shift.blue);
+  pixel.setPixelColor(led, rgb_shift.red, rgb_shift.green, rgb_shift.blue);
   pixel.show();
-  
-  delay(1);
+  delay(5);
 }
-
