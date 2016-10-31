@@ -11,10 +11,23 @@
  * @description
  */
 
+ /*
+ *
+ */
+unsigned long now;
+unsigned long timestamp = 0;
+const long interval = 100;
+const float duration = 500;
+
 /*
  * @description DEBUG
  */
 #define DEBUG
+
+/*
+ * @description ACTIVE
+ */
+String MODE = "active";
 
 /*
  * @description Config
@@ -83,14 +96,6 @@
 
 
 /*
- *
- */
-unsigned long now;
-unsigned long timestamp = 0;
-const long interval = 100;
-
-
-/*
  * @method setup
  * @description main litebrite setup
  */
@@ -117,14 +122,7 @@ void setup()
 	/*
 	 *
 	 */
-	setPins();
-
-
-
-	/*
-	 *
-	 */
-	setupIntro();
+	setPins(); 
 }
 
 
@@ -134,5 +132,18 @@ void setup()
  */
 void loop()
 {
-	getPins();
+  now = millis();
+  if(now - timestamp >= interval)
+  {
+    getPins();
+    if(ACTIVE)
+    {
+    	updatePixels();
+    }
+    timestamp = now;
+  };
+
+  /*
+   *
+   */
 }

@@ -24,7 +24,7 @@ typedef struct{int r;int g;int b;} RGB;
 /*
  * @struct IO
  */
-typedef struct{int pin;int mode;int state;String type;int index;RGB current;RGB from;RGB to;} IO;	
+typedef struct{int pin;int mode;int state;String type;int index;RGB current;RGB from;RGB to;float changed;} IO;	
 
 /*
  * @struct Punch
