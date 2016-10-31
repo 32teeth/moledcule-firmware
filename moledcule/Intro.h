@@ -11,7 +11,7 @@
  * @description
  */
 
-bool animate = false;
+bool animate = true;
 ANIMATION intro = {0,0,250};
 
 int intro_active = 0;
@@ -121,6 +121,7 @@ void animateIntro()
       /*
        * @description
        */  
+      /*
       intro_loops--;
       if(intro_loops == 0)
       {
@@ -131,6 +132,7 @@ void animateIntro()
         pixel.show();
         animate = false;
       }
+      */
     } 
 
     /*

@@ -134,11 +134,11 @@ void setup()
  */
 void loop()
 {
-	/*
+	///*
 	if(animate)
 	{
 		animateIntro();
 	}
-	*/
+	//*/
 	getPins();
 }
