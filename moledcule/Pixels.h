@@ -49,7 +49,7 @@ void fadePixel(IO& io)
 
 void updatePixels()
 {
-	#ifdef FADE
+	#ifndef FADE
 		for(int n = 0; n < 4; n++){paintPixel(PUNCHS[n]);}
 		for(int n = 0; n < 4; n++){paintPixel(KICKS[n]);}
 		for(int n = 0; n < 3; n++){paintPixel(ALTS[n]);}

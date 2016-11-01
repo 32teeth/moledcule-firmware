@@ -17,17 +17,17 @@
 unsigned long now;
 unsigned long timestamp = 0;
 const long interval = 100;
-const float duration = 500;
+const float duration = 100;
 
 /*
  * @description DEBUG
  */
-#define DEBUG
+//#define DEBUG
 
 /*
  * @description ACTIVE
  */
-String MODE = "active";
+//String MODE = "active";
 
 /*
  * @description Config
@@ -136,12 +136,10 @@ void loop()
   if(now - timestamp >= interval)
   {
     getPins();
-    if(ACTIVE)
-    {
-    	updatePixels();
-    }
     timestamp = now;
   };
+
+  updatePixels();
 
   /*
    *
