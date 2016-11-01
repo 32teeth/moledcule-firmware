@@ -22,6 +22,8 @@ void paintPixel(IO& io)
 	io.current = io.state == 0 ? io.to : io.from;
 	pixel.setPixelColor(io.index, io.current.r, io.current.g, io.current.b);
 	pixel.setPixelColor(io.index+1, io.current.r, io.current.g, io.current.b);
+	delay(5);		
+	pixel.show();
 }
 
 void fadePixel(IO& io)
@@ -44,6 +46,9 @@ void fadePixel(IO& io)
 
 		pixel.setPixelColor(io.index, io.current.r, io.current.g, io.current.b);
 		pixel.setPixelColor(io.index+1, io.current.r, io.current.g, io.current.b); 
+
+		delay(5);
+		pixel.show();
 	}
 }
 
@@ -60,6 +65,4 @@ void updatePixels()
 		for(int n = 0; n < 3; n++){fadePixel(ALTS[n]);}
 		for(int n = 0; n < 4; n++){fadePixel(DIRECTIONS[n]);}
 	#endif	
-
-	pixel.show();
 }
