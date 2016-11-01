@@ -133,12 +133,9 @@ void setup()
 void loop()
 {
   now = millis();
-  if(now - timestamp >= interval)
-  {
-    getPins();
-    timestamp = now;
-  };
+  if(now - timestamp >= interval){timestamp = now;};
 
+	getPins();
   updatePixels();
 
   /*
