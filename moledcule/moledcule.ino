@@ -17,7 +17,7 @@
 unsigned long now;
 unsigned long timestamp = 0;
 const long interval = 100;
-const float duration = 100;
+const float duration = 500;
 
 /*
  * @description DEBUG
@@ -65,14 +65,14 @@ const float duration = 100;
 #include "Define.h"
 
 /*
- * @description Utils
- */ 
-#include "Utils.h"
-
-/*
  * @description Comm
  */ 
 #include "Comm.h"
+
+/*
+ * @description Utils
+ */ 
+#include "Utils.h"
 
 /*
  * @description Pins
@@ -111,18 +111,19 @@ void setup()
 		pixel.setPixelColor(i, 0, 0, 0);
 	}
 	pixel.show();
+	delay(2500);
 
 	/*
 	 *
 	 */
 	startComm();
 	listenComm();
-	printComm("Comm is ready!");
 
 	/*
 	 *
 	 */
 	setPins(); 
+	delay(1000);	
 }
 
 

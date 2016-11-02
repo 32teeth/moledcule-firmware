@@ -51,10 +51,8 @@ long int getLong(int r, int g, int b)
 */
 long int getLong(String color)
 {
-	char charbuf[8];
-	color.toCharArray(charbuf,8);
-	long int shift=strtol(charbuf,0,16);
-	return shift;
+  long number = (long) strtol( &color[0], NULL, 16);	
+  return number;
 }
 
 /*
@@ -83,6 +81,8 @@ RGB getRGB(RGB& rgb, long color)
 	rgb.r = (color>>16);
 	rgb.g = ((color>>8) & 0xff);
 	rgb.b = (color & 0xff);
+
+	return rgb;
 }
 
 /*

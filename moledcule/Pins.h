@@ -30,6 +30,8 @@ RGB DOWN_COLOR;
 RGB LEFT_COLOR;
 RGB UP_COLOR;
 
+
+
 /*
  * @description all punch IO
  */
@@ -37,6 +39,7 @@ IO P1_IO = {3, INPUT, HIGH, "d", P1_INDEX, black, black, getRGB(P1_COLOR, getLon
 IO P2_IO = {2, INPUT, HIGH, "d", P2_INDEX, black, black, getRGB(P2_COLOR, getLong(P2)), 0};
 IO P3_IO = {0, INPUT, HIGH, "d", P3_INDEX, black, black, getRGB(P3_COLOR, getLong(P3)), 0};
 IO P4_IO = {1, INPUT, HIGH, "d", P4_INDEX, black, black, getRGB(P4_COLOR, getLong(P4)), 0};
+
 /*
  * @description all kick IO
  */
@@ -134,6 +137,8 @@ void setPins()
 	for(int n = 0; n < 4; n++){setPins(KICKS[n]);}
 	for(int n = 0; n < 3; n++){setPins(ALTS[n]);}
 	for(int n = 0; n < 4; n++){setPins(DIRECTIONS[n]);}	
+
+
 }
 
 /*
@@ -183,7 +188,7 @@ void getPins()
 	DIRECTION.bin = getBin(DIRECTION.address);
 
 	#ifdef DEBUG
-		printPins();
+		//printPins();
 	#endif
 }
 
