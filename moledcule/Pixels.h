@@ -17,14 +17,17 @@
 #include <Adafruit_NeoPixel.h>
 Adafruit_NeoPixel pixel = Adafruit_NeoPixel(count_led, data_led, NEO_RGB + NEO_KHZ800);
 
-void paintPixel(IO& io)
+void paintPixel(IO& io, bool pair)
 {
 	io.current = io.state == 0 ? io.to : io.from;
 	pixel.setPixelColor(io.index, io.current.r, io.current.g, io.current.b);
-	pixel.setPixelColor(io.index+1, io.current.r, io.current.g, io.current.b);
+	if(pair)
+	{
+		pixel.setPixelColor(io.index+1, io.current.r, io.current.g, io.current.b);
+	}	
 }
 
-void fadePixel(IO& io)
+void fadePixel(IO& io, bool pair)
 {
 	if(io.changed >= now && io.index != -1)
 	{
@@ -43,8 +46,12 @@ void fadePixel(IO& io)
 	  io.current.b = to.b - (io.current.b*percent);
 
 		pixel.setPixelColor(io.index, io.current.g, io.current.r, io.current.b);
-		pixel.setPixelColor(io.index+1, io.current.g, io.current.r, io.current.b); 
+		if(pair)
+		{
+			pixel.setPixelColor(io.index+1, io.current.g, io.current.r, io.current.b); 
+		}
 
+		/*
 		char buffer[250];
 		(String)sprintf(
 			buffer,
@@ -59,22 +66,32 @@ void fadePixel(IO& io)
 			io.current.g,
 			io.current.b						
 		);	  
-		printComm(buffer);		
+		printComm(buffer);
+		*/		
 	}
 }
 
 void updatePixels()
 {
 	#ifdef FADE
-		for(int n = 0; n < 4; n++){fadePixel(PUNCHS[n]);}
-		for(int n = 0; n < 4; n++){fadePixel(KICKS[n]);}
-		for(int n = 0; n < 3; n++){fadePixel(ALTS[n]);}
-		for(int n = 0; n < 4; n++){fadePixel(DIRECTIONS[n]);}
+		for(int n = 0; n < 4; n++){fadePixel(PUNCHS[n], true);}
+		for(int n = 0; n < 4; n++){fadePixel(KICKS[n], true);}
+		for(int n = 0; n < 3; n++){fadePixel(ALTS[n], true);}
+
+		int diagonal = 0;
+		for(int n = 0; n < 4; n++){diagonal += DIRECTIONS[n].state == 0 ? 1 : 0;}
+
+
+		for(int n = 0; n < 4; n++)
+		{
+			fadePixel(DIRECTIONS[n], false);
+		}		
+
 	#else
-		for(int n = 0; n < 4; n++){paintPixel(PUNCHS[n]);}
-		for(int n = 0; n < 4; n++){paintPixel(KICKS[n]);}
-		for(int n = 0; n < 3; n++){paintPixel(ALTS[n]);}
-		for(int n = 0; n < 4; n++){paintPixel(DIRECTIONS[n]);}	
+		for(int n = 0; n < 4; n++){paintPixel(PUNCHS[n], true);}
+		for(int n = 0; n < 4; n++){paintPixel(KICKS[n], true);}
+		for(int n = 0; n < 3; n++){paintPixel(ALTS[n], true);}
+		for(int n = 0; n < 4; n++){paintPixel(DIRECTIONS[n], false);}
 	#endif	
 
 	delay(5);		

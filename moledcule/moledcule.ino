@@ -22,7 +22,7 @@ const float duration = 500;
 /*
  * @description DEBUG
  */
-//#define DEBUG
+#define DEBUG
 
 /*
  * @description ACTIVE
@@ -99,6 +99,7 @@ const float duration = 500;
  * @method setup
  * @description main litebrite setup
  */
+bool intro = true;
 void setup()
 { 
 	/*
@@ -111,7 +112,7 @@ void setup()
 		pixel.setPixelColor(i, 0, 0, 0);
 	}
 	pixel.show();
-	delay(2500);
+
 
 	/*
 	 *
@@ -123,7 +124,7 @@ void setup()
 	 *
 	 */
 	setPins(); 
-	delay(1000);	
+	delay(1000);
 }
 
 
