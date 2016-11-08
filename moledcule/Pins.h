@@ -137,8 +137,6 @@ void setPins()
 	for(int n = 0; n < 4; n++){setPins(KICKS[n]);}
 	for(int n = 0; n < 3; n++){setPins(ALTS[n]);}
 	for(int n = 0; n < 4; n++){setPins(DIRECTIONS[n]);}	
-
-
 }
 
 /*

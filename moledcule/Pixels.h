@@ -49,25 +49,115 @@ void fadePixel(IO& io, bool pair)
 		if(pair)
 		{
 			pixel.setPixelColor(io.index+1, io.current.g, io.current.r, io.current.b); 
-		}
+		}	
+	}
+}
 
-		/*
-		char buffer[250];
-		(String)sprintf(
-			buffer,
-			"from %d,%d,%d to %d,%d,%d current %d,%d,%d",
-			io.from.r,
-			io.from.g,
-			io.from.b,
-			io.to.r,
-			io.to.g,
-			io.to.b,
-			io.current.r,
-			io.current.g,
-			io.current.b						
-		);	  
-		printComm(buffer);
-		*/		
+void paintPlatePixel()
+{
+	DIRECTIONS[0].index = PLATE_RIGHT_INDEX;
+	DIRECTIONS[1].index = PLATE_DOWN_INDEX;
+	DIRECTIONS[2].index = PLATE_LEFT_INDEX;
+	DIRECTIONS[3].index = PLATE_UP_INDEX;
+	switch(DIRECTION.address)
+	{
+		default:
+		case 0:
+			DIRECTIONS[0].index = PLATE_RIGHT_INDEX;
+			DIRECTIONS[1].index = PLATE_DOWN_INDEX;
+			DIRECTIONS[2].index = PLATE_LEFT_INDEX;
+			DIRECTIONS[3].index = PLATE_UP_INDEX;
+		break;
+		case 1:
+			DIRECTIONS[0].index = PLATE_RIGHT_INDEX;
+			paintPixel(DIRECTIONS[0], true);
+		break;
+		case 3:
+			DIRECTIONS[0].index = PLATE_DOWNRIGHT_INDEX;
+			paintPixel(DIRECTIONS[0], false);
+			paintPixel(DIRECTIONS[1], false);
+		break;			
+		case 2:
+			DIRECTIONS[1].index = PLATE_DOWN_INDEX;
+			paintPixel(DIRECTIONS[1], true);
+		break;
+		case 6:
+			DIRECTIONS[2].index = PLATE_DOWNLEFT_INDEX;
+			paintPixel(DIRECTIONS[1], false);
+			paintPixel(DIRECTIONS[2], false);
+		break;				
+		case 4:
+			DIRECTIONS[2].index = PLATE_LEFT_INDEX;
+			paintPixel(DIRECTIONS[2], true);
+		break;
+		case 12:
+			DIRECTIONS[2].index = PLATE_UPLEFT_INDEX;
+			paintPixel(DIRECTIONS[2], false);
+			paintPixel(DIRECTIONS[3], false);
+		break;
+		case 8:
+			DIRECTIONS[3].index = PLATE_UP_INDEX;
+			paintPixel(DIRECTIONS[3], true);
+		break;
+		case 9:
+			DIRECTIONS[3].index = PLATE_UPRIGHT_INDEX;
+			paintPixel(DIRECTIONS[3], false);
+			paintPixel(DIRECTIONS[0], false);
+		break;									
+	}
+}
+
+void fadePlatePixel()
+{
+	DIRECTIONS[0].index = PLATE_RIGHT_INDEX;
+	DIRECTIONS[1].index = PLATE_DOWN_INDEX;
+	DIRECTIONS[2].index = PLATE_LEFT_INDEX;
+	DIRECTIONS[3].index = PLATE_UP_INDEX;
+	switch(DIRECTION.address)
+	{
+		default:
+		case 0:
+			DIRECTIONS[0].index = PLATE_RIGHT_INDEX;
+			DIRECTIONS[1].index = PLATE_DOWN_INDEX;
+			DIRECTIONS[2].index = PLATE_LEFT_INDEX;
+			DIRECTIONS[3].index = PLATE_UP_INDEX;
+		break;
+		case 1:
+			DIRECTIONS[0].index = PLATE_RIGHT_INDEX;
+			paintPixel(DIRECTIONS[0], true);
+		break;
+		case 3:
+			DIRECTIONS[0].index = PLATE_DOWNRIGHT_INDEX;
+			paintPixel(DIRECTIONS[0], false);
+			paintPixel(DIRECTIONS[1], false);
+		break;			
+		case 2:
+			DIRECTIONS[1].index = PLATE_DOWN_INDEX;
+			paintPixel(DIRECTIONS[1], true);
+		break;
+		case 6:
+			DIRECTIONS[2].index = PLATE_DOWNLEFT_INDEX;
+			paintPixel(DIRECTIONS[1], false);
+			paintPixel(DIRECTIONS[2], false);
+		break;				
+		case 4:
+			DIRECTIONS[2].index = PLATE_LEFT_INDEX;
+			paintPixel(DIRECTIONS[2], true);
+		break;
+		case 12:
+			DIRECTIONS[2].index = PLATE_UPLEFT_INDEX;
+			paintPixel(DIRECTIONS[2], false);
+			paintPixel(DIRECTIONS[3], false);
+		break;
+		case 8:
+			DIRECTIONS[3].index = PLATE_UP_INDEX;
+			paintPixel(DIRECTIONS[3], true);
+		break;
+		case 9:
+			DIRECTIONS[3].index = PLATE_UPRIGHT_INDEX;
+			paintPixel(DIRECTIONS[3], false);
+			paintPixel(DIRECTIONS[0], false);
+		break;									
 	}
 }
 
@@ -77,21 +167,12 @@ void updatePixels()
 		for(int n = 0; n < 4; n++){fadePixel(PUNCHS[n], true);}
 		for(int n = 0; n < 4; n++){fadePixel(KICKS[n], true);}
 		for(int n = 0; n < 3; n++){fadePixel(ALTS[n], true);}
-
-		int diagonal = 0;
-		for(int n = 0; n < 4; n++){diagonal += DIRECTIONS[n].state == 0 ? 1 : 0;}
-
-
-		for(int n = 0; n < 4; n++)
-		{
-			fadePixel(DIRECTIONS[n], false);
-		}		
-
+		fadePlatePixel();
 	#else
 		for(int n = 0; n < 4; n++){paintPixel(PUNCHS[n], true);}
 		for(int n = 0; n < 4; n++){paintPixel(KICKS[n], true);}
 		for(int n = 0; n < 3; n++){paintPixel(ALTS[n], true);}
-		for(int n = 0; n < 4; n++){paintPixel(DIRECTIONS[n], false);}
+		paintPlatePixel();
 	#endif	
 
 	delay(5);		
