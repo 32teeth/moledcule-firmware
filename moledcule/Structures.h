@@ -22,6 +22,11 @@ typedef struct{unsigned long now;unsigned long timestamp;const long interval;} A
 typedef struct{int r;int g;int b;} RGB;
 
 /*
+ * @struct PLATE
+ */
+typedef struct{RGB current; RGB form; RGB to;} PLATE;
+
+/*
  * @struct IO
  */
 typedef struct{int pin;int mode;int state;String type;int index;RGB current;RGB from;RGB to;float changed;} IO;	
@@ -29,19 +34,19 @@ typedef struct{int pin;int mode;int state;String type;int index;RGB current;RGB 
 /*
  * @struct Punch
  */
-typedef struct{int states[4];int stored[4];int address;String bin;} Punch;
+typedef struct{int states[4];int address;String bin;} Punch;
 
 /*
  * @struct Kick
  */
-typedef struct{int states[4];int stored[4];int address;String bin;} Kick;
+typedef struct{int states[4];int address;String bin;} Kick;
 
 /*
  * @struct Alt
  */
-typedef struct{int states[3];int stored[3];int address;String bin;} Alt;
+typedef struct{int states[3];int address;String bin;} Alt;
 
 /*
  * @struct Direction
  */
-typedef struct{int states[4];int stored[4];int address;String bin;} Direction;	
+typedef struct{int states[4];int address;String bin;} Direction;	

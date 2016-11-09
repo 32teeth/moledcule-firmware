@@ -74,10 +74,10 @@ IO DIRECTIONS[4] = {RIGHT_IO, DOWN_IO, LEFT_IO, UP_IO};
 /*
  * @description
  */
-Punch PUNCH = {{0,0,0,0},{0,0,0,0},0,"0"};
-Kick KICK = {{0,0,0,0},{0,0,0,0},0,"0"};
-Alt ALT = {{0,0,0},{0,0,0},0,"0"};
-Direction DIRECTION = {{0,0,0,0},{0,0,0,0},0,"0"};
+Punch PUNCH = {{0,0,0,0},0,"0"};
+Kick KICK = {{0,0,0,0},0,"0"};
+Alt ALT = {{0,0,0},0,"0"};
+Direction DIRECTION = {{0,0,0,0},0,"0"};
 
 
 /*

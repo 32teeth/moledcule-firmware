@@ -124,6 +124,7 @@ void setup()
 	 *
 	 */
 	setPins(); 
+	plateInit();
 	delay(1000);
 }
 
