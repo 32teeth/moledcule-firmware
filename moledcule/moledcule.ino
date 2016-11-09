@@ -138,7 +138,9 @@ void loop()
   if(now - timestamp >= interval){timestamp = now;};
 
 	getPins();
+	delay(5);
   updatePixels();
+  delay(5);
 
   /*
    *

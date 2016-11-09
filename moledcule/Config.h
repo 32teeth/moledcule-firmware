@@ -17,7 +17,7 @@
 #define plate_led 8
 #define controller_led 0
 
-#define count_led 20
+#define count_led 16
 
 #define FADE
 
