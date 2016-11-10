@@ -90,7 +90,7 @@ void fadePlate(int address)
 		 */
 		case 0:
 		{
-
+			x = -1; y = -1;
 		}
 		/*
 		 * RIGHT
