@@ -24,7 +24,7 @@ typedef struct{int r;int g;int b;} RGB;
 /*
  * @struct PLATE
  */
-typedef struct{RGB current; RGB form; RGB to;} PLATE;
+typedef struct{RGB current; RGB from; RGB to;} PLATE;
 
 /*
  * @struct IO
