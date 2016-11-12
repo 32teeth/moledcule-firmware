@@ -8,7 +8,7 @@
 	#define data_led 23		
 #endif
 
-#define bright 50
+#define bright 75
 
 #define punch_led 6
 #define kick_led 6

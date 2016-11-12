@@ -12,7 +12,7 @@
  */
 
 /*
- * @struct RGB
+ * @struct ANIMATION
  */
 typedef struct{unsigned long now;unsigned long timestamp;const long interval;} ANIMATION;
 

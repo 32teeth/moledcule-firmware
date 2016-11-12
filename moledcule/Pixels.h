@@ -48,7 +48,7 @@ int pairs[8][2] = {
 	{PLATE_RIGHT_INDEX+4,PLATE_RIGHT_INDEX+5},
 	{PLATE_RIGHT_INDEX+5,PLATE_RIGHT_INDEX+6},
 	{PLATE_RIGHT_INDEX+6,PLATE_RIGHT_INDEX+7},
-	{PLATE_RIGHT_INDEX+7,PLATE_UPRIGHT_INDEX-PLATE_RIGHT_INDEX}
+	{PLATE_RIGHT_INDEX+7,PLATE_RIGHT_INDEX}
 };
 
 int previous = 0;
@@ -89,6 +89,14 @@ void fadePixel(int address)
 			pixel.setPixelColor(pairs[n][0], plate[n].current.r, plate[n].current.g, plate[n].current.b);
 			pixel.setPixelColor(pairs[n][1], plate[n].current.r, plate[n].current.g, plate[n].current.b);
 		}
+		for(int n = 0; n < 8; n++)
+		{
+			if(index == n)
+			{	
+				pixel.setPixelColor(pairs[n][0], plate[n].current.r, plate[n].current.g, plate[n].current.b);
+				pixel.setPixelColor(pairs[n][1], plate[n].current.r, plate[n].current.g, plate[n].current.b);
+			}
+		}		
 	}
 	previous = address;
 }
