@@ -17,28 +17,25 @@
 #include <Adafruit_NeoPixel.h>
 Adafruit_NeoPixel pixel = Adafruit_NeoPixel(count_led, data_led, NEO_RGB + NEO_KHZ800);
 
-PLATE plate[8] = {
-	{black, black, black},
-	{black, black, black},
-	{black, black, black},
-	{black, black, black},
-	{black, black, black},
-	{black, black, black},
-	{black, black, black},
-	{black, black, black}
-};
+RGB PLATE_RIGHT_COLOR;
+RGB PLATE_DOWNRIGHT_COLOR;
+RGB PLATE_DOWN_COLOR;
+RGB PLATE_DOWNLEFT_COLOR;
+RGB PLATE_LEFT_COLOR;
+RGB PLATE_UPLEFT_COLOR;
+RGB PLATE_UP_COLOR;
+RGB PLATE_UPRIGHT_COLOR;
 
-void plateInit()
-{
-	getRGB(plate[0].to, getLong(PLATE_RIGHT));
-	getRGB(plate[1].to, getLong(PLATE_DOWNRIGHT));
-	getRGB(plate[2].to, getLong(PLATE_DOWN));
-	getRGB(plate[3].to, getLong(PLATE_DOWNLEFT));
-	getRGB(plate[4].to, getLong(PLATE_LEFT));
-	getRGB(plate[5].to, getLong(PLATE_UPLEFT));
-	getRGB(plate[6].to, getLong(PLATE_UP));
-	getRGB(plate[7].to, getLong(PLATE_UPRIGHT));		
-}
+PLATE plate[8] = {
+	{black, black, getGRB(PLATE_RIGHT_COLOR, getLong(PLATE_RIGHT))},
+	{black, black, getGRB(PLATE_DOWNRIGHT_COLOR, getLong(PLATE_DOWNRIGHT))},
+	{black, black, getGRB(PLATE_DOWN_COLOR, getLong(PLATE_DOWN))},
+	{black, black, getGRB(PLATE_DOWNLEFT_COLOR, getLong(PLATE_DOWNLEFT))},
+	{black, black, getGRB(PLATE_LEFT_COLOR, getLong(PLATE_LEFT))},
+	{black, black, getGRB(PLATE_UPLEFT_COLOR, getLong(PLATE_UPLEFT))},
+	{black, black, getGRB(PLATE_UP_COLOR, getLong(PLATE_UP))},
+	{black, black, getGRB(PLATE_UPRIGHT_COLOR, getLong(PLATE_UPRIGHT))}
+};
 
 int pairs[8][2] = {
 	{PLATE_RIGHT_INDEX,PLATE_RIGHT_INDEX+1},

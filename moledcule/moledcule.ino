@@ -17,7 +17,7 @@
 unsigned long now;
 unsigned long timestamp = 0;
 const long interval = 100;
-const float duration = 1000;
+const float duration = 2500;
 
 /*
  * @description DEBUG
@@ -124,7 +124,6 @@ void setup()
 	 *
 	 */
 	setPins(); 
-	plateInit();
 	delay(1000);
 }
 
