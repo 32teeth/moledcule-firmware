@@ -150,3 +150,11 @@ void updatePixels()
 	delay(5);
 	pixel.show();			
 }
+
+void hidePixels()
+{
+	for(int n = 0; n < 4; n++){pixel.setPixelColor(PUNCHS[n].index, black.r, black.g, black.b);}
+	for(int n = 0; n < 4; n++){pixel.setPixelColor(KICKS[n].index, black.r, black.g, black.b);}
+	for(int n = 0; n < 3; n++){pixel.setPixelColor(ALTS[n].index, black.r, black.g, black.b);}	
+	paintPixel(0);
+}
