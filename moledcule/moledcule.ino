@@ -98,7 +98,6 @@ const float duration = 1500;
  * @method setup
  * @description main litebrite setup
  */
-bool intro = true;
 void setup()
 { 
 	/*

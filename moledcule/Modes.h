@@ -10,7 +10,7 @@
  * @date updated 10/26/16
  * @description
  */
-
+/*
 COMMAND command{millis(), millis(), 5000};
 
 MODE simple = {"simple", &RIGHT_IO, &P1_IO, false};
@@ -39,8 +39,6 @@ void pollMode()
 
 		Serial.println(buffer);
 	}
-
-	/*
 	bool poll = false;
 	bool wait = false;
 	if(P1_IO.state == 0 && LEFT_IO.state == 0)
@@ -65,5 +63,5 @@ void pollMode()
 	command.now = millis();
 
 	runMode();
-	*/
 }
+*/
