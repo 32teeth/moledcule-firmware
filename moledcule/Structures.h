@@ -17,11 +17,6 @@
 typedef struct{unsigned long now;unsigned long timestamp;const long interval;} ANIMATION;
 
 /*
- * @struct COMMAND
- */
-typedef struct{unsigned long now;unsigned long timestamp;const long interval;} COMMAND;
-
-/*
  * @struct RGB
  */
 typedef struct{int r;int g;int b;} RGB;
@@ -55,3 +50,13 @@ typedef struct{int states[3];int address;String bin;} Alt;
  * @struct Direction
  */
 typedef struct{int states[4];int address;String bin;} Direction;	
+
+/*
+ * @struct COMMAND
+ */
+typedef struct{unsigned long now;unsigned long timestamp;const long interval;} COMMAND;
+
+/*
+ * @struct MODE
+ */
+typedef struct{String name; IO direction; IO button; bool active;} MODE;
