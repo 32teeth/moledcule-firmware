@@ -31,7 +31,7 @@ MODE modes[mode_count] = {simple, tournament};
 
 /*
  * @method printMode
- * #description debig print
+ * #description debug print
  */
 void printMode(MODE mode)
 {
