@@ -17,21 +17,12 @@
 unsigned long now;
 unsigned long timestamp = 0;
 const long interval = 100;
-<<<<<<< HEAD
-const float duration = 2500;
-=======
 const float duration = 1500;
->>>>>>> origin/master
 
 /*
  * @description DEBUG
  */
 #define DEBUG
-
-/*
- * @description ACTIVE
- */
-//String MODE = "active";
 
 /*
  * @description Config
@@ -42,7 +33,6 @@ const float duration = 1500;
  * @description Config
  */
 #include "Structures.h"
-<<<<<<< HEAD
 
  /*
  * @description Colors
@@ -139,7 +129,7 @@ const float duration = 1500;
 #include "Animation.h"
 
 /*
- * @description Animation
+ * @description Modes
  */
 #include "Modes.h"
 
@@ -186,6 +176,6 @@ void loop()
   if(now - timestamp >= interval){timestamp = now;};
 
 	getPins();
-	pollMode();
-  //updatePixels();
+	//pollMode();
+  updatePixels();
 }
