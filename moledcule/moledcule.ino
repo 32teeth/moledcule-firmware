@@ -17,7 +17,11 @@
 unsigned long now;
 unsigned long timestamp = 0;
 const long interval = 100;
+<<<<<<< HEAD
 const float duration = 2500;
+=======
+const float duration = 1500;
+>>>>>>> origin/master
 
 /*
  * @description DEBUG
@@ -38,6 +42,7 @@ const float duration = 2500;
  * @description Config
  */
 #include "Structures.h"
+<<<<<<< HEAD
 
  /*
  * @description Colors
@@ -75,6 +80,45 @@ const float duration = 2500;
 #include "Utils.h"
 
 /*
+=======
+
+ /*
+ * @description Colors
+ */
+#include "Colors.h"
+
+ /*
+ * @description Config
+ */
+#include "Config.h"
+
+/*
+ * @description Pattern
+ */
+#include "Pattern.h"
+
+/*
+ * @description Wiring
+ */
+#include "Wiring.h"
+
+/*
+ * @description Define
+ */
+#include "Define.h"
+
+/*
+ * @description Comm
+ */ 
+#include "Comm.h"
+
+/*
+ * @description Utils
+ */ 
+#include "Utils.h"
+
+/*
+>>>>>>> origin/master
  * @description Pins
  */
 #include "Pins.h"
@@ -98,7 +142,6 @@ const float duration = 2500;
  * @description Animation
  */
 #include "Modes.h"
-
 
 /*
  * @method setup
