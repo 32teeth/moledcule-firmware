@@ -70,45 +70,6 @@ const float duration = 1500;
 #include "Utils.h"
 
 /*
-=======
-
- /*
- * @description Colors
- */
-#include "Colors.h"
-
- /*
- * @description Config
- */
-#include "Config.h"
-
-/*
- * @description Pattern
- */
-#include "Pattern.h"
-
-/*
- * @description Wiring
- */
-#include "Wiring.h"
-
-/*
- * @description Define
- */
-#include "Define.h"
-
-/*
- * @description Comm
- */ 
-#include "Comm.h"
-
-/*
- * @description Utils
- */ 
-#include "Utils.h"
-
-/*
->>>>>>> origin/master
  * @description Pins
  */
 #include "Pins.h"

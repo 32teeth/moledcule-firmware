@@ -12,11 +12,6 @@
  */
 
 /*
- * @struct ANIMATION
- */
-typedef struct{unsigned long now;unsigned long timestamp;const long interval;} ANIMATION;
-
-/*
  * @struct RGB
  */
 typedef struct{int r;int g;int b;} RGB;
