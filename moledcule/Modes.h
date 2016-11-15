@@ -34,8 +34,8 @@ MODE modes[mode_count] = {simple, tournament};
  * #description debug print
  */
 void printMode(MODE mode)
-{
-	char buffer[250];	
+{	
+	char buffer[100];
 	(String)sprintf(
 		buffer,
 		"waiting polling direction:%d button:%d active:%s",

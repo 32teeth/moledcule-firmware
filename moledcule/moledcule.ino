@@ -11,23 +11,25 @@
  * @description
  */
 
+/*
+ * @description Config
+ */
+#include <Arduino.h>
+#include <avr/pgmspace.h>
+
  /*
  *
  */
 unsigned long now;
 unsigned long timestamp = 0;
-const long interval = 100;
-const float duration = 1500;
+const PROGMEM long interval = 100;
+const PROGMEM long duration = 1500;
 
 /*
  * @description DEBUG
  */
-#define DEBUG
-
-/*
- * @description Config
- */
-#include <Arduino.h>
+//#define DEBUG
+//const bool DEBUG = false;
 
  /*
  * @description Config
@@ -132,9 +134,6 @@ void setup()
  */
 void loop()
 {
-  now = millis();
-  if(now - timestamp >= interval){timestamp = now;};
-
 	//getPins();
 	pollMode();
   updatePixels();

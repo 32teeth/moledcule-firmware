@@ -50,11 +50,11 @@ int pairs[8][2] = {
 
 int previous = 0;
 int reference[13] = {-1,0,2,1,4,-1,3,-1,6,7,-1,-1,5};
-float changed = now;
+unsigned long changed = now;
 void fadePixel(int address)
 {
-	int shift = 0;
-	int index = reference[address];
+	unsigned int shift = 0;
+	unsigned int index = reference[address];
 	/*
 	 * diagonal shift
 	 */
@@ -74,13 +74,13 @@ void fadePixel(int address)
 			RGB to = index == n ? plate[n].to : black;
 			RGB from = plate[n].current;
 
-		  plate[n].current.r = to.r - from.r;
+		  //plate[n].current.r = to.r - from.r;
 		  plate[n].current.r = to.r - (plate[n].current.r*percent);
 
-		  plate[n].current.g = to.g - from.g;
+		  //plate[n].current.g = to.g - from.g;
 		  plate[n].current.g = to.g - (plate[n].current.g*percent);
 
-		  plate[n].current.b = to.b - from.b;
+		  //plate[n].current.b = to.b - from.b;
 		  plate[n].current.b = to.b - (plate[n].current.b*percent);			
 
 			pixel.setPixelColor(pairs[n][0], plate[n].current.r, plate[n].current.g, plate[n].current.b);
@@ -107,13 +107,13 @@ void fadePixel(IO& io)
 		RGB to = io.state == 0 ? io.to : black;
 		RGB from = io.current;
 
-	  io.current.r = to.r - from.r;
+	  //io.current.r = to.r - from.r;
 	  io.current.r = to.r - (io.current.r*percent);
 
-	  io.current.g = to.g - from.g;
+	  //io.current.g = to.g - from.g;
 	  io.current.g = to.g - (io.current.g*percent);
 
-	  io.current.b = to.b - from.b;
+	  //io.current.b = to.b - from.b;
 	  io.current.b = to.b - (io.current.b*percent);
 
 		pixel.setPixelColor(io.index, io.current.g, io.current.r, io.current.b);

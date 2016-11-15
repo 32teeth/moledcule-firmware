@@ -30,8 +30,6 @@ RGB DOWN_COLOR;
 RGB LEFT_COLOR;
 RGB UP_COLOR;
 
-
-
 /*
  * @description all punch IO
  */
@@ -107,12 +105,12 @@ void getPins(IO& io)
 */
 void printPins()
 {
-	char punch[24];PUNCH.bin.toCharArray(punch, 24);
-	char kick[24];KICK.bin.toCharArray(kick, 24);
-	char alt[24];ALT.bin.toCharArray(alt, 24);
-	char direction[24];DIRECTION.bin.toCharArray(direction, 24);
+	char punch[8];PUNCH.bin.toCharArray(punch, 8);
+	char kick[8];KICK.bin.toCharArray(kick, 8);
+	char alt[8];ALT.bin.toCharArray(alt, 8);
+	char direction[8];DIRECTION.bin.toCharArray(direction, 8);
 		
-	char buffer[250];
+	char buffer[100];
 
 	(String)sprintf(
 		buffer,
@@ -186,7 +184,7 @@ void getPins()
 	DIRECTION.bin = getBin(DIRECTION.address);
 
 	#ifdef DEBUG
-		//printPins();
+		printPins();
 	#endif
 }
 
