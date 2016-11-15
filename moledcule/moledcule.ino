@@ -135,7 +135,7 @@ void loop()
   now = millis();
   if(now - timestamp >= interval){timestamp = now;};
 
-	getPins();
-	//pollMode();
+	//getPins();
+	pollMode();
   updatePixels();
 }

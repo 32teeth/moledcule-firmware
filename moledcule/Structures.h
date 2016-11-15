@@ -47,11 +47,11 @@ typedef struct{int states[3];int address;String bin;} Alt;
 typedef struct{int states[4];int address;String bin;} Direction;	
 
 /*
- * @struct COMMAND
- */
-typedef struct{unsigned long now;unsigned long timestamp;const long interval;} COMMAND;
-
-/*
  * @struct MODE
  */
 typedef struct{String name; IO direction; IO button; bool active;} MODE;
+
+/*
+ * @struct COMMAND
+ */
+typedef struct{unsigned long now;unsigned long timestamp;const long interval; String mode;} COMMAND;
