@@ -74,13 +74,13 @@ void fadePixel(int address)
 			RGB to = index == n ? plate[n].to : black;
 			RGB from = plate[n].current;
 
-		  //plate[n].current.r = to.r - from.r;
+		  plate[n].current.r = to.r - from.r;
 		  plate[n].current.r = to.r - (plate[n].current.r*percent);
 
-		  //plate[n].current.g = to.g - from.g;
+		  plate[n].current.g = to.g - from.g;
 		  plate[n].current.g = to.g - (plate[n].current.g*percent);
 
-		  //plate[n].current.b = to.b - from.b;
+		  plate[n].current.b = to.b - from.b;
 		  plate[n].current.b = to.b - (plate[n].current.b*percent);			
 
 			pixel.setPixelColor(pairs[n][0], plate[n].current.r, plate[n].current.g, plate[n].current.b);
@@ -107,17 +107,51 @@ void fadePixel(IO& io)
 		RGB to = io.state == 0 ? io.to : black;
 		RGB from = io.current;
 
-	  //io.current.r = to.r - from.r;
+	  io.current.r = to.r - from.r;
 	  io.current.r = to.r - (io.current.r*percent);
 
-	  //io.current.g = to.g - from.g;
+	  io.current.g = to.g - from.g;
 	  io.current.g = to.g - (io.current.g*percent);
 
-	  //io.current.b = to.b - from.b;
+	  io.current.b = to.b - from.b;
 	  io.current.b = to.b - (io.current.b*percent);
 
 		pixel.setPixelColor(io.index, io.current.g, io.current.r, io.current.b);
 		pixel.setPixelColor(io.index+1, io.current.g, io.current.r, io.current.b); 
+	}
+}
+
+RGB PK1_COLOR;
+RGB PK2_COLOR;
+RGB PK3_COLOR;
+RGB PK4_COLOR;
+RGB CROSS[4] = {PK1_COLOR, PK2_COLOR, PK3_COLOR, PK4_COLOR};
+
+void fadeCross(IO& PUNCH, IO& KICK, RGB& color)
+{
+	IO x[2] = {PUNCH, KICK};
+	for(int n = 0; n < 2; n++)
+	{
+		IO io = x[2];
+		if(io.changed >= now && io.index != -1)
+		{
+			float percent = ((io.changed-now)/duration);		
+			
+			RGB to = io.state == 0 ? color : black;
+			RGB from = io.current;
+
+		  io.current.r = color.r - from.r;
+		  io.current.r = color.r - (io.current.r*percent);
+
+		  io.current.g = color.g - from.g;
+		  io.current.g = color.g - (io.current.g*percent);
+
+		  io.current.b = color.b - from.b;
+		  io.current.b = color.b - (io.current.b*percent);
+
+			pixel.setPixelColor(io.index, io.current.g, io.current.r, io.current.b);
+			pixel.setPixelColor(io.index+1, io.current.g, io.current.r, io.current.b); 
+		}
 	}
 }
 
@@ -136,8 +170,22 @@ void paintPixel(int address)
 void updatePixels()
 {
 	#ifdef FADE
+		for(int n = 0; n < 4; n++)
+		{
+			if(PUNCHS[n].state == KICKS[n].state)
+			{
+				fadeCross(PUNCHS[n], KICKS[n], CROSS[n]);
+			}
+			else
+			{
+				fadePixel(PUNCHS[n]);
+				fadePixel(KICKS[n]);
+			}
+		}
+		/*
 		for(int n = 0; n < 4; n++){fadePixel(PUNCHS[n]);}
 		for(int n = 0; n < 4; n++){fadePixel(KICKS[n]);}
+		*/
 		for(int n = 0; n < 3; n++){fadePixel(ALTS[n]);}
 		fadePixel(DIRECTION.address);
 	#else

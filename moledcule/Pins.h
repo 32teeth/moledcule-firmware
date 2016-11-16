@@ -121,7 +121,6 @@ void printPins()
 		DIRECTION.address, direction
 	);
 
-
 	printComm(buffer);
 ;}
 
@@ -131,10 +130,13 @@ void printPins()
 */
 void setPins()
 {
-	for(int n = 0; n < 4; n++){setPins(PUNCHS[n]);}
-	for(int n = 0; n < 4; n++){setPins(KICKS[n]);}
-	for(int n = 0; n < 3; n++){setPins(ALTS[n]);}
-	for(int n = 0; n < 4; n++){setPins(DIRECTIONS[n]);}	
+	for(int n = 0; n < 4; n++)
+	{
+		setPins(PUNCHS[n]);
+		setPins(KICKS[n]);
+		setPins(DIRECTIONS[n]);
+		if(n < 3){setPins(ALTS[n]);};		
+	}
 }
 
 /*
@@ -144,44 +146,53 @@ void setPins()
 void getPins()
 {
 	PUNCH.address = 0;
+	KICK.address = 0;
+	DIRECTION.address = 0;
+	ALT.address = 0;
+
 	for(int n = 0; n < 4; n++)
 	{
+		/*
+		 *
+		 */
 		getPins(PUNCHS[n]);
 		if(PUNCH.states[n] != PUNCHS[n].state){PUNCHS[n].changed = (now + duration);}
 		PUNCH.states[n] = PUNCHS[n].state;
 		PUNCH.address |= PUNCH.states[n] == 0 ? 1 << n : 0 << n;
-	}
-	PUNCH.bin = getBin(PUNCH.address);
 
-	KICK.address = 0;
-	for(int n = 0; n < 4; n++)
-	{
+		/*
+		 *
+		 */
 		getPins(KICKS[n]);
 		if(KICK.states[n] != KICKS[n].state){KICKS[n].changed = (now + duration);}
 		KICK.states[n] = KICKS[n].state;
 		KICK.address |= KICK.states[n] == 0 ? 1 << n : 0 << n;
-	}		
-	KICK.bin = getBin(KICK.address);
 
-	ALT.address = 0;
-	for(int n = 0; n < 3; n++)
-	{
-		getPins(ALTS[n]);
-		if(ALT.states[n] != ALTS[n].state){ALTS[n].changed = (now + duration);}
-		ALT.states[n] = ALTS[n].state;
-		ALT.address |= ALT.states[n] == 0 ? 1 << n : 0 << n;	
-	}			
-	ALT.bin = getBin(ALT.address);
-
-	DIRECTION.address = 0;
-	for(int n = 0; n < 4; n++)
-	{
+		/*
+		 *
+		 */
 		getPins(DIRECTIONS[n]);
 		if(DIRECTION.states[n] != DIRECTIONS[n].state){DIRECTIONS[n].changed = (now + duration);}
-		DIRECTION.states[n] = DIRECTIONS[n].state;		
-		DIRECTION.address |= DIRECTION.states[n] == 0 ? 1 << n : 0 << n;	
+		DIRECTION.states[n] = DIRECTIONS[n].state;
+		DIRECTION.address |= DIRECTION.states[n] == 0 ? 1 << n : 0 << n;						
+
+		/*
+		 *
+		 */
+		if(n < 3)
+		{
+			getPins(ALTS[n]);
+			if(ALT.states[n] != ALTS[n].state){ALTS[n].changed = (now + duration);}
+			ALT.states[n] = ALTS[n].state;
+			ALT.address |= ALT.states[n] == 0 ? 1 << n : 0 << n;	
+		}
 	}
+	
+	PUNCH.bin = getBin(PUNCH.address);
+	KICK.bin = getBin(KICK.address);
 	DIRECTION.bin = getBin(DIRECTION.address);
+	ALT.bin = getBin(ALT.address);
+
 
 	#ifdef DEBUG
 		printPins();
