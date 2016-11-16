@@ -181,17 +181,16 @@ void updatePixels()
 				fadePixel(PUNCHS[n]);
 				fadePixel(KICKS[n]);
 			}
+			if(n < 3){fadePixel(ALTS[n]);}
 		}
-		/*
-		for(int n = 0; n < 4; n++){fadePixel(PUNCHS[n]);}
-		for(int n = 0; n < 4; n++){fadePixel(KICKS[n]);}
-		*/
-		for(int n = 0; n < 3; n++){fadePixel(ALTS[n]);}
 		fadePixel(DIRECTION.address);
 	#else
-		for(int n = 0; n < 4; n++){paintPixel(PUNCHS[n]);}
-		for(int n = 0; n < 4; n++){paintPixel(KICKS[n]);}
-		for(int n = 0; n < 3; n++){paintPixel(ALTS[n]);}	
+		for(int n = 0; n < 4; n++)
+		{
+			paintPixel(PUNCHS[n]);
+			paintPixel(KICKS[n]);
+			if(n < 3){paintPixel(ALTS[n]);}
+		}
 		paintPixel(DIRECTION.address);
 	#endif	
 
@@ -201,8 +200,11 @@ void updatePixels()
 
 void hidePixels()
 {
-	for(int n = 0; n < 4; n++){pixel.setPixelColor(PUNCHS[n].index, black.r, black.g, black.b);}
-	for(int n = 0; n < 4; n++){pixel.setPixelColor(KICKS[n].index, black.r, black.g, black.b);}
-	for(int n = 0; n < 3; n++){pixel.setPixelColor(ALTS[n].index, black.r, black.g, black.b);}	
+	for(int n = 0; n < 4; n++)
+	{
+		pixel.setPixelColor(PUNCHS[n].index, black.r, black.g, black.b);
+		pixel.setPixelColor(KICKS[n].index, black.r, black.g, black.b);
+		if(n < 3){pixel.setPixelColor(ALTS[n].index, black.r, black.g, black.b);}
+	}
 	paintPixel(0);
 }
