@@ -51,6 +51,7 @@ int pairs[8][2] = {
 int previous = 0;
 int reference[13] = {-1,0,2,1,4,-1,3,-1,6,7,-1,-1,5};
 unsigned long changed = now;
+
 void fadePixel(int address)
 {
 	unsigned int shift = 0;
@@ -74,13 +75,13 @@ void fadePixel(int address)
 			RGB to = index == n ? plate[n].to : black;
 			RGB from = plate[n].current;
 
-		  plate[n].current.r = to.r - from.r;
+		  //plate[n].current.r = to.r - from.r;
 		  plate[n].current.r = to.r - (plate[n].current.r*percent);
 
-		  plate[n].current.g = to.g - from.g;
+		  //plate[n].current.g = to.g - from.g;
 		  plate[n].current.g = to.g - (plate[n].current.g*percent);
 
-		  plate[n].current.b = to.b - from.b;
+		  //plate[n].current.b = to.b - from.b;
 		  plate[n].current.b = to.b - (plate[n].current.b*percent);			
 
 			pixel.setPixelColor(pairs[n][0], plate[n].current.r, plate[n].current.g, plate[n].current.b);
@@ -169,10 +170,11 @@ void paintPixel(int address)
 
 void updatePixels()
 {
+	/*
 	#ifdef FADE
 		for(int n = 0; n < 4; n++)
 		{
-			if(PUNCHS[n].state == KICKS[n].state)
+			if((PUNCHS[n].state == KICKS[n].state) && PUNCHS[n].state == 0)
 			{
 				fadeCross(PUNCHS[n], KICKS[n], CROSS[n]);
 			}
@@ -193,6 +195,22 @@ void updatePixels()
 		}
 		paintPixel(DIRECTION.address);
 	#endif	
+	*/
+
+	#ifdef FADE
+		for(int n = 0; n < 4; n++){fadePixel(PUNCHS[n]);}
+		for(int n = 0; n < 4; n++){fadePixel(KICKS[n]);}
+		for(int n = 0; n < 3; n++){fadePixel(ALTS[n]);}
+		fadePixel(DIRECTION.address);
+	#else
+		for(int n = 0; n < 4; n++){paintPixel(PUNCHS[n]);}
+		for(int n = 0; n < 4; n++){paintPixel(KICKS[n]);}
+		for(int n = 0; n < 3; n++){paintPixel(ALTS[n]);}	
+		paintPixel(DIRECTION.address);
+	#endif	
+
+	delay(5);
+	pixel.show();	
 
 	delay(5);
 	pixel.show();			

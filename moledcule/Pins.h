@@ -145,6 +145,7 @@ void setPins()
 */
 void getPins()
 {
+	Serial.println(now);
 	PUNCH.address = 0;
 	KICK.address = 0;
 	DIRECTION.address = 0;

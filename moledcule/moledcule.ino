@@ -8,28 +8,26 @@
  * @version 0.0.5
  * @date created 08/19/16
  * @date updated 10/26/16
- * @description
+ * @web http://moledcule.club
  */
 
 /*
  * @description Config
  */
 #include <Arduino.h>
-#include <avr/pgmspace.h>
 
  /*
  *
  */
 unsigned long now;
 unsigned long timestamp = 0;
-const PROGMEM long interval = 100;
-const PROGMEM long duration = 1500;
+const long interval = 1000;
+const long duration = 1500;
 
 /*
  * @description DEBUG
  */
-//#define DEBUG
-//const bool DEBUG = false;
+#define DEBUG
 
  /*
  * @description Config
@@ -119,6 +117,7 @@ void setup()
 	 */
 	startComm();
 	listenComm();
+	printComm("Serial Ready");
 
 	/*
 	 *
@@ -134,7 +133,26 @@ void setup()
  */
 void loop()
 {
-	//getPins();
-	pollMode();
-  updatePixels();
+	now = millis();
+  if(now - timestamp >= interval)
+  {
+  	timestamp = now;
+  	/*
+		char buffer[100];
+
+		(String)sprintf(
+			buffer,
+			"now:%d timestamp:%d interval:%d", 
+			now, 
+			timestamp, 
+			interval
+		);
+
+		Serial.println(buffer); 
+		*/
+		getPins();  	
+  };	
+	    
+	//pollMode();
+  //updatePixels();
 }
