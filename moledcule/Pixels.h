@@ -50,12 +50,14 @@ int pairs[8][2] = {
 
 int previous = 0;
 int reference[13] = {-1,0,2,1,4,-1,3,-1,6,7,-1,-1,5};
-unsigned long changed = now;
 
-void fadePixel(int address)
+unsigned long changed = 0;
+float percent = 0;
+void paintPixel(int address)
 {
 	unsigned int shift = 0;
 	unsigned int index = reference[address];
+
 	/*
 	 * diagonal shift
 	 */
@@ -68,20 +70,32 @@ void fadePixel(int address)
 	if(previous != address){changed = now + duration;}
 	if(changed >= now)
 	{
-		float percent = ((changed-now)/duration);
+		/*
+		char buffer[100];
+		(String)sprintf(
+			buffer,
+			"changed:%lu now:%lu duration:%lu",
+			changed,
+			now,
+			duration
+		);
+
+		Serial.println(buffer);		
+		 */
+		percent = (((float)changed-(float)now)/(float)duration);
 
 		for(int n = 0; n < 8; n++)
 		{
 			RGB to = index == n ? plate[n].to : black;
 			RGB from = plate[n].current;
 
-		  //plate[n].current.r = to.r - from.r;
+		  plate[n].current.r = to.r - from.r;
 		  plate[n].current.r = to.r - (plate[n].current.r*percent);
 
-		  //plate[n].current.g = to.g - from.g;
+		  plate[n].current.g = to.g - from.g;
 		  plate[n].current.g = to.g - (plate[n].current.g*percent);
 
-		  //plate[n].current.b = to.b - from.b;
+		  plate[n].current.b = to.b - from.b;
 		  plate[n].current.b = to.b - (plate[n].current.b*percent);			
 
 			pixel.setPixelColor(pairs[n][0], plate[n].current.r, plate[n].current.g, plate[n].current.b);
@@ -99,11 +113,11 @@ void fadePixel(int address)
 	previous = address;
 }
 
-void fadePixel(IO& io)
+void paintPixel(IO& io)
 {
 	if(io.changed >= now && io.index != -1)
 	{
-		float percent = ((io.changed-now)/duration);		
+		float percent = (((float)io.changed-(float)now)/(float)duration);	
 		
 		RGB to = io.state == 0 ? io.to : black;
 		RGB from = io.current;
@@ -120,6 +134,14 @@ void fadePixel(IO& io)
 		pixel.setPixelColor(io.index, io.current.g, io.current.r, io.current.b);
 		pixel.setPixelColor(io.index+1, io.current.g, io.current.r, io.current.b); 
 	}
+	else
+	{
+		if(io.state == 1)
+		{
+			pixel.setPixelColor(io.index, black.g, black.r, black.b);
+			pixel.setPixelColor(io.index+1, black.g, black.r, black.b); 		
+		}
+	}
 }
 
 RGB PK1_COLOR;
@@ -128,7 +150,7 @@ RGB PK3_COLOR;
 RGB PK4_COLOR;
 RGB CROSS[4] = {PK1_COLOR, PK2_COLOR, PK3_COLOR, PK4_COLOR};
 
-void fadeCross(IO& PUNCH, IO& KICK, RGB& color)
+void paintCross(IO& PUNCH, IO& KICK, RGB& color)
 {
 	IO x[2] = {PUNCH, KICK};
 	for(int n = 0; n < 2; n++)
@@ -156,36 +178,24 @@ void fadeCross(IO& PUNCH, IO& KICK, RGB& color)
 	}
 }
 
-void paintPixel(IO& io)
-{
-	io.current = io.state == 0 ? io.to : black;
-	pixel.setPixelColor(io.index, io.current.r, io.current.g, io.current.b);
-	pixel.setPixelColor(io.index+1, io.current.r, io.current.g, io.current.b);
-}
-
-void paintPixel(int address)
-{
-
-}
-
 void updatePixels()
 {
 	/*
-	#ifdef FADE
+	#ifdef paint
 		for(int n = 0; n < 4; n++)
 		{
 			if((PUNCHS[n].state == KICKS[n].state) && PUNCHS[n].state == 0)
 			{
-				fadeCross(PUNCHS[n], KICKS[n], CROSS[n]);
+				paintCross(PUNCHS[n], KICKS[n], CROSS[n]);
 			}
 			else
 			{
-				fadePixel(PUNCHS[n]);
-				fadePixel(KICKS[n]);
+				paintPixel(PUNCHS[n]);
+				paintPixel(KICKS[n]);
 			}
-			if(n < 3){fadePixel(ALTS[n]);}
+			if(n < 3){paintPixel(ALTS[n]);}
 		}
-		fadePixel(DIRECTION.address);
+		paintPixel(DIRECTION.address);
 	#else
 		for(int n = 0; n < 4; n++)
 		{
@@ -197,23 +207,13 @@ void updatePixels()
 	#endif	
 	*/
 
-	#ifdef FADE
-		for(int n = 0; n < 4; n++){fadePixel(PUNCHS[n]);}
-		for(int n = 0; n < 4; n++){fadePixel(KICKS[n]);}
-		for(int n = 0; n < 3; n++){fadePixel(ALTS[n]);}
-		fadePixel(DIRECTION.address);
-	#else
-		for(int n = 0; n < 4; n++){paintPixel(PUNCHS[n]);}
-		for(int n = 0; n < 4; n++){paintPixel(KICKS[n]);}
-		for(int n = 0; n < 3; n++){paintPixel(ALTS[n]);}	
-		paintPixel(DIRECTION.address);
-	#endif	
+	for(int n = 0; n < 4; n++){paintPixel(PUNCHS[n]);}
+	for(int n = 0; n < 4; n++){paintPixel(KICKS[n]);}
+	for(int n = 0; n < 3; n++){paintPixel(ALTS[n]);}
+	paintPixel(DIRECTION.address);
 
 	delay(5);
 	pixel.show();	
-
-	delay(5);
-	pixel.show();			
 }
 
 void hidePixels()

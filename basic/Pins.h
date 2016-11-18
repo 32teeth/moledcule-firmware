@@ -11,55 +11,36 @@
  * @description
  */
 
-RGB P1_COLOR;
-RGB P2_COLOR;
-RGB P3_COLOR;
-RGB P4_COLOR;
-
-RGB K1_COLOR;
-RGB K2_COLOR;
-RGB K3_COLOR;
-RGB K4_COLOR;
-
-RGB START_COLOR;
-RGB SELECT_COLOR;
-RGB HOME_COLOR;
-
-RGB RIGHT_COLOR;
-RGB DOWN_COLOR;
-RGB LEFT_COLOR;
-RGB UP_COLOR;
-
 /*
  * @description all punch IO
  */
-IO P1_IO = {3, INPUT, HIGH, "d", P1_INDEX, black, black, getRGB(P1_COLOR, getLong(P1)), 0};
-IO P2_IO = {2, INPUT, HIGH, "d", P2_INDEX, black, black, getRGB(P2_COLOR, getLong(P2)), 0};
-IO P3_IO = {0, INPUT, HIGH, "d", P3_INDEX, black, black, getRGB(P3_COLOR, getLong(P3)), 0};
-IO P4_IO = {1, INPUT, HIGH, "d", P4_INDEX, black, black, getRGB(P4_COLOR, getLong(P4)), 0};
+IO P1_IO = {3, INPUT, HIGH, "d", 0};
+IO P2_IO = {2, INPUT, HIGH, "d", 0};
+IO P3_IO = {0, INPUT, HIGH, "d", 0};
+IO P4_IO = {1, INPUT, HIGH, "d", 0};
 
 /*
  * @description all kick IO
  */
-IO K1_IO = {4, INPUT, HIGH, "d", K1_INDEX, black, black, getRGB(K1_COLOR, getLong(K1)), 0};
-IO K2_IO = {A3, INPUT, HIGH, "a", K2_INDEX, black, black, getRGB(K2_COLOR, getLong(K2)), 0};
-IO K3_IO = {12, INPUT, HIGH, "d", K3_INDEX, black, black, getRGB(K3_COLOR, getLong(K3)), 0};
-IO K4_IO = {6, INPUT, HIGH, "d", K4_INDEX, black, black, getRGB(K4_COLOR, getLong(K4)), 0};
+IO K1_IO = {4, INPUT, HIGH, "d", 0};
+IO K2_IO = {A3, INPUT, HIGH, "a", 0};
+IO K3_IO = {12, INPUT, HIGH, "d", 0};
+IO K4_IO = {6, INPUT, HIGH, "d", 0};
 
 /*
  * @description all alt IO
  */		
-IO START_IO = {10, INPUT, HIGH, "d", START_INDEX, black, black, getRGB(START_COLOR, getLong(START)), 0};
-IO SELECT_IO = {9, INPUT, HIGH, "d", SELECT_INDEX, black, black, getRGB(SELECT_COLOR, getLong(SELECT)), 0};
-IO HOME_IO = {8, INPUT, HIGH, "d", HOME_INDEX, black, black, getRGB(HOME_COLOR, getLong(HOME)), 0};
+IO START_IO = {10, INPUT, HIGH, "d", 0};
+IO SELECT_IO = {9, INPUT, HIGH, "d", 0};
+IO HOME_IO = {8, INPUT, HIGH, "d", 0};
 
 /*
  * @description direction IO
  */
-IO RIGHT_IO = {A2, INPUT, HIGH, "a", RIGHT_INDEX, black, black, getRGB(RIGHT_COLOR, getLong(RIGHT)), 0};
-IO DOWN_IO = {11, INPUT, HIGH, "d", DOWN_INDEX, black, black, getRGB(DOWN_COLOR, getLong(DOWN)), 0};
-IO LEFT_IO = {A1, INPUT, HIGH,"a", LEFT_INDEX, black, black, getRGB(LEFT_COLOR, getLong(LEFT)), 0};
-IO UP_IO = {A0, INPUT, HIGH, "a", UP_INDEX, black, black, getRGB(UP_COLOR, getLong(UP)), 0};
+IO RIGHT_IO = {A2, INPUT, HIGH, "a", 0};
+IO DOWN_IO = {11, INPUT, HIGH, "d", 0};
+IO LEFT_IO = {A1, INPUT, HIGH,"a", 0};
+IO UP_IO = {A0, INPUT, HIGH, "a", 0};
 
 /*
  * @description array of IO
@@ -103,7 +84,6 @@ void getPins(IO& io)
 ** @method printPins
 ** @desc create string buffer and dump to serial
 */
-/*
 void printPins()
 {
 	char punch[8];PUNCH.bin.toCharArray(punch, 8);
@@ -124,7 +104,6 @@ void printPins()
 
 	printComm(buffer);
 ;}
-*/
 
 /*
 ** @method setPins
@@ -194,6 +173,11 @@ void getPins()
 	KICK.bin = getBin(KICK.address);
 	DIRECTION.bin = getBin(DIRECTION.address);
 	ALT.bin = getBin(ALT.address);
+
+
+	#ifdef DEBUG
+		printPins();
+	#endif
 }
 
 

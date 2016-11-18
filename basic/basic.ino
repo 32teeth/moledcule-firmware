@@ -11,53 +11,28 @@
  * @web http://moledcule.club
  */
 
- /*
- *
- */
-unsigned long now;
-unsigned long timestamp = 0;
-unsigned long interval = 100;
-unsigned long duration = 10;
-
 /*
  * @description Config
  */
 #include <Arduino.h>
 
+ /*
+ *
+ */
+unsigned long now;
+unsigned long timestamp = 0;
+const long interval = 1000;
+const long duration = 1500;
+
 /*
  * @description DEBUG
  */
-//#define DEBUG
+#define DEBUG
 
  /*
  * @description Config
  */
 #include "Structures.h"
-
- /*
- * @description Colors
- */
-#include "Colors.h"
-
- /*
- * @description Config
- */
-#include "Config.h"
-
-/*
- * @description Pattern
- */
-#include "Pattern.h"
-
-/*
- * @description Wiring
- */
-#include "Wiring.h"
-
-/*
- * @description Define
- */
-#include "Define.h"
 
 /*
  * @description Comm
@@ -75,34 +50,11 @@ unsigned long duration = 10;
 #include "Pins.h"
 
 /*
- * @description Pixels
- */
-#include "Pixels.h"
-
-/*
- * @description Modes
- */
-//#include "Modes.h"
-
-
-/*
  * @method setup
  * @description main litebrite setup
  */
 void setup()
 { 
-	/*
-	 * @description start pixel and turn them all off
-	 */
-	pixel.begin();
-	pixel.setBrightness(bright);
-	for(int i = 0; i < count_led; i++)
-	{
-		pixel.setPixelColor(i, 0, 0, 0);
-	}
-	pixel.show();
-
-
 	/*
 	 *
 	 */
@@ -114,15 +66,6 @@ void setup()
 	 *
 	 */
 	setPins(); 
-
-	/*
-	 *
-	 */
-	#ifdef FADE
-		interval = 100;
-		duration = 1500;
-	#endif
-
 	delay(1000);
 }
 
@@ -135,6 +78,5 @@ void loop()
 {
 	now = millis();
   if(now - timestamp >= interval){timestamp = now;};	
-	getPins();  	
-  updatePixels();
+	getPins(); 
 }
