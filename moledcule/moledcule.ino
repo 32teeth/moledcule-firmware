@@ -27,7 +27,7 @@ unsigned long duration = 10;
 /*
  * @description DEBUG
  */
-//#define DEBUG
+#define DEBUG
 
  /*
  * @description Config
@@ -96,9 +96,9 @@ void setup()
 	 */
 	pixel.begin();
 	pixel.setBrightness(bright);
-	for(int i = 0; i < count_led; i++)
+	for(uint8_t n = 0; n < count_led; n++)
 	{
-		pixel.setPixelColor(i, 0, 0, 0);
+		pixel.setPixelColor(n, 0, 0, 0);
 	}
 	pixel.show();
 
