@@ -111,7 +111,7 @@ void printPins()
 */
 void setPins()
 {
-	for(int n = 0; n < 4; n++)
+	for(uint8_t n = 0; n < 4; n++)
 	{
 		setPins(PUNCHS[n]);
 		setPins(KICKS[n]);
@@ -131,7 +131,7 @@ void getPins()
 	DIRECTION.address = 0;
 	ALT.address = 0;
 
-	for(int n = 0; n < 4; n++)
+	for(uint8_t n = 0; n < 4; n++)
 	{
 		/*
 		 *

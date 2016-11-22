@@ -82,7 +82,7 @@ unsigned long duration = 10;
 /*
  * @description Modes
  */
-//#include "Modes.h"
+#include "Modes.h"
 
 
 /*
@@ -135,6 +135,6 @@ void loop()
 {
 	now = millis();
   if(now - timestamp >= interval){timestamp = now;};	
-	getPins();  	
-  updatePixels();
+	getPins(); 
+	pollMode();
 }

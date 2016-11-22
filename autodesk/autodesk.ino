@@ -27,7 +27,7 @@ IO LEDS[2] = {LED1, LED2};
 
 /*
  * @method setup
- * @description main litebrite setup
+ * @description main moledcule setup
  */
 void setup()
 { 
@@ -50,7 +50,7 @@ void setup()
 
 /*
  * @method setup
- * @description main litebrite loop
+ * @description main moledcule loop
  */
 void loop()
 {

@@ -11,6 +11,37 @@
  * @web http://moledcule.club
  */
 
+ /*
+
+                                      +-----+
+         +----[PWR]-------------------| USB |--+
+         |                            +-----+  |
+         |         GND/RST2  [ ][ ]            |
+         |       MOSI2/SCK2  [ ][ ]  A5/SCL[ ] |
+         |          5V/MISO2 [ ][ ]  A4/SDA[ ] |
+         |                             AREF[ ] |
+         |                              GND[ ] |
+         | [ ]N/C                    SCK/13[ ] |
+         | [ ]IOREF                 MISO/12[ ] | Kick 3
+         | [ ]RST                   MOSI/11[ ]~| Down
+         | [ ]3V3    +---+               10[ ]~| Start
+         | [ ]5v    -|   |-               9[ ]~| Select
+         | [ ]GND   -| A |-               8[ ] | Home
+         | [ ]GND   -| 3 |-                    |
+         | [ ]Vin   -| 2 |-               7[ ] |
+         |          -| U |-               6[ ]~| Kick 4
+      Up | [ ]A0    -| 4 |-               5[ ]~|
+    Left | [ ]A1    -|   |-               4[ ] | Kick 1
+   Right | [ ]A2     +---+           INT1/3[ ]~| Punch 1
+  Kick 2 | [ ]A3                     INT0/2[ ] | Punch 2
+         | [ ]A4/SDA  RST SCK MISO     TX>1[ ] | Punch 4
+    Data | [ ]A5/SCL  [ ] [ ] [ ]      RX<0[ ] | Punch 3
+         |            [ ] [ ] [ ]              |
+         |  UNO_R3    GND MOSI 5V  ____________/
+         \_______________________/
+
+*/
+
 /*
  * @description Config
  */
@@ -21,7 +52,7 @@
  */
 unsigned long now;
 unsigned long timestamp = 0;
-const long interval = 1000;
+const long interval = 100;
 const long duration = 1500;
 
 /*

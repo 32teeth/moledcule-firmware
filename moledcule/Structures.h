@@ -49,9 +49,9 @@ typedef struct{uint8_t states[4];uint8_t address;String bin;} Direction;
 /*
  * @struct MODE
  */
-//typedef struct{String name; IO direction; IO button; bool active;} MODE;
+typedef struct{char name; IO direction; IO button; bool active;} MODE;
 
 /*
  * @struct COMMAND
  */
-//typedef struct{unsigned long now;unsigned long timestamp;const long interval; String mode;} COMMAND;
+typedef struct{unsigned long now;unsigned long timestamp;const long interval;} COMMAND;
