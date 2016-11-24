@@ -14,33 +14,31 @@
 /*
  * @struct command
  */
-COMMAND command = {millis(), millis(), 5000};
+COMMAND command = {millis(), millis(), 5000, "simple"};
 
 /*
  * @struct mode
  */
-MODE simple = {"simple", &RIGHT_IO, &P1_IO, true};
+MODE simple = {"simple", &RIGHT_IO, &P1_IO, false};
 MODE tournament = {"tournament", &LEFT_IO, &P1_IO, false};
+
+#define mode_count 2
 
 /*
  * @struct mode array
- * #description the order you put it in is the address of the eeprom
  */
-MODE modes[] = {simple, tournament};
+MODE modes[mode_count] = {simple, tournament};
 
 /*
  * @method printMode
  * #description debug print
  */
-void printMode(char status, MODE mode)
+void printMode(MODE mode)
 {	
 	char buffer[100];
 	(String)sprintf(
 		buffer,
-		"command:%s status:%s direction:%d button:%d active:%s",
-		mode.name,
-		status,
-		mode.direction.state,
+		"waiting polling direction:%d button:%d active:%s",
 		mode.direction.state,
 		mode.button.state,
 		mode.active ? "true" : "false"
@@ -48,53 +46,46 @@ void printMode(char status, MODE mode)
 	Serial.println(buffer);	
 };
 
-bool polling = false;
-bool waiting = false;
-
-/*
- *
- *
- */
-void runMode()
-{
-	if(simple.active){updatePixels();}
-}
-
 /*
  * @method pollMode
  * #description poll all modes
  */
 void pollMode()
 {
+	bool polling = false;
+	bool waiting = false;
+
 	command.now = millis();
 
-	for(int n = 0; n < sizeof(modes); n++)
+	for(int n = 0; n < mode_count; n++)
 	{
 		MODE mode = modes[n];
 
 		if(mode.direction.state == 0 && mode.button.state == 0)
 		{
 			polling = true;
-			printMode("polling", mode);
+
+			printMode(mode);
 
 			if(!waiting)
 			{
 				command.timestamp = command.now + command.interval;
 				waiting = true;	
-				printMode("waiting", mode);					
+				printMode(mode);					
 			};
-
 			if(command.now - command.timestamp >= command.interval)
 			{
-				//command.timestamp = millis();
-				mode.active != mode.active;
-				printMode("set", mode);
-				polling = false;
-				waiting = false;
-				delay(1000);
+				command.timestamp = millis();
+				printMode(mode);	
+				if(!mode.active)
+				{
+					simple.active = true;
+				}
 			};			
 		}
 	};
 
-	runMode();
+	command.now = millis();
+
+	//runMode();
 };

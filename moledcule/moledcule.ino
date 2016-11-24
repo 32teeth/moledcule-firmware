@@ -27,7 +27,7 @@ unsigned long duration = 10;
 /*
  * @description DEBUG
  */
-#define DEBUG
+//#define DEBUG
 
  /*
  * @description Config
@@ -82,7 +82,7 @@ unsigned long duration = 10;
 /*
  * @description Modes
  */
-#include "Modes.h"
+//#include "Modes.h"
 
 
 /*
@@ -96,9 +96,9 @@ void setup()
 	 */
 	pixel.begin();
 	pixel.setBrightness(bright);
-	for(uint8_t n = 0; n < count_led; n++)
+	for(int i = 0; i < count_led; i++)
 	{
-		pixel.setPixelColor(n, 0, 0, 0);
+		pixel.setPixelColor(i, 0, 0, 0);
 	}
 	pixel.show();
 
@@ -135,6 +135,6 @@ void loop()
 {
 	now = millis();
   if(now - timestamp >= interval){timestamp = now;};	
-	getPins(); 
-	pollMode();
+	getPins();  	
+  updatePixels();
 }

@@ -30,8 +30,6 @@ RGB DOWN_COLOR;
 RGB LEFT_COLOR;
 RGB UP_COLOR;
 
-
-
 /*
  * @description all punch IO
  */
@@ -108,12 +106,12 @@ void getPins(IO& io)
 /*
 void printPins()
 {
-	uint8_t punch[8];PUNCH.bin.toCharArray(punch, 8);
-	uint8_t kick[8];KICK.bin.toCharArray(kick, 8);
-	uint8_t alt[8];ALT.bin.toCharArray(alt, 8);
-	uint8_t direction[8];DIRECTION.bin.toCharArray(direction, 8);
+	char punch[8];PUNCH.bin.toCharArray(punch, 8);
+	char kick[8];KICK.bin.toCharArray(kick, 8);
+	char alt[8];ALT.bin.toCharArray(alt, 8);
+	char direction[8];DIRECTION.bin.toCharArray(direction, 8);
 		
-	uint8_t buffer[100];
+	char buffer[100];
 
 	(String)sprintf(
 		buffer,
@@ -134,7 +132,7 @@ void printPins()
 */
 void setPins()
 {
-	for(uint8_t n = 0; n < 4; n++)
+	for(int n = 0; n < 4; n++)
 	{
 		setPins(PUNCHS[n]);
 		setPins(KICKS[n]);
@@ -154,7 +152,7 @@ void getPins()
 	DIRECTION.address = 0;
 	ALT.address = 0;
 
-	for(uint8_t n = 0; n < 4; n++)
+	for(int n = 0; n < 4; n++)
 	{
 		/*
 		 *

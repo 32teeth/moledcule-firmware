@@ -71,7 +71,8 @@ void paintPixel(int address)
 	if(changed >= now)
 	{
 		percent = (((float)changed-(float)now)/(float)duration);
-		for(uint8_t n = 0; n < 8; n++)
+
+		for(int n = 0; n < 8; n++)
 		{
 			RGB to = index == n ? plate[n].to : black;
 			RGB from = plate[n].current;
@@ -88,7 +89,7 @@ void paintPixel(int address)
 			pixel.setPixelColor(pairs[n][0], plate[n].current.r, plate[n].current.g, plate[n].current.b);
 			pixel.setPixelColor(pairs[n][1], plate[n].current.r, plate[n].current.g, plate[n].current.b);
 		}
-		for(uint8_t n = 0; n < 8; n++)
+		for(int n = 0; n < 8; n++)
 		{
 			if(index == n)
 			{	
@@ -140,7 +141,7 @@ RGB CROSS[4] = {PK1_COLOR, PK2_COLOR, PK3_COLOR, PK4_COLOR};
 void paintCross(IO& PUNCH, IO& KICK, RGB& color)
 {
 	IO x[2] = {PUNCH, KICK};
-	for(uint8_t n = 0; n < 2; n++)
+	for(int n = 0; n < 2; n++)
 	{
 		IO io = x[2];
 		if(io.changed >= now && io.index != -1)
@@ -167,9 +168,36 @@ void paintCross(IO& PUNCH, IO& KICK, RGB& color)
 
 void updatePixels()
 {
-	for(uint8_t n = 0; n < 4; n++){paintPixel(PUNCHS[n]);}
-	for(uint8_t n = 0; n < 4; n++){paintPixel(KICKS[n]);}
-	for(uint8_t n = 0; n < 3; n++){paintPixel(ALTS[n]);}
+	/*
+	#ifdef paint
+		for(int n = 0; n < 4; n++)
+		{
+			if((PUNCHS[n].state == KICKS[n].state) && PUNCHS[n].state == 0)
+			{
+				paintCross(PUNCHS[n], KICKS[n], CROSS[n]);
+			}
+			else
+			{
+				paintPixel(PUNCHS[n]);
+				paintPixel(KICKS[n]);
+			}
+			if(n < 3){paintPixel(ALTS[n]);}
+		}
+		paintPixel(DIRECTION.address);
+	#else
+		for(int n = 0; n < 4; n++)
+		{
+			paintPixel(PUNCHS[n]);
+			paintPixel(KICKS[n]);
+			if(n < 3){paintPixel(ALTS[n]);}
+		}
+		paintPixel(DIRECTION.address);
+	#endif	
+	*/
+
+	for(int n = 0; n < 4; n++){paintPixel(PUNCHS[n]);}
+	for(int n = 0; n < 4; n++){paintPixel(KICKS[n]);}
+	for(int n = 0; n < 3; n++){paintPixel(ALTS[n]);}
 	paintPixel(DIRECTION.address);
 
 	delay(5);
@@ -178,8 +206,11 @@ void updatePixels()
 
 void hidePixels()
 {
-	for(uint8_t n = 0; n < count_led; n++)
+	for(int n = 0; n < 4; n++)
 	{
-		pixel.setPixelColor(n, 0, 0, 0);
+		pixel.setPixelColor(PUNCHS[n].index, black.r, black.g, black.b);
+		pixel.setPixelColor(KICKS[n].index, black.r, black.g, black.b);
+		if(n < 3){pixel.setPixelColor(ALTS[n].index, black.r, black.g, black.b);}
 	}
+	paintPixel(0);
 }

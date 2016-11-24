@@ -14,7 +14,7 @@
 /*
  * @struct RGB
  */
-typedef struct{uint8_t r;uint8_t g;uint8_t b;} RGB;
+typedef struct{int r;int g;int b;} RGB;
 
 /*
  * @struct PLATE
@@ -24,34 +24,34 @@ typedef struct{RGB current; RGB from; RGB to;} PLATE;
 /*
  * @struct IO
  */
-typedef struct{uint8_t pin;uint8_t mode;uint8_t state;String type;uint8_t index;RGB current;RGB from;RGB to;unsigned long changed;} IO;	
+typedef struct{int pin;int mode;int state;String type;int index;RGB current;RGB from;RGB to;float changed;} IO;	
 
 /*
  * @struct Punch
  */
-typedef struct{uint8_t states[4];uint8_t address;String bin;} Punch;
+typedef struct{int states[4];int address;String bin;} Punch;
 
 /*
  * @struct Kick
  */
-typedef struct{uint8_t states[4];uint8_t address;String bin;} Kick;
+typedef struct{int states[4];int address;String bin;} Kick;
 
 /*
  * @struct Alt
  */
-typedef struct{uint8_t states[3];uint8_t address;String bin;} Alt;
+typedef struct{int states[3];int address;String bin;} Alt;
 
 /*
  * @struct Direction
  */
-typedef struct{uint8_t states[4];uint8_t address;String bin;} Direction;	
+typedef struct{int states[4];int address;String bin;} Direction;	
 
 /*
  * @struct MODE
  */
-typedef struct{char name; IO direction; IO button; bool active;} MODE;
+//typedef struct{String name; IO direction; IO button; bool active;} MODE;
 
 /*
  * @struct COMMAND
  */
-typedef struct{unsigned long now;unsigned long timestamp;const long interval;} COMMAND;
+//typedef struct{unsigned long now;unsigned long timestamp;const long interval; String mode;} COMMAND;
