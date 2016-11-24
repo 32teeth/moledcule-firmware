@@ -103,7 +103,7 @@ void getPins(IO& io)
 ** @method printPins
 ** @desc create string buffer and dump to serial
 */
-/*
+
 void printPins()
 {
 	char punch[8];PUNCH.bin.toCharArray(punch, 8);
@@ -123,8 +123,7 @@ void printPins()
 	);
 
 	printComm(buffer);
-;}
-*/
+}
 
 /*
 ** @method setPins
@@ -194,6 +193,10 @@ void getPins()
 	KICK.bin = getBin(KICK.address);
 	DIRECTION.bin = getBin(DIRECTION.address);
 	ALT.bin = getBin(ALT.address);
+
+	#ifdef DEBUG
+		printPins();
+	#endif	
 }
 
 

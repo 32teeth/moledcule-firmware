@@ -107,7 +107,7 @@ void setup()
  */
 void loop()
 {
-	now = millis();
+    now = millis();
   if(now - timestamp >= interval){timestamp = now;};	
 	getPins(); 
 }
