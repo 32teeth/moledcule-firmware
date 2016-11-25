@@ -45,6 +45,8 @@ void listenComm()
 void printComm(String str)
 {
 	#ifdef DEBUG
+		delay(5);
 		Serial.println(str);
+		Serial.flush();
 	#endif
 };

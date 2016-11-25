@@ -27,7 +27,7 @@ unsigned long duration = 10;
 /*
  * @description DEBUG
  */
-//#define DEBUG
+#define DEBUG
 
  /*
  * @description Config
@@ -109,7 +109,6 @@ void setup()
 	startComm();
 	listenComm();
 	printComm("Serial Ready");
-
 	/*
 	 *
 	 */
@@ -134,7 +133,10 @@ void setup()
 void loop()
 {
 	now = millis();
-  if(now - timestamp >= interval){timestamp = now;};	
+  if(now - timestamp >= interval)
+  {
+  	timestamp = now;
+  };	
 	getPins();  	
   updatePixels();
 }

@@ -24,7 +24,7 @@ typedef struct{RGB current; RGB from; RGB to;} PLATE;
 /*
  * @struct IO
  */
-typedef struct{int pin;int mode;int state;String type;int index;RGB current;RGB from;RGB to;float changed;} IO;	
+typedef struct{int pin;int mode;int state;String type;int index;RGB current;RGB from;RGB to;long changed;} IO;	
 
 /*
  * @struct Punch
@@ -45,13 +45,3 @@ typedef struct{int states[3];int address;String bin;} Alt;
  * @struct Direction
  */
 typedef struct{int states[4];int address;String bin;} Direction;	
-
-/*
- * @struct MODE
- */
-//typedef struct{String name; IO direction; IO button; bool active;} MODE;
-
-/*
- * @struct COMMAND
- */
-//typedef struct{unsigned long now;unsigned long timestamp;const long interval; String mode;} COMMAND;

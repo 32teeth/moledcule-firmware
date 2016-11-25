@@ -115,11 +115,11 @@ void printPins()
 
 	(String)sprintf(
 		buffer,
-		"punch:%d %s kick:%d %s alt:%d %s direction:%d %s",
-		PUNCH.address, punch,
-		KICK.address, kick,
-		ALT.address, alt,
-		DIRECTION.address, direction
+		"punch:%s kick:%s alt:%s direction:%s",
+		punch,
+		kick,
+		alt,
+		direction
 	);
 
 	printComm(buffer);
@@ -195,7 +195,7 @@ void getPins()
 	ALT.bin = getBin(ALT.address);
 
 	#ifdef DEBUG
-		printPins();
+		//printPins();
 	#endif	
 }
 

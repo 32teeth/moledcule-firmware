@@ -105,7 +105,7 @@ void paintPixel(IO& io)
 {
 	if(io.changed >= now && io.index != -1)
 	{
-		float percent = (((float)io.changed-(float)now)/(float)duration);	
+		float percent = (((float)io.changed-(float)now)/(float)duration);		
 		
 		RGB to = io.state == 0 ? io.to : black;
 		RGB from = io.current;
@@ -136,68 +136,84 @@ RGB PK1_COLOR;
 RGB PK2_COLOR;
 RGB PK3_COLOR;
 RGB PK4_COLOR;
-RGB CROSS[4] = {PK1_COLOR, PK2_COLOR, PK3_COLOR, PK4_COLOR};
+RGB CROSS[4] = {
+	getGRB(PK1_COLOR, getLong(PK1)), 
+	getGRB(PK2_COLOR, getLong(PK2)), 
+	getGRB(PK3_COLOR, getLong(PK3)), 
+	getGRB(PK4_COLOR, getLong(PK4))
+};
 
 void paintCross(IO& PUNCH, IO& KICK, RGB& color)
-{
-	IO x[2] = {PUNCH, KICK};
-	for(int n = 0; n < 2; n++)
+{	
+	if(PUNCH.changed > KICK.changed){KICK.changed = PUNCH.changed;}
+	if(KICK.changed > PUNCH.changed){PUNCH.changed = KICK.changed;}
+
+			//pixel.setPixelColor(PUNCH.index, color.g, color.r, color.b);
+			//pixel.setPixelColor(PUNCH.index+1, color.g, color.r, color.b); 
+			//pixel.setPixelColor(KICK.index, color.g, color.r, color.b);
+			//pixel.setPixelColor(KICK.index+1, color.g, color.r, color.b); 	
+	float percent = (((float)PUNCH.changed-(float)now)/(float)duration);	
+	if(PUNCH.changed >= now && PUNCH.index != -1)
 	{
-		IO io = x[2];
-		if(io.changed >= now && io.index != -1)
-		{
-			float percent = ((io.changed-now)/duration);		
-			
-			RGB to = io.state == 0 ? color : black;
-			RGB from = io.current;
+		RGB to = PUNCH.state == 0 ? color : black;
+		RGB from = PUNCH.current;
 
-		  io.current.r = color.r - from.r;
-		  io.current.r = color.r - (io.current.r*percent);
+	  PUNCH.current.r = to.r - from.r;
+	  PUNCH.current.r = to.r - (PUNCH.current.r*percent);
 
-		  io.current.g = color.g - from.g;
-		  io.current.g = color.g - (io.current.g*percent);
+	  PUNCH.current.g = to.g - from.g;
+	  PUNCH.current.g = to.g - (PUNCH.current.g*percent);
 
-		  io.current.b = color.b - from.b;
-		  io.current.b = color.b - (io.current.b*percent);
+	  PUNCH.current.b = to.b - from.b;
+	  PUNCH.current.b = to.b - (PUNCH.current.b*percent);
 
-			pixel.setPixelColor(io.index, io.current.g, io.current.r, io.current.b);
-			pixel.setPixelColor(io.index+1, io.current.g, io.current.r, io.current.b); 
-		}
-	}
+		pixel.setPixelColor(PUNCH.index, PUNCH.current.r, PUNCH.current.g, PUNCH.current.b);
+		pixel.setPixelColor(PUNCH.index+1, PUNCH.current.r, PUNCH.current.g, PUNCH.current.b); 
+	}	
+
+	if(KICK.changed >= now && KICK.index != -1)
+	{
+		RGB to = KICK.state == 0 ? color : black;
+		RGB from = KICK.current;
+
+	  KICK.current.r = to.r - from.r;
+	  KICK.current.r = to.r - (KICK.current.r*percent);
+
+	  KICK.current.g = to.g - from.g;
+	  KICK.current.g = to.g - (KICK.current.g*percent);
+
+	  KICK.current.b = to.b - from.b;
+	  KICK.current.b = to.b - (KICK.current.b*percent);
+
+		pixel.setPixelColor(KICK.index, KICK.current.r, KICK.current.g, KICK.current.b);
+		pixel.setPixelColor(KICK.index+1, KICK.current.r, KICK.current.g, KICK.current.b); 
+	}					
 }
 
 void updatePixels()
 {
 	/*
-	#ifdef paint
-		for(int n = 0; n < 4; n++)
+	for(int n = 0; n < 4; n++)
+	{
+		paintPixel(PUNCHS[n]);
+		paintPixel(KICKS[n]);
+		if(n < 3){paintPixel(ALTS[n]);}
+	}
+	paintPixel(DIRECTION.address);
+	*/
+	for(int n = 0; n < 4; n++)
+	{
+		if((PUNCHS[n].state == KICKS[n].state) && PUNCHS[n].state == 0)
 		{
-			if((PUNCHS[n].state == KICKS[n].state) && PUNCHS[n].state == 0)
-			{
-				paintCross(PUNCHS[n], KICKS[n], CROSS[n]);
-			}
-			else
-			{
-				paintPixel(PUNCHS[n]);
-				paintPixel(KICKS[n]);
-			}
-			if(n < 3){paintPixel(ALTS[n]);}
+			paintCross(PUNCHS[n], KICKS[n], CROSS[n]);
 		}
-		paintPixel(DIRECTION.address);
-	#else
-		for(int n = 0; n < 4; n++)
+		else
 		{
 			paintPixel(PUNCHS[n]);
 			paintPixel(KICKS[n]);
-			if(n < 3){paintPixel(ALTS[n]);}
 		}
-		paintPixel(DIRECTION.address);
-	#endif	
-	*/
-
-	for(int n = 0; n < 4; n++){paintPixel(PUNCHS[n]);}
-	for(int n = 0; n < 4; n++){paintPixel(KICKS[n]);}
-	for(int n = 0; n < 3; n++){paintPixel(ALTS[n]);}
+		if(n < 3){paintPixel(ALTS[n]);}
+	}
 	paintPixel(DIRECTION.address);
 
 	delay(5);
