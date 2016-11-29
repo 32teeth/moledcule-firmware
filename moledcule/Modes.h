@@ -14,13 +14,15 @@
 /*
  * @struct command
  */
-COMMAND command = {millis(), millis(), 5000, "simple"};
+TIMER command = {0, millis(), 2500};
 
 /*
  * @struct mode
  */
-MODE simple = {"simple", &RIGHT_IO, &P1_IO, false};
-MODE tournament = {"tournament", &LEFT_IO, &P1_IO, false};
+MODE simple = {"simple", RIGHT_PIN, P1_PIN, false};
+MODE tournament = {"tournament", LEFT_PIN, P1_PIN, false};
+MODE active = {"simple", 0, 0, true};
+MODE pending = {"none", 0, 0, false};
 
 #define mode_count 2
 
@@ -38,54 +40,98 @@ void printMode(MODE mode)
 	char buffer[100];
 	(String)sprintf(
 		buffer,
-		"waiting polling direction:%d button:%d active:%s",
-		mode.direction.state,
-		mode.button.state,
+		"mode: %s direction:%d button:%d active:%s",
+		mode.name,
+		getPin(mode.direction),
+		getPin(mode.button),
 		mode.active ? "true" : "false"
 	);		
 	Serial.println(buffer);	
 };
 
+void runMode()
+{
+  if(active.name == "tournament"){hidePixels();}
+  if(active.name == "simple"){updatePixels();}
+}
+
+/*
+ * @method setMode
+ * #description set mode
+ */
+void setMode()
+{
+	for(int n = 0; n < mode_count; n++)
+	{
+		MODE& mode = modes[n];
+		if(mode.name != active.name){mode.active = false;}
+
+		for(int n = 0; n < count_led; n++)
+		{
+			pixel.setPixelColor(n, white.r, white.g, white.b);
+			delay(5);
+			pixel.show();		
+		}
+		for(int n = count_led; n > 0; n--)
+		{
+			pixel.setPixelColor(n, black.r, black.g, black.b);
+			delay(5);
+			pixel.show();		
+		}		
+	}
+
+	int alloff = mode_count;
+	for(int n = 0; n < mode_count; n++)	
+	{
+		MODE& mode = modes[n];
+		if(mode.active){alloff--;}
+	}
+
+	if(alloff == 0)
+	{
+		active.name = "simple";
+		simple.active = true;
+	}
+}
+
+bool waiting = false;
 /*
  * @method pollMode
  * #description poll all modes
  */
 void pollMode()
 {
-	bool polling = false;
-	bool waiting = false;
-
 	command.now = millis();
-
 	for(int n = 0; n < mode_count; n++)
 	{
-		MODE mode = modes[n];
+		MODE& mode = modes[n];
 
-		if(mode.direction.state == 0 && mode.button.state == 0)
+		if(getPin(mode.direction) == 0 && getPin(mode.button) == 0)
 		{
-			polling = true;
-
-			printMode(mode);
-
+			if(pending.name != mode.name)
+			{
+				command.timestamp = command.now;
+				pending.name = mode.name;
+			}
 			if(!waiting)
 			{
-				command.timestamp = command.now + command.interval;
+				command.timestamp = command.now;
+				pending.name = mode.name;
 				waiting = true;	
-				printMode(mode);					
-			};
-			if(command.now - command.timestamp >= command.interval)
-			{
+			}
+			if(command.now - command.timestamp >= command.interval && waiting)
+			{											
+				mode.active = mode.active ? false : true;
+				if(mode.active){active.name = mode.name;}
 				command.timestamp = millis();
-				printMode(mode);	
-				if(!mode.active)
-				{
-					simple.active = true;
-				}
-			};			
+				waiting = false;				
+				setMode();
+				delay(10);
+			}
 		}
 	};
 
 	command.now = millis();
 
-	//runMode();
+	runMode();
 };

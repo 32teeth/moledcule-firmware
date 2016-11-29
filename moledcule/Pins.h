@@ -30,36 +30,57 @@ RGB DOWN_COLOR;
 RGB LEFT_COLOR;
 RGB UP_COLOR;
 
+int P1_PIN = 3;
+int P2_PIN = 2;
+int P3_PIN = 0;
+int P4_PIN = 1;
+
+int K1_PIN = 4;
+int K2_PIN = A3;
+int K3_PIN = 12;
+int K4_PIN = 6;
+
+int START_PIN = 10;
+int SELECT_PIN = 9;
+int HOME_PIN = 8;
+
+int RIGHT_PIN = A2;
+int DOWN_PIN = 11;
+int LEFT_PIN = A1;
+int UP_PIN = A0;
+
+
+
 /*
  * @description all punch IO
  */
-IO P1_IO = {3, INPUT, HIGH, "d", P1_INDEX, black, black, getRGB(P1_COLOR, getLong(P1)), 0};
-IO P2_IO = {2, INPUT, HIGH, "d", P2_INDEX, black, black, getRGB(P2_COLOR, getLong(P2)), 0};
-IO P3_IO = {0, INPUT, HIGH, "d", P3_INDEX, black, black, getRGB(P3_COLOR, getLong(P3)), 0};
-IO P4_IO = {1, INPUT, HIGH, "d", P4_INDEX, black, black, getRGB(P4_COLOR, getLong(P4)), 0};
+IO P1_IO = {P1_PIN, INPUT, HIGH, "d", P1_INDEX, black, black, getRGB(P1_COLOR, getLong(P1)), 0};
+IO P2_IO = {P2_PIN, INPUT, HIGH, "d", P2_INDEX, black, black, getRGB(P2_COLOR, getLong(P2)), 0};
+IO P3_IO = {P3_PIN, INPUT, HIGH, "d", P3_INDEX, black, black, getRGB(P3_COLOR, getLong(P3)), 0};
+IO P4_IO = {P4_PIN, INPUT, HIGH, "d", P4_INDEX, black, black, getRGB(P4_COLOR, getLong(P4)), 0};
 
 /*
  * @description all kick IO
  */
-IO K1_IO = {4, INPUT, HIGH, "d", K1_INDEX, black, black, getRGB(K1_COLOR, getLong(K1)), 0};
-IO K2_IO = {A3, INPUT, HIGH, "a", K2_INDEX, black, black, getRGB(K2_COLOR, getLong(K2)), 0};
-IO K3_IO = {12, INPUT, HIGH, "d", K3_INDEX, black, black, getRGB(K3_COLOR, getLong(K3)), 0};
-IO K4_IO = {6, INPUT, HIGH, "d", K4_INDEX, black, black, getRGB(K4_COLOR, getLong(K4)), 0};
+IO K1_IO = {K1_PIN, INPUT, HIGH, "d", K1_INDEX, black, black, getRGB(K1_COLOR, getLong(K1)), 0};
+IO K2_IO = {K2_PIN, INPUT, HIGH, "a", K2_INDEX, black, black, getRGB(K2_COLOR, getLong(K2)), 0};
+IO K3_IO = {K3_PIN, INPUT, HIGH, "d", K3_INDEX, black, black, getRGB(K3_COLOR, getLong(K3)), 0};
+IO K4_IO = {K4_PIN, INPUT, HIGH, "d", K4_INDEX, black, black, getRGB(K4_COLOR, getLong(K4)), 0};
 
 /*
  * @description all alt IO
  */		
-IO START_IO = {10, INPUT, HIGH, "d", START_INDEX, black, black, getRGB(START_COLOR, getLong(START)), 0};
-IO SELECT_IO = {9, INPUT, HIGH, "d", SELECT_INDEX, black, black, getRGB(SELECT_COLOR, getLong(SELECT)), 0};
-IO HOME_IO = {8, INPUT, HIGH, "d", HOME_INDEX, black, black, getRGB(HOME_COLOR, getLong(HOME)), 0};
+IO START_IO = {START_PIN, INPUT, HIGH, "d", START_INDEX, black, black, getRGB(START_COLOR, getLong(START)), 0};
+IO SELECT_IO = {SELECT_PIN, INPUT, HIGH, "d", SELECT_INDEX, black, black, getRGB(SELECT_COLOR, getLong(SELECT)), 0};
+IO HOME_IO = {HOME_PIN, INPUT, HIGH, "d", HOME_INDEX, black, black, getRGB(HOME_COLOR, getLong(HOME)), 0};
 
 /*
  * @description direction IO
  */
-IO RIGHT_IO = {A2, INPUT, HIGH, "a", RIGHT_INDEX, black, black, getRGB(RIGHT_COLOR, getLong(RIGHT)), 0};
-IO DOWN_IO = {11, INPUT, HIGH, "d", DOWN_INDEX, black, black, getRGB(DOWN_COLOR, getLong(DOWN)), 0};
-IO LEFT_IO = {A1, INPUT, HIGH,"a", LEFT_INDEX, black, black, getRGB(LEFT_COLOR, getLong(LEFT)), 0};
-IO UP_IO = {A0, INPUT, HIGH, "a", UP_INDEX, black, black, getRGB(UP_COLOR, getLong(UP)), 0};
+IO RIGHT_IO = {RIGHT_PIN, INPUT, HIGH, "a", RIGHT_INDEX, black, black, getRGB(RIGHT_COLOR, getLong(RIGHT)), 0};
+IO DOWN_IO = {DOWN_PIN, INPUT, HIGH, "d", DOWN_INDEX, black, black, getRGB(DOWN_COLOR, getLong(DOWN)), 0};
+IO LEFT_IO = {LEFT_PIN, INPUT, HIGH,"a", LEFT_INDEX, black, black, getRGB(LEFT_COLOR, getLong(LEFT)), 0};
+IO UP_IO = {UP_PIN, INPUT, HIGH, "a", UP_INDEX, black, black, getRGB(UP_COLOR, getLong(UP)), 0};
 
 /*
  * @description array of IO
@@ -100,32 +121,6 @@ void getPins(IO& io)
 }
 
 /*
-** @method printPins
-** @desc create string buffer and dump to serial
-*/
-
-void printPins()
-{
-	char punch[8];PUNCH.bin.toCharArray(punch, 8);
-	char kick[8];KICK.bin.toCharArray(kick, 8);
-	char alt[8];ALT.bin.toCharArray(alt, 8);
-	char direction[8];DIRECTION.bin.toCharArray(direction, 8);
-		
-	char buffer[100];
-
-	(String)sprintf(
-		buffer,
-		"punch:%s kick:%s alt:%s direction:%s",
-		punch,
-		kick,
-		alt,
-		direction
-	);
-
-	printComm(buffer);
-}
-
-/*
 ** @method setPins
 ** @desc itterate through structs and invoke setPins
 */
@@ -144,6 +139,16 @@ void setPins()
 ** @method getPins
 ** @desc itterate through structs and set appropriate structs
 */
+int getPin(int pin)
+{
+	return digitalRead(pin);
+}
+
+
+/*
+** @method getPins
+** @desc itterate through structs and set appropriate structs
+*/
 void getPins()
 {
 	PUNCH.address = 0;
@@ -157,7 +162,7 @@ void getPins()
 		 *
 		 */
 		getPins(PUNCHS[n]);
-		if(PUNCH.states[n] != PUNCHS[n].state){PUNCHS[n].changed = (now + duration);}
+		if(PUNCH.states[n] != PUNCHS[n].state){PUNCHS[n].changed = (timer.now + duration);}
 		PUNCH.states[n] = PUNCHS[n].state;
 		PUNCH.address |= PUNCH.states[n] == 0 ? 1 << n : 0 << n;
 
@@ -165,7 +170,7 @@ void getPins()
 		 *
 		 */
 		getPins(KICKS[n]);
-		if(KICK.states[n] != KICKS[n].state){KICKS[n].changed = (now + duration);}
+		if(KICK.states[n] != KICKS[n].state){KICKS[n].changed = (timer.now + duration);}
 		KICK.states[n] = KICKS[n].state;
 		KICK.address |= KICK.states[n] == 0 ? 1 << n : 0 << n;
 
@@ -173,7 +178,7 @@ void getPins()
 		 *
 		 */
 		getPins(DIRECTIONS[n]);
-		if(DIRECTION.states[n] != DIRECTIONS[n].state){DIRECTIONS[n].changed = (now + duration);}
+		if(DIRECTION.states[n] != DIRECTIONS[n].state){DIRECTIONS[n].changed = (timer.now + duration);}
 		DIRECTION.states[n] = DIRECTIONS[n].state;
 		DIRECTION.address |= DIRECTION.states[n] == 0 ? 1 << n : 0 << n;						
 
@@ -183,7 +188,7 @@ void getPins()
 		if(n < 3)
 		{
 			getPins(ALTS[n]);
-			if(ALT.states[n] != ALTS[n].state){ALTS[n].changed = (now + duration);}
+			if(ALT.states[n] != ALTS[n].state){ALTS[n].changed = (timer.now + duration);}
 			ALT.states[n] = ALTS[n].state;
 			ALT.address |= ALT.states[n] == 0 ? 1 << n : 0 << n;	
 		}
@@ -193,10 +198,6 @@ void getPins()
 	KICK.bin = getBin(KICK.address);
 	DIRECTION.bin = getBin(DIRECTION.address);
 	ALT.bin = getBin(ALT.address);
-
-	#ifdef DEBUG
-		//printPins();
-	#endif	
 }
 
 

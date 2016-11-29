@@ -12,6 +12,12 @@
  */
 
 /*
+ * @struct timer
+ */
+typedef struct{unsigned long now;unsigned long timestamp;unsigned long interval;} TIMER;
+TIMER timer;
+
+/*
  * @struct RGB
  */
 typedef struct{int r;int g;int b;} RGB;
@@ -45,3 +51,10 @@ typedef struct{int states[3];int address;String bin;} Alt;
  * @struct Direction
  */
 typedef struct{int states[4];int address;String bin;} Direction;	
+
+/*
+ * @struct MODE
+ */
+typedef struct{char* name; int direction; int button; bool active;} MODE;
+
+

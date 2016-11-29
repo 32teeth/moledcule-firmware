@@ -53,6 +53,7 @@ int reference[13] = {-1,0,2,1,4,-1,3,-1,6,7,-1,-1,5};
 
 unsigned long changed = 0;
 float percent = 0;
+
 void paintPixel(int address)
 {
 	unsigned int shift = 0;
@@ -67,10 +68,10 @@ void paintPixel(int address)
 	/*
 	 *
 	 */
-	if(previous != address){changed = now + duration;}
-	if(changed >= now)
+	if(previous != address){changed = timer.now + duration;}
+	if(changed >= timer.now)
 	{
-		percent = (((float)changed-(float)now)/(float)duration);
+		percent = (((float)changed-(float)timer.now)/(float)duration);
 
 		for(int n = 0; n < 8; n++)
 		{
@@ -103,9 +104,9 @@ void paintPixel(int address)
 
 void paintPixel(IO& io)
 {
-	if(io.changed >= now && io.index != -1)
+	if(io.changed >= timer.now && io.index != -1)
 	{
-		float percent = (((float)io.changed-(float)now)/(float)duration);		
+		float percent = (((float)io.changed-(float)timer.now)/(float)duration);		
 		
 		RGB to = io.state == 0 ? io.to : black;
 		RGB from = io.current;
@@ -152,8 +153,8 @@ void paintCross(IO& PUNCH, IO& KICK, RGB& color)
 			//pixel.setPixelColor(PUNCH.index+1, color.g, color.r, color.b); 
 			//pixel.setPixelColor(KICK.index, color.g, color.r, color.b);
 			//pixel.setPixelColor(KICK.index+1, color.g, color.r, color.b); 	
-	float percent = (((float)PUNCH.changed-(float)now)/(float)duration);	
-	if(PUNCH.changed >= now && PUNCH.index != -1)
+	float percent = (((float)PUNCH.changed-(float)timer.now)/(float)duration);	
+	if(PUNCH.changed >= timer.now && PUNCH.index != -1)
 	{
 		RGB to = PUNCH.state == 0 ? color : black;
 		RGB from = PUNCH.current;
@@ -171,7 +172,7 @@ void paintCross(IO& PUNCH, IO& KICK, RGB& color)
 		pixel.setPixelColor(PUNCH.index+1, PUNCH.current.r, PUNCH.current.g, PUNCH.current.b); 
 	}	
 
-	if(KICK.changed >= now && KICK.index != -1)
+	if(KICK.changed >= timer.now && KICK.index != -1)
 	{
 		RGB to = KICK.state == 0 ? color : black;
 		RGB from = KICK.current;
@@ -192,15 +193,8 @@ void paintCross(IO& PUNCH, IO& KICK, RGB& color)
 
 void updatePixels()
 {
-	/*
-	for(int n = 0; n < 4; n++)
-	{
-		paintPixel(PUNCHS[n]);
-		paintPixel(KICKS[n]);
-		if(n < 3){paintPixel(ALTS[n]);}
-	}
-	paintPixel(DIRECTION.address);
-	*/
+	timer.now = millis();
+
 	for(int n = 0; n < 4; n++)
 	{
 		if((PUNCHS[n].state == KICKS[n].state) && PUNCHS[n].state == 0)
@@ -229,4 +223,7 @@ void hidePixels()
 		if(n < 3){pixel.setPixelColor(ALTS[n].index, black.r, black.g, black.b);}
 	}
 	paintPixel(0);
+	
+	delay(5);
+	pixel.show();		
 }

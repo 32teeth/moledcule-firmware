@@ -14,9 +14,6 @@
  /*
  *
  */
-unsigned long now;
-unsigned long timestamp = 0;
-unsigned long interval = 100;
 unsigned long duration = 10;
 
 /*
@@ -82,8 +79,7 @@ unsigned long duration = 10;
 /*
  * @description Modes
  */
-//#include "Modes.h"
-
+#include "Modes.h"
 
 /*
  * @method setup
@@ -91,6 +87,8 @@ unsigned long duration = 10;
  */
 void setup()
 { 
+	timer = {0,millis(),1000};
+
 	/*
 	 * @description start pixel and turn them all off
 	 */
@@ -118,7 +116,7 @@ void setup()
 	 *
 	 */
 	#ifdef FADE
-		interval = 100;
+		timer.interval = 100;
 		duration = 1500;
 	#endif
 
@@ -132,11 +130,12 @@ void setup()
  */
 void loop()
 {
-	now = millis();
-  if(now - timestamp >= interval)
+	timer.now = millis();
+  if(timer.now - timer.timestamp >= timer.interval)
   {
-  	timestamp = now;
+  	timer.timestamp = timer.now;
   };	
-	getPins();  	
-  updatePixels();
+
+	getPins();
+	pollMode();
 }
