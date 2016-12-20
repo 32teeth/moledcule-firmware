@@ -77,6 +77,11 @@ unsigned long duration = 10;
 #include "Pixels.h"
 
 /*
+ * @description Screen
+ */
+#include "Screen.h"
+
+/*
  * @description Modes
  */
 #include "Modes.h"

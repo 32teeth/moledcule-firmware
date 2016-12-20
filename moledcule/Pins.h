@@ -30,57 +30,55 @@ RGB DOWN_COLOR;
 RGB LEFT_COLOR;
 RGB UP_COLOR;
 
-int P1_PIN = 3;
-int P2_PIN = 2;
-int P3_PIN = 0;
-int P4_PIN = 1;
+const int P1_PIN = 3;
+const int P2_PIN = 2;
+const int P3_PIN = 0;
+const int P4_PIN = 1;
 
-int K1_PIN = 4;
-int K2_PIN = A3;
-int K3_PIN = 12;
-int K4_PIN = 6;
+const int K1_PIN = 4;
+const int K2_PIN = A3;
+const int K3_PIN = 12;
+const int K4_PIN = 6;
 
-int START_PIN = 10;
-int SELECT_PIN = 9;
-int HOME_PIN = 8;
+const int START_PIN = 10;
+const int SELECT_PIN = 9;
+const int HOME_PIN = 8;
 
-int RIGHT_PIN = A2;
-int DOWN_PIN = 11;
-int LEFT_PIN = A1;
-int UP_PIN = A0;
-
-
+const int RIGHT_PIN = A2;
+const int DOWN_PIN = 11;
+const int LEFT_PIN = A1;
+const int UP_PIN = A0;
 
 /*
  * @description all punch IO
  */
-IO P1_IO = {P1_PIN, INPUT, HIGH, "d", P1_INDEX, black, black, getRGB(P1_COLOR, getLong(P1)), 0};
-IO P2_IO = {P2_PIN, INPUT, HIGH, "d", P2_INDEX, black, black, getRGB(P2_COLOR, getLong(P2)), 0};
-IO P3_IO = {P3_PIN, INPUT, HIGH, "d", P3_INDEX, black, black, getRGB(P3_COLOR, getLong(P3)), 0};
-IO P4_IO = {P4_PIN, INPUT, HIGH, "d", P4_INDEX, black, black, getRGB(P4_COLOR, getLong(P4)), 0};
+IO P1_IO = {P1_PIN, INPUT, 1, "d", P1_INDEX, black, black, getRGB(P1_COLOR, getLong(P1)), 0};
+IO P2_IO = {P2_PIN, INPUT, 1, "d", P2_INDEX, black, black, getRGB(P2_COLOR, getLong(P2)), 0};
+IO P3_IO = {P3_PIN, INPUT, 1, "d", P3_INDEX, black, black, getRGB(P3_COLOR, getLong(P3)), 0};
+IO P4_IO = {P4_PIN, INPUT, 1, "d", P4_INDEX, black, black, getRGB(P4_COLOR, getLong(P4)), 0};
 
 /*
  * @description all kick IO
  */
-IO K1_IO = {K1_PIN, INPUT, HIGH, "d", K1_INDEX, black, black, getRGB(K1_COLOR, getLong(K1)), 0};
-IO K2_IO = {K2_PIN, INPUT, HIGH, "a", K2_INDEX, black, black, getRGB(K2_COLOR, getLong(K2)), 0};
-IO K3_IO = {K3_PIN, INPUT, HIGH, "d", K3_INDEX, black, black, getRGB(K3_COLOR, getLong(K3)), 0};
-IO K4_IO = {K4_PIN, INPUT, HIGH, "d", K4_INDEX, black, black, getRGB(K4_COLOR, getLong(K4)), 0};
+IO K1_IO = {K1_PIN, INPUT, 1, "d", K1_INDEX, black, black, getRGB(K1_COLOR, getLong(K1)), 0};
+IO K2_IO = {K2_PIN, INPUT, 1, "a", K2_INDEX, black, black, getRGB(K2_COLOR, getLong(K2)), 0};
+IO K3_IO = {K3_PIN, INPUT, 1, "d", K3_INDEX, black, black, getRGB(K3_COLOR, getLong(K3)), 0};
+IO K4_IO = {K4_PIN, INPUT, 1, "d", K4_INDEX, black, black, getRGB(K4_COLOR, getLong(K4)), 0};
 
 /*
  * @description all alt IO
  */		
-IO START_IO = {START_PIN, INPUT, HIGH, "d", START_INDEX, black, black, getRGB(START_COLOR, getLong(START)), 0};
-IO SELECT_IO = {SELECT_PIN, INPUT, HIGH, "d", SELECT_INDEX, black, black, getRGB(SELECT_COLOR, getLong(SELECT)), 0};
-IO HOME_IO = {HOME_PIN, INPUT, HIGH, "d", HOME_INDEX, black, black, getRGB(HOME_COLOR, getLong(HOME)), 0};
+IO START_IO = {START_PIN, INPUT, 1, "d", START_INDEX, black, black, getRGB(START_COLOR, getLong(START)), 0};
+IO SELECT_IO = {SELECT_PIN, INPUT, 1, "d", SELECT_INDEX, black, black, getRGB(SELECT_COLOR, getLong(SELECT)), 0};
+IO HOME_IO = {HOME_PIN, INPUT, 1, "d", HOME_INDEX, black, black, getRGB(HOME_COLOR, getLong(HOME)), 0};
 
 /*
  * @description direction IO
  */
-IO RIGHT_IO = {RIGHT_PIN, INPUT, HIGH, "a", RIGHT_INDEX, black, black, getRGB(RIGHT_COLOR, getLong(RIGHT)), 0};
-IO DOWN_IO = {DOWN_PIN, INPUT, HIGH, "d", DOWN_INDEX, black, black, getRGB(DOWN_COLOR, getLong(DOWN)), 0};
-IO LEFT_IO = {LEFT_PIN, INPUT, HIGH,"a", LEFT_INDEX, black, black, getRGB(LEFT_COLOR, getLong(LEFT)), 0};
-IO UP_IO = {UP_PIN, INPUT, HIGH, "a", UP_INDEX, black, black, getRGB(UP_COLOR, getLong(UP)), 0};
+IO RIGHT_IO = {RIGHT_PIN, INPUT, 1, "a", RIGHT_INDEX, black, black, getRGB(RIGHT_COLOR, getLong(RIGHT)), 0};
+IO DOWN_IO = {DOWN_PIN, INPUT, 1, "d", DOWN_INDEX, black, black, getRGB(DOWN_COLOR, getLong(DOWN)), 0};
+IO LEFT_IO = {LEFT_PIN, INPUT, 1,"a", LEFT_INDEX, black, black, getRGB(LEFT_COLOR, getLong(LEFT)), 0};
+IO UP_IO = {UP_PIN, INPUT, 1, "a", UP_INDEX, black, black, getRGB(UP_COLOR, getLong(UP)), 0};
 
 /*
  * @description array of IO

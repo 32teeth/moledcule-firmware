@@ -149,10 +149,6 @@ void paintCross(IO& PUNCH, IO& KICK, RGB& color)
 	if(PUNCH.changed > KICK.changed){KICK.changed = PUNCH.changed;}
 	if(KICK.changed > PUNCH.changed){PUNCH.changed = KICK.changed;}
 
-			//pixel.setPixelColor(PUNCH.index, color.g, color.r, color.b);
-			//pixel.setPixelColor(PUNCH.index+1, color.g, color.r, color.b); 
-			//pixel.setPixelColor(KICK.index, color.g, color.r, color.b);
-			//pixel.setPixelColor(KICK.index+1, color.g, color.r, color.b); 	
 	float percent = (((float)PUNCH.changed-(float)timer.now)/(float)duration);	
 	if(PUNCH.changed >= timer.now && PUNCH.index != -1)
 	{

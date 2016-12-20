@@ -16,43 +16,29 @@
  */
 TIMER command = {0, millis(), 2500};
 
+
 /*
  * @struct mode
  */
-MODE simple = {"simple", RIGHT_PIN, P1_PIN, false};
-MODE tournament = {"tournament", LEFT_PIN, P1_PIN, false};
 MODE active = {"simple", 0, 0, true};
 MODE pending = {"none", 0, 0, false};
 
-#define mode_count 2
+#define mode_count 3
 
 /*
  * @struct mode array
  */
-MODE modes[mode_count] = {simple, tournament};
-
-/*
- * @method printMode
- * #description debug print
- */
-void printMode(MODE mode)
-{	
-	char buffer[100];
-	(String)sprintf(
-		buffer,
-		"mode: %s direction:%d button:%d active:%s",
-		mode.name,
-		getPin(mode.direction),
-		getPin(mode.button),
-		mode.active ? "true" : "false"
-	);		
-	Serial.println(buffer);	
+MODE modes[mode_count+2] = {
+	{"simple", RIGHT_PIN, P1_PIN, false}, 
+	{"tournament", LEFT_PIN, P1_PIN, false}, 
+	{"screen", UP_PIN, P1_PIN, false}
 };
 
 void runMode()
 {
   if(active.name == "tournament"){hidePixels();}
   if(active.name == "simple"){updatePixels();}
+  if(active.name == "screen"){screenSaver();}
 }
 
 /*
@@ -65,19 +51,12 @@ void setMode()
 	{
 		MODE& mode = modes[n];
 		if(mode.name != active.name){mode.active = false;}
-
-		for(int n = 0; n < count_led; n++)
-		{
-			pixel.setPixelColor(n, white.r, white.g, white.b);
-			delay(5);
-			pixel.show();		
-		}
+		screenSaver();
 		for(int n = count_led; n > 0; n--)
 		{
 			pixel.setPixelColor(n, black.r, black.g, black.b);
-			delay(5);
 			pixel.show();		
-		}		
+		}
 	}
 
 	int alloff = mode_count;
@@ -90,7 +69,7 @@ void setMode()
 	if(alloff == 0)
 	{
 		active.name = "simple";
-		simple.active = true;
+		modes[0].active = true;
 	}
 }
 
