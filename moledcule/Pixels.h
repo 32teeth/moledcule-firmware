@@ -204,7 +204,10 @@ void updatePixels()
 		}
 		if(n < 3){paintPixel(ALTS[n]);}
 	}
-	paintPixel(DIRECTION.address);
+	if(plate_led > 0)
+	{
+		paintPixel(DIRECTION.address);		
+	}	
 
 	delay(5);
 	pixel.show();	

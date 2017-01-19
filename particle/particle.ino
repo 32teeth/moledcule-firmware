@@ -54,10 +54,10 @@ void loop() {
     timer.now = millis();
     if(timer.now - timer.timestamp >= timer.interval)
     {
-        timer.timestamp = timer.now;
-        timer.changed = timer.now + duration;
-        f = t;
-        t = random(10);
+      timer.timestamp = timer.now;
+      timer.changed = timer.now + duration;
+      f = t;
+      t = random(10);
         
       char buffer[100];
     

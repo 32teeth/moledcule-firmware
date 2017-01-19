@@ -1,5 +1,5 @@
 
-#define MOLEDCULE
+#define KAIMANA
 
 #ifdef MOLEDCULE
 	#define data_led 7
