@@ -54,6 +54,44 @@ int reference[13] = {-1,0,2,1,4,-1,3,-1,6,7,-1,-1,5};
 unsigned long changed = 0;
 float percent = 0;
 
+
+RGB BALLTOP_COLOR;
+RGB BT[1] = {
+	getGRB(BALLTOP_COLOR, getLong(BALLTOP))
+};
+
+void paintBalltop(int address)
+{
+	/*
+	unsigned int shift = 0;
+	unsigned int index = reference[address];		
+	if(previous != address){changed = timer.now + duration;}
+	if(changed >= timer.now)
+	{
+		percent = (((float)changed-(float)timer.now)/(float)duration);
+		RGB to = BT[1];
+		RGB from = black;		
+		if(address == 0)
+		{
+			to = black;
+			from = BT[1];
+		}
+
+	  BALLTOP_COLOR.r = to.r - from.r;
+	  BALLTOP_COLOR.r = to.r - (BALLTOP_COLOR.r*percent);
+
+	  BALLTOP_COLOR.g = to.g - from.g;
+	  BALLTOP_COLOR.g = to.g - (BALLTOP_COLOR.g*percent);
+
+	  BALLTOP_COLOR.b = to.b - from.b;
+	  BALLTOP_COLOR.b = to.b - (BALLTOP_COLOR.b*percent);			
+
+		pixel.setPixelColor(BALLTOP_INDEX, BALLTOP_COLOR.r, BALLTOP_COLOR.g, BALLTOP_COLOR.b);		
+	}
+	*/
+	pixel.setPixelColor(BALLTOP_INDEX, BALLTOP_COLOR.r, BALLTOP_COLOR.g, BALLTOP_COLOR.b);		
+}
+
 void paintPixel(int address)
 {
 	unsigned int shift = 0;
@@ -207,7 +245,11 @@ void updatePixels()
 	if(plate_led > 0)
 	{
 		paintPixel(DIRECTION.address);		
-	}	
+	}
+	if(balltop_led > 0)
+	{
+		paintBalltop(DIRECTION.address);		
+	}		
 
 	delay(5);
 	pixel.show();	

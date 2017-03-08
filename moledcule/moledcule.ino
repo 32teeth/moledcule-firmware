@@ -142,6 +142,6 @@ void loop()
   };	
 
 	getPins();
-	//pollMode();
- updatePixels();
+	pollMode();
+  //updatePixels();
 }
