@@ -9,21 +9,21 @@
 /*
  * @description pin mapping
  */
-const byte PIN_P1 = 3;
-const byte PIN_P2 = 2;
-const byte PIN_P3 = 0;
-const byte PIN_P4 = 1;
+#define PIN_P1 3
+#define PIN_P2 2
+#define PIN_P3 0
+#define PIN_P4 1
 
-const byte PIN_K1 = 4;
-const byte PIN_K2 = A3;
-const byte PIN_K3 = 12;
-const byte PIN_K4 = 6;
+#define PIN_K1 4
+#define PIN_K2 A3
+#define PIN_K3 12
+#define PIN_K4 6
 
-const byte PIN_START = 10;
-const byte PIN_SELECT = 9;
-const byte PIN_HOME = 8;
+#define PIN_START 10
+#define PIN_SELECT 9
+#define PIN_HOME 8
 
-const byte PIN_RIGHT = A2;
-const byte PIN_DOWN = 11;
-const byte PIN_LEFT = A1;
-const byte PIN_UP = A0;
+#define PIN_RIGHT A2
+#define PIN_DOWN 11
+#define PIN_LEFT A1
+#define PIN_UP A0
