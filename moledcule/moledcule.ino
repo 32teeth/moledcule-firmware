@@ -101,8 +101,9 @@ void setup()
 	pixel.setBrightness(bright);
 	for(int i = 0; i < count_led; i++)
 	{
-		pixel.setPixelColor(i, 0, 0, 0);
+		pixel.setPixelColor(i, 255, 0, 0);
 	}
+
 	pixel.show();
 
 

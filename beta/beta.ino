@@ -30,7 +30,13 @@ void setup()
 	TIMER moledcule = {0,millis(),1000};
 
 	pixel.begin();
-	pixel.setBrightness(brightness);
+	pixel.setBrightness(bright);
+  
+  delay(1000);
+  
+  pixel.setPixelColor(0, 0, 255, 255);
+  pixel.show();
+  
 
 	delay(1000);
 }

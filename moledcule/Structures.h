@@ -15,6 +15,7 @@
  * @struct timer
  */
 typedef struct{unsigned long now;unsigned long timestamp;unsigned long interval;} TIMER;
+TIMER timer;
 
 /*
  * @struct RGB
