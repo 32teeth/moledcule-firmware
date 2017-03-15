@@ -1,10 +1,10 @@
 /*
  * @author Eugene Andruszczenko
- *  ___ ___ _           _   _   
- * |_  |_  | |_ ___ ___| |_| |_ 
+ *  ___ ___ _           _   _
+ * |_  |_  | |_ ___ ___| |_| |_
  * |_  |  _|  _| -_| -_|  _|   |
  * |___|___|_| |___|___|_| |_|_|
- * 
+ *
  * @version 0.0.5
  * @date created 08/19/16
  * @date updated 10/26/16
@@ -24,7 +24,7 @@ uint32_t Wheel(byte WheelPos) {
 }
 
 void screenSaver()
-{	
+{
   uint16_t i, j;
 
   for (j = 0; j < 256; j++) { // 5 cycles of all colors on wheel
@@ -32,5 +32,5 @@ void screenSaver()
       pixel.setPixelColor(i, Wheel(((i * 256 / pixel.numPixels()) + j) & 255));
     }
     pixel.show();
-  }	
+  }
 }

@@ -31,7 +31,7 @@
   <http://www.gnu.org/licenses/>.
   -------------------------------------------------------------------------*/
 
-#include "pixel.h"
+#include "_pixel.h"
 
 // Constructor when length, pin and type are known at compile-time:
 Pixel::Pixel(uint16_t n, uint8_t p, neoPixelType t) :
