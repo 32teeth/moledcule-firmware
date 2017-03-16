@@ -9,14 +9,40 @@
 /*
  * @struct timer
  */
-typedef struct{unsigned long now;unsigned long timestamp;unsigned long interval;} TIMER;
+typedef struct __attribute__((__packed__))
+{
+  volatile unsigned long now;
+  volatile unsigned long timestamp;
+  volatile unsigned long interval;
+} TIMER;
 TIMER moledcule;
 /*
  * @struct COLOR
  */
-typedef struct{byte r;byte g;byte b;} COLOR;
+typedef struct __attribute__((__packed__))
+{
+  byte r;
+  byte g;
+  byte b;
+} COLOR;
 
 /*
  * @struct IO
  */
-typedef struct{byte pin;byte state;byte index;long changed;} IO;
+typedef struct __attribute__((__packed__))
+{
+  byte pin;
+  bool state;
+  byte index;
+  volatile unsigned long changed;
+} IO;
+
+/*
+ * @struct STATES
+ */
+typedef struct __attribute__((__packed__))
+{
+  byte states[4];
+  byte address;
+  String bin;
+} STATES;

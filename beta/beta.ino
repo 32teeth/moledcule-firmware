@@ -12,15 +12,15 @@
  */
 #include <Arduino.h>
 #include "structs.h"
-#include "config.h"
-#include "wiring.h"
-#include "pins.h"
-#include "io.h"
 #include "utils.h"
-#include "display.h"
+#include "config.h"
 #ifdef DEBUG
   #include "serial.h"
 #endif
+#include "wiring.h"
+#include "pins.h"
+#include "io.h"
+#include "display.h"
 
 /*
  * @method setup
