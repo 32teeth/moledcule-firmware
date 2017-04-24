@@ -29,11 +29,11 @@ MODE pending = {"none", 0, 0, false};
  * @struct mode array
  */
 MODE modes[mode_count+2] = {
-	{"simple", RIGHT_PIN, P1_PIN, false},
-	{"tournament", LEFT_PIN, P1_PIN, false},
-	{"screen", UP_PIN, P1_PIN, false},
-	{"xbox", LEFT_PIN, K1_PIN, false},
-	{"playstation", LEFT_PIN, K2_PIN, false}
+	{"simple", UP_PIN, P1_PIN, false},
+	{"tournament", UP_PIN, P2_PIN, false},
+	{"screen", UP_PIN, P3_PIN, false},
+	{"xbox", UP_PIN, K1_PIN, false},
+	{"playstation", UP_PIN, K2_PIN, false}
 };
 
 void runMode()
