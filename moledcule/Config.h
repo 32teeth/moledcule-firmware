@@ -1,3 +1,4 @@
+
 #define KAIMANA
 
 #ifdef MOLEDCULE
@@ -25,4 +26,4 @@
 #define FIGHTSTICK
 /*
  EOF
- */
+*/

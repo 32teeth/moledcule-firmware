@@ -35,12 +35,14 @@ void setup()
     delay(1000);
   #endif
 
+  Serial.print("hello");
+
 	pixel.begin();
 	pixel.setBrightness(bright);
 
   delay(1000);
 
-  pixel.setPixelColor(0, 0, 255, 255);
+  pixel.setPixelColor(0, 0, 128, 128);
   pixel.show();
 
 
